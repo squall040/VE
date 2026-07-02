@@ -433,6 +433,8 @@
           <div class="bar"><div class="fill" data-ete="555" data-hiver="400" style="width:99%">≈ 555 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Model 3<small>base · 534 km WLTP</small></div>
           <div class="bar"><div class="fill" data-ete="530" data-hiver="370" style="width:95%">≈ 530 km</div></div></div>
+        <div class="scale-row"><div class="scale-name">MG4<small>77 kWh · 545 km WLTP <span style="white-space:nowrap">(base = 64 kWh/452 km)</span></small></div>
+          <div class="bar"><div class="fill" data-ete="500" data-hiver="365" style="width:89%">≈ 500 km</div></div></div>
         <div class="scale-row"><div class="scale-name">BYD Atto 3 EVO<small>base · 510 km WLTP</small></div>
           <div class="bar"><div class="fill" data-ete="460" data-hiver="340" style="width:82%">≈ 460 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Model Y<small>base · 534 km WLTP</small></div>
@@ -441,8 +443,6 @@
           <div class="bar"><div class="fill" data-ete="440" data-hiver="320" style="width:79%">≈ 440 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-3008<small>base · 529 km WLTP</small></div>
           <div class="bar"><div class="fill" data-ete="430" data-hiver="320" style="width:77%">≈ 430 km</div></div></div>
-        <div class="scale-row"><div class="scale-name">MG4<small>base · 452 km WLTP</small></div>
-          <div class="bar"><div class="fill mid" data-ete="410" data-hiver="300" style="width:73%">≈ 410 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Kia EV9<small>base · 443 km WLTP</small></div>
           <div class="bar"><div class="fill mid" data-ete="395" data-hiver="300" style="width:71%">≈ 395 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-308<small>base · 450 km WLTP</small></div>
@@ -484,7 +484,7 @@
               <option value="ev9">Kia EV9</option>
               <option value="megane">Renault Megane E-Tech</option>
               <option value="ioniq5">Hyundai Ioniq 5</option>
-              <option value="mg4">MG4</option>
+              <option value="mg4">MG4 (77 kWh, base = 64 kWh/452 km)</option>
               <option value="corolla">Toyota Corolla (actuelle)</option>
             </select>
           </label>
@@ -526,7 +526,7 @@
             <option value="25,0" data-raw="22,0" data-acmin="11" data-acmax="11" data-dc="+200 km / ~24 min">Kia EV9</option>
             <option value="18,0" data-raw="15,8" data-acmin="11" data-acmax="11" data-dc="+300 km / ~30 min">Renault Megane E-Tech</option>
             <option value="19,8" data-raw="17,4" data-acmin="11" data-acmax="11" data-dc="+230 km / ~18 min">Hyundai Ioniq 5</option>
-            <option value="19,4" data-raw="17,1" data-acmin="11" data-acmax="11" data-dc="+216 km / ~21 min">MG4</option>
+            <option value="19,4" data-raw="17,1" data-acmin="11" data-acmax="11" data-dc="+261 km / ~35 min">MG4 (77 kWh, base = 64 kWh/452 km)</option>
           </select>
         </label>
         <label>Consommation
@@ -615,7 +615,10 @@
     <section id="s4">
       <div class="head"><span class="num">4</span><h2>Comparatif des modèles envisageables</h2></div>
       <p class="lead">Tous les modèles sont indiqués en <strong>version de base</strong> (batterie d'entrée de
-        gamme), pour une comparaison équitable. Tous bénéficient des mêmes avantages fiscaux. Le <strong>WLTP</strong>
+        gamme), pour une comparaison équitable — <strong>sauf la MG4</strong> (version 77&nbsp;kWh
+        Extended Range, volontairement pas la version de base : la 64&nbsp;kWh d'entrée de gamme
+        (452&nbsp;km WLTP) n'apporte que ≈&nbsp;+5&nbsp;% d'autonomie réelle vs l'e-208, jugé pas assez significatif pour
+        l'objectif recherché ici). Tous bénéficient des mêmes avantages fiscaux. Le <strong>WLTP</strong>
         est la valeur de laboratoire (référence constructeur, peu réaliste). Les deux colonnes d'autonomie réelle
         sont les estimations <strong>EV-Database</strong> : <strong>« Réel usage mixte »</strong> (Combiné-Doux —
         printemps/été/automne, hors grand froid déjà couvert par la colonne suivante ; bouton ci-dessous pour
@@ -647,7 +650,7 @@
               <option value="ev9">Kia EV9 — 76,1 kWh</option>
               <option value="megane">Renault Megane E-Tech — 60 kWh</option>
               <option value="ioniq5">Hyundai Ioniq 5 — 63 kWh</option>
-              <option value="mg4">MG4 — 64 kWh</option>
+              <option value="mg4">MG4 — 77 kWh (base = 64 kWh/452 km)</option>
             </select>
           </label>
           <table class="m-table" id="rangeTbl">
@@ -676,7 +679,7 @@
           <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Renault Megane E-Tech <small>base · EV60 · 220 ch</small></td><td class="d">France (Douai)</td><td class="d">60 kWh</td><td class="d">470 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step">~320 km</td><td class="d">~30 min → +300 km <small>borne rapide, 130 kW</small></td><td class="d">605 € <a href="https://professionnels.renault.fr/vehicules-electriques/megane-e-tech-electrique-pro.html" target="_blank" rel="noopener" style="color:var(--teal-deep)"><small>base 90 000 km/36 mois</small></a></td></tr>
           <tr><td class="m">Hyundai Ioniq 5 <small>Standard Range · RWD</small></td><td class="d">Corée du Sud</td><td class="d">63 kWh</td><td class="d">430 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step">~290 km</td><td class="d">~18 min → +230 km <small>borne rapide, 195 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">MG4 <small>Premium · 64 kWh LFP · 190 ch</small></td><td class="d">Chine</td><td class="d">64 kWh</td><td class="d">452 km</td><td class="d" data-mixte-ac="361" data-mixte-raw="410">~361 km</td><td class="step">~300 km</td><td class="d">~21 min → +216 km <small>borne rapide, 154 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">MG4 <small>Premium 77 kWh · ⚠️ pas la version de base <span style="white-space:nowrap">(64 kWh/452 km WLTP)</span></small></td><td class="d">Chine</td><td class="d">77 kWh</td><td class="d">545 km</td><td class="d" data-mixte-ac="440" data-mixte-raw="500">~440 km</td><td class="step">~365 km</td><td class="d">~35 min → +261 km <small>borne rapide, 144 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Toyota Corolla <small>actuelle · hybride</small></td><td class="d">R-U / Turquie</td><td class="d">—</td><td class="d">—</td><td class="d">~560 km</td><td class="step gA">~530 km</td><td class="d">~3 min → plein <small>~560 km récupérés</small></td><td class="d">—</td></tr>
         </tbody>
       </table></div>
@@ -690,7 +693,7 @@
         Sans recharge à domicile, je dépends entièrement des bornes publiques — soit des arrêts rapides répétés (≈ 28 min pour la e-208), soit des charges lentes de plusieurs heures.
         <details class="more">
         <summary>Détails et sources (provenance, versions, méthodologie, loyers)</summary>
-        <p style="margin-top:10px;font-size:.8rem;color:var(--muted)">Temps et km indiqués : valeurs constructeur (20→80 %, borne à pleine puissance, batterie préconditionnée). En conditions réelles — froid, borne partagée, batterie non préchauffée — comptez sensiblement plus long. <b>MG4</b> : MG ne communique que sur une fenêtre 10→80 % (25 min officiels) — le temps et les km 20→80 % affichés sont <b>extrapolés</b> (règle de trois sur la fenêtre de charge + conso réelle EV-Database), pas une mesure directe.</p>
+        <p style="margin-top:10px;font-size:.8rem;color:var(--muted)">Temps et km indiqués : valeurs constructeur (20→80 %, borne à pleine puissance, batterie préconditionnée). En conditions réelles — froid, borne partagée, batterie non préchauffée — comptez sensiblement plus long. <b>MG4</b> : version <b>77 kWh Extended Range, pas la version de base</b> (64 kWh, 452 km WLTP) — retenue spécifiquement pour un vrai gain d'autonomie vs l'e-208 (la 64 kWh n'apportait que +5 % de réel, jugé pas assez significatif). MG ne communique que sur une fenêtre 10→80 % (41 min officiels pour cette version) — le temps et les km 20→80 % affichés sont <b>extrapolés</b> (règle de trois sur la fenêtre de charge + conso réelle EV-Database), pas une mesure directe.</p>
         <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">La provenance indiquée correspond au <b>lieu d'assemblage final</b>. Elle ne préjuge pas de l'origine de tous les composants : une voiture assemblée en France ou en Europe intègre des pièces (batterie, électronique) souvent fabriquées ailleurs. C'est un repère, pas une garantie d'origine intégrale.</p>
         <p style="margin-top:10px"><b>Versions retenues.</b> Le tableau compare la <b>version de base</b> de chaque modèle (batterie d'entrée de gamme effectivement vendue en France). Plusieurs modèles existent aussi en grande batterie, plus autonome (ex. e-3008 98 kWh, Kia EV9 99,8 kWh, Tesla Grande Autonomie).</p>
         <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">Sources <b>croisées</b> (consultées en juin 2026) : configurateurs constructeurs (Peugeot, Tesla, BYD, Kia, Renault, Hyundai, MG), EV-Database, Automobile-Propre, fiches-auto.fr, electrive. Capacités batterie = valeur annoncée par le constructeur ; la définition varie selon la marque (e-308, EV9, Hyundai et MG = capacité brute ; e-3008, Seal et Renault = nette/utile), et Tesla ne publie pas la sienne (≈ 60 kWh estimé). WLTP = valeur constructeur « jusqu'à » (meilleure configuration) ; les mesures standardisées peuvent être un peu plus basses — ex. e-208 : 433 km (Peugeot) vs 409 km (EV-Database). e-308 : 450 km = estimation Peugeot, homologation en cours. Les deux colonnes d'<b>autonomie réelle</b> reprennent les estimations <b>EV-Database</b> : « usage mixte » = Combiné-Doux (printemps/été/automne, hors grand froid déjà couvert par la colonne suivante), <b>climatisation active incluse</b> (≈ −12 % estimé par rapport à la valeur EV-Database brute — sans clim — ordre de grandeur AAA 2026/Recurrent, cf. section 3 et modale d'autonomie détaillée) ; et « grand froid » = Combiné-Froid (scénario −10 °C avec chauffage, worst-case).</p>
@@ -970,9 +973,9 @@
           simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
       // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux (clim active, ≈ −12 %) / 25% Combiné-Froid (climat océanique : grand froid minoritaire dans l'année)
-      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'megane':370,'ioniq5':333,'mg4':346,'corolla':-1};
+      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'megane':370,'ioniq5':333,'mg4':421,'corolla':-1};
       // Durée d'une recharge rapide 20→80 % en minutes (reprise du tableau comparatif : constructeurs / EV-Database)
-      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'megane':30,'ioniq5':18,'mg4':21};
+      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'megane':30,'ioniq5':18,'mg4':35};
       function setV(c,t,s){simV.className='sim-card v-'+c;simV.querySelector('.v').textContent=t;simVSub.textContent=s;}
       function setVac(c,t,s){simVac.className='sim-card v-'+c;simVac.querySelector('.v').textContent=t;simVacSub.textContent=s;}
       function setNet(c,t,d){simNet.className='sim-net '+c;simNetT.textContent=t;simNetD.textContent=d;}
@@ -1153,7 +1156,7 @@
       'ev9':[350,250,300,510,315,395],
       'megane':[370,270,320,565,350,440],
       'ioniq5':[340,245,290,510,315,395],
-      'mg4':[350,255,300,525,330,410]
+      'mg4':[425,310,365,640,400,500]
     };
     var ids=['rCityCold','rHwyCold','rCombCold','rCityMild','rHwyMild','rCombMild'];
     function fillRange(){
