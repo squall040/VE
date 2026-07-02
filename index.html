@@ -592,10 +592,15 @@
         gamme), pour une comparaison équitable. Tous bénéficient des mêmes avantages fiscaux. Le <strong>WLTP</strong>
         est la valeur de laboratoire (référence constructeur, peu réaliste). Les deux colonnes d'autonomie réelle
         sont les estimations <strong>EV-Database</strong> : <strong>« Réel usage mixte »</strong> (Combiné-Doux —
-        printemps/été/automne, hors grand froid déjà couvert par la colonne suivante — <strong>climatisation active
-        incluse</strong>, ≈ −12&nbsp;% estimé par rapport à la valeur EV-Database brute, cf. section 3) et
+        printemps/été/automne, hors grand froid déjà couvert par la colonne suivante ; bouton ci-dessous pour
+        comparer avec/sans climatisation active, ≈ −12&nbsp;% estimé, cf. section 3) et
         <strong>« Réel grand froid »</strong> (Combiné-Froid, ≈ −10 °C avec chauffage).
         <button type="button" class="info-trigger" data-modal="rangeModal" aria-haspopup="dialog">Voir le détail ville/autoroute, froid/doux</button></p>
+      <div class="season-toggle" role="group" aria-label="Climatisation pour la colonne « Réel usage mixte »">
+        <span>Réel usage mixte :</span>
+        <button type="button" class="season-btn on" id="cmpAcOn" aria-pressed="true">Avec clim</button>
+        <button type="button" class="season-btn" id="cmpAcOff" aria-pressed="false">Sans clim</button>
+      </div>
 
       <dialog id="rangeModal" class="modal" aria-labelledby="rangeModalTitle">
         <div class="modal-head">
@@ -632,14 +637,14 @@
         <caption class="sr-only">Comparatif des modèles : provenance, batterie, autonomie WLTP, autonomie réelle (usage mixte et grand froid), recharge rapide et loyer LLD.</caption>
         <thead><tr><th scope="col">Modèle</th><th scope="col">Provenance (assemblage)</th><th scope="col">Batterie</th><th scope="col">WLTP</th><th scope="col">Réel usage mixte</th><th scope="col">Réel grand froid</th><th scope="col">Recharge rapide 20→80 %</th><th scope="col">Loyer LLD/mois</th></tr></thead>
         <tbody>
-          <tr class="hl"><td class="m">Peugeot e-208 <small>modèle retenu · 156 ch</small></td><td class="d">Slovaquie / Espagne</td><td class="d">51 kWh</td><td class="d">433 km</td><td class="d">~343 km</td><td class="step gE">~280 km</td><td class="d">~28 min → +180 km <small>borne rapide, 100 kW</small></td><td class="d">510 €</td></tr>
-          <tr><td class="m">Peugeot e-308 <small>berline · batterie 58 kWh (2025)</small></td><td class="d">France (Mulhouse)</td><td class="d">58 kWh</td><td class="d">450 km</td><td class="d">~348 km</td><td class="step gC">~285 km</td><td class="d">~27–32 min → +210 km <small>borne rapide, 100 kW</small></td><td class="d">675 € <small>+165 €</small></td></tr>
-          <tr><td class="m">Peugeot e-3008 <small>Standard Range · 213 ch · produit en France</small></td><td class="d">France (Sochaux)</td><td class="d">73 kWh</td><td class="d">529 km</td><td class="d">~378 km</td><td class="step gC">~320 km</td><td class="d">~35 min → +250 km <small>borne rapide, 160 kW</small></td><td class="d">585 € <small>+75 €</small></td></tr>
-          <tr><td class="m">Tesla Model 3 <small>RWD / Propulsion</small></td><td class="d">Chine (Shanghai)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d">~466 km</td><td class="step gB">~370 km</td><td class="d">~22 min → +240 km <small>Supercharger, 175 kW</small></td><td class="d">593 € <small>+83 €</small></td></tr>
-          <tr><td class="m">Tesla Model Y <small>RWD / Propulsion</small></td><td class="d">Allemagne (Berlin)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d">~387 km</td><td class="step gC">~315 km</td><td class="d">~24 min → +230 km <small>Supercharger, 175 kW</small></td><td class="d">545 € <small>+35 €</small></td></tr>
-          <tr><td class="m">BYD Seal <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d">~488 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">BYD Atto 3 EVO <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d">~405 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d">~348 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
+          <tr class="hl"><td class="m">Peugeot e-208 <small>modèle retenu · 156 ch</small></td><td class="d">Slovaquie / Espagne</td><td class="d">51 kWh</td><td class="d">433 km</td><td class="d" data-mixte-ac="343" data-mixte-raw="390">~343 km</td><td class="step gE">~280 km</td><td class="d">~28 min → +180 km <small>borne rapide, 100 kW</small></td><td class="d">510 €</td></tr>
+          <tr><td class="m">Peugeot e-308 <small>berline · batterie 58 kWh (2025)</small></td><td class="d">France (Mulhouse)</td><td class="d">58 kWh</td><td class="d">450 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~285 km</td><td class="d">~27–32 min → +210 km <small>borne rapide, 100 kW</small></td><td class="d">675 € <small>+165 €</small></td></tr>
+          <tr><td class="m">Peugeot e-3008 <small>Standard Range · 213 ch · produit en France</small></td><td class="d">France (Sochaux)</td><td class="d">73 kWh</td><td class="d">529 km</td><td class="d" data-mixte-ac="378" data-mixte-raw="430">~378 km</td><td class="step gC">~320 km</td><td class="d">~35 min → +250 km <small>borne rapide, 160 kW</small></td><td class="d">585 € <small>+75 €</small></td></tr>
+          <tr><td class="m">Tesla Model 3 <small>RWD / Propulsion</small></td><td class="d">Chine (Shanghai)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d" data-mixte-ac="466" data-mixte-raw="530">~466 km</td><td class="step gB">~370 km</td><td class="d">~22 min → +240 km <small>Supercharger, 175 kW</small></td><td class="d">593 € <small>+83 €</small></td></tr>
+          <tr><td class="m">Tesla Model Y <small>RWD / Propulsion</small></td><td class="d">Allemagne (Berlin)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step gC">~315 km</td><td class="d">~24 min → +230 km <small>Supercharger, 175 kW</small></td><td class="d">545 € <small>+35 €</small></td></tr>
+          <tr><td class="m">BYD Seal <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d" data-mixte-ac="488" data-mixte-raw="555">~488 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">BYD Atto 3 EVO <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d" data-mixte-ac="405" data-mixte-raw="460">~405 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Toyota Corolla <small>actuelle · hybride</small></td><td class="d">R-U / Turquie</td><td class="d">—</td><td class="d">—</td><td class="d">~560 km</td><td class="step gA">~530 km</td><td class="d">~3 min → plein <small>~560 km récupérés</small></td><td class="d">—</td></tr>
         </tbody>
       </table></div>
@@ -843,7 +848,7 @@
   <button id="totop" aria-label="Revenir en haut">↑</button>
   <script>
   /* feu tricolore sur les autonomies du comparatif (col. « usage mixte » et « grand froid ») */
-  (function(){
+  function applyCmpColors(){
     var rows=document.querySelectorAll('#cmpVeh tbody tr');
     function cls(km,cold){
       if(cold) return km>=350?'aut-g':km>=285?'aut-o':'aut-r';   // grand froid : seuils décalés
@@ -857,6 +862,23 @@
         td.classList.add(cls(+m[1],c[1]));
       });
     });
+  }
+  applyCmpColors();
+  /* toggle avec/sans clim sur la colonne « Réel usage mixte » du comparatif */
+  (function(){
+    var btnOn=document.getElementById('cmpAcOn'),btnOff=document.getElementById('cmpAcOff');
+    if(!btnOn) return;
+    var cells=document.querySelectorAll('#cmpVeh tbody td[data-mixte-ac]');
+    function render(ac){
+      btnOn.classList.toggle('on',ac); btnOn.setAttribute('aria-pressed',ac);
+      btnOff.classList.toggle('on',!ac); btnOff.setAttribute('aria-pressed',!ac);
+      cells.forEach(function(td){
+        td.textContent='~'+td.getAttribute(ac?'data-mixte-ac':'data-mixte-raw')+' km';
+      });
+      applyCmpColors();
+    }
+    btnOn.addEventListener('click',function(){ render(true); });
+    btnOff.addEventListener('click',function(){ render(false); });
   })();
   (function(){
     var doc=document.documentElement;
