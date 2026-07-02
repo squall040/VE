@@ -452,7 +452,7 @@
 
       <div class="sim">
         <div class="sim-h">Et pour votre profil ?</div>
-        <p class="sim-sub">Faites varier le kilométrage, la recharge à domicile et le modèle — tout se recalcule en direct.</p>
+        <p class="sim-sub">Faites varier le kilométrage, la recharge à domicile et le modèle — tout se recalcule en direct. Autonomie utilisée : moyenne pondérée sur l'année (<b>75&nbsp;% doux avec clim active / 25&nbsp;% grand froid</b>) — différente de la valeur « été » affichée plus haut, car ce simulateur doit couvrir les 52 semaines de l'année, hiver compris.</p>
         <div class="sim-controls">
           <label>Kilométrage annuel <output id="simKmVal">40 000 km</output>
             <input type="range" id="simKm" min="5000" max="60000" step="1000" value="40000" aria-label="Kilométrage annuel">
@@ -465,15 +465,15 @@
           </label>
           <label>Modèle
             <select id="simCar" aria-label="Modèle">
-              <option value="208" selected>Peugeot e-208 — 363 km</option>
-              <option value="308">Peugeot e-308 — 368 km</option>
-              <option value="3008">Peugeot e-3008 — 403 km</option>
-              <option value="m3">Tesla Model 3 — 490 km</option>
-              <option value="my">Tesla Model Y — 409 km</option>
-              <option value="seal">BYD Seal — 516 km</option>
-              <option value="atto">BYD Atto 3 EVO — 430 km</option>
-              <option value="ev9">Kia EV9 — 371 km</option>
-              <option value="corolla">Toyota Corolla (actuelle) — 560 km</option>
+              <option value="208" selected>Peugeot e-208</option>
+              <option value="308">Peugeot e-308</option>
+              <option value="3008">Peugeot e-3008</option>
+              <option value="m3">Tesla Model 3</option>
+              <option value="my">Tesla Model Y</option>
+              <option value="seal">BYD Seal</option>
+              <option value="atto">BYD Atto 3 EVO</option>
+              <option value="ev9">Kia EV9</option>
+              <option value="corolla">Toyota Corolla (actuelle)</option>
             </select>
           </label>
           <label>Trajet le plus long <output id="simTripVal">800 km</output>
@@ -492,7 +492,7 @@
             <p class="sim-net-d" id="simNetD">Recharge à gérer soi-même, sans planification ni réservation (Superchargeurs souvent inclus). Aux grands départs, l'affluence allonge souvent les arrêts bien au-delà de la seule durée de charge — il faut attendre qu'une borne se libère.</p>
           </div>
         </div>
-        <p class="sim-note"><b class="nh">Quotidien</b> — km/semaine ÷ autonomie exploitable. Sans recharge à domicile, on recharge de ~20 % à ~80 % sur borne rapide (au-delà, la charge ralentit fortement), soit <b>60 %</b> de l'autonomie réelle « usage mixte » (EV-Database). Avec recharge à domicile, les pleins de nuit (quasi complets) couvrent l'usage quotidien.</p>
+        <p class="sim-note"><b class="nh">Quotidien</b> — km/semaine ÷ autonomie exploitable. Sans recharge à domicile, on recharge de ~20 % à ~80 % sur borne rapide (au-delà, la charge ralentit fortement), soit <b>60 %</b> de l'autonomie réelle « usage mixte » (EV-Database, <b>clim active incluse</b> ≈ −12 % sur la part doux/été — cf. section 3). Avec recharge à domicile, les pleins de nuit (quasi complets) couvrent l'usage quotidien.</p>
         <p class="sim-note"><b class="nh">Longs trajets</b> — nombre d'arrêts = distance ÷ autonomie autoroute exploitable (≈ 75 % du mixte à 130 km/h, fenêtre <b>10→80 % = 70 %</b>, car on planifie et on descend plus bas). <b>Durée d'un arrêt</b> = temps de charge rapide propre au modèle (cf. tableau comparatif : ≈ 22 min pour une Model 3, ≈ 28 min pour l'e-208…). Le réseau <b>Tesla</b> étant planifié et fluide, le seuil de « location conseillée » y est plus tolérant (4 arrêts) qu'avec les bornes publiques partagées (3 arrêts, files possibles).</p>
       </div>
 
@@ -533,7 +533,7 @@
           <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
         </tbody>
       </table></div>
-      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte) + ~8 % de pertes de charge — valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : le bouton au-dessus du tableau bascule entre <strong>temps constructeur</strong> (20→80 %, borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus) et <strong>temps réel mesuré</strong> en test indépendant (Automobile-Propre « Supertest », EVKX), sur la version de base. Fenêtre 20→80 % dans les deux cas : les km ajoutés sont identiques, seul le temps change.</p>
+      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte) + ~8 % de pertes de charge — valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
 
       <div class="sim" style="margin-top:18px">
         <div class="sim-h">Coût de la recharge &amp; rentabilité d'une borne</div>
@@ -915,8 +915,8 @@
           simRech=document.getElementById('simRech'),simH=document.getElementById('simH'),simV=document.getElementById('simVerdict'),simVSub=document.getElementById('simVerdictSub'),
           simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
-      // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux / 25% Combiné-Froid (climat océanique : grand froid minoritaire dans l'année)
-      var autos={'208':363,'308':368,'3008':403,'m3':490,'my':409,'seal':516,'atto':430,'ev9':371,'corolla':-1};
+      // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux (clim active, ≈ −12 %) / 25% Combiné-Froid (climat océanique : grand froid minoritaire dans l'année)
+      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'corolla':-1};
       // Durée d'une recharge rapide 20→80 % en minutes (reprise du tableau comparatif : constructeurs / EV-Database)
       var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24};
       function setV(c,t,s){simV.className='sim-card v-'+c;simV.querySelector('.v').textContent=t;simVSub.textContent=s;}
