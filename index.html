@@ -299,7 +299,9 @@
   .m-src{color:var(--muted);font-size:.78rem;margin-top:12px}
   /* Sélecteur de véhicule / consommation (coût de recharge) */
   .conso-bar{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;margin:12px 0 14px;padding:14px 16px;background:#e8f4f6;border-radius:10px}
-  .conso-bar > label{display:flex;flex-direction:column;gap:7px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700}
+  .conso-bar > label,.conso-bar > .ac-group{display:flex;flex-direction:column;gap:7px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700}
+  .conso-bar .ac-group .season-toggle{margin:0;gap:8px}
+  .conso-bar .ac-group .season-btn{padding:0 14px;height:42px}
   .conso-bar select,.cv-field input{box-sizing:border-box;height:42px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.92rem;font-family:inherit;font-weight:600}
   .conso-bar select{padding:0 34px 0 12px;min-width:210px;cursor:pointer}
   .cv-field{position:relative;display:inline-block}
@@ -493,7 +495,7 @@
           </div>
         </div>
         <p class="sim-note"><b class="nh">Quotidien</b> — km/semaine ÷ autonomie exploitable. Sans recharge à domicile, on recharge de ~20 % à ~80 % sur borne rapide (au-delà, la charge ralentit fortement), soit <b>60 %</b> de l'autonomie réelle « usage mixte » (EV-Database, <b>clim active incluse</b> ≈ −12 % sur la part doux/été — cf. section 3). Avec recharge à domicile, les pleins de nuit (quasi complets) couvrent l'usage quotidien.</p>
-        <p class="sim-note"><b class="nh">Longs trajets</b> — nombre d'arrêts = distance ÷ autonomie autoroute exploitable (≈ 75 % du mixte à 130 km/h, fenêtre <b>10→80 % = 70 %</b>, car on planifie et on descend plus bas). <b>Durée d'un arrêt</b> = temps de charge rapide propre au modèle (cf. tableau comparatif : ≈ 22 min pour une Model 3, ≈ 28 min pour l'e-208…). Le réseau <b>Tesla</b> étant planifié et fluide, le seuil de « location conseillée » y est plus tolérant (4 arrêts) qu'avec les bornes publiques partagées (3 arrêts, files possibles).</p>
+        <p class="sim-note"><b class="nh">Longs trajets</b> — 1er tronçon parcouru batterie pleine au départ (fenêtre <b>100→10&nbsp;% = 90&nbsp;%</b>), puis tronçons suivants sur une fenêtre <b>80→10&nbsp;% = 70&nbsp;%</b> (recharge rapide jusqu'à 80 % seulement, on redescend bas avant l'arrêt suivant) — appliqué à l'autonomie autoroute exploitable (≈ 75 % du mixte à 130 km/h). <b>Durée d'un arrêt</b> = temps de charge rapide propre au modèle (cf. tableau comparatif : ≈ 22 min pour une Model 3, ≈ 28 min pour l'e-208…). Le réseau <b>Tesla</b> étant planifié et fluide, le seuil de « location conseillée » y est plus tolérant (4 arrêts) qu'avec les bornes publiques partagées (3 arrêts, files possibles).</p>
       </div>
 
       <p class="lead" style="margin-top:26px"><strong>Le coût de la recharge selon le mode.</strong>
@@ -504,19 +506,25 @@
       <div class="conso-bar">
         <label>Véhicule
           <select id="cvCar" aria-label="Véhicule pour le calcul de consommation">
-            <option value="17,5" data-acmin="7.4" data-acmax="11" data-dc="+180 km / ~28 min" selected>Peugeot e-208</option>
-            <option value="18,0" data-acmin="11" data-acmax="11" data-dc="+210 km / ~27–32 min">Peugeot e-308</option>
-            <option value="20,5" data-acmin="11" data-acmax="11" data-dc="+250 km / ~35 min">Peugeot e-3008</option>
-            <option value="16,0" data-acmin="11" data-acmax="11" data-dc="+240 km / ~22 min">Tesla Model 3</option>
-            <option value="18,0" data-acmin="11" data-acmax="11" data-dc="+230 km / ~24 min">Tesla Model Y</option>
-            <option value="19,5" data-acmin="11" data-acmax="11" data-dc="+270 km / ~30 min">BYD Seal</option>
-            <option value="19,0" data-acmin="11" data-acmax="11" data-dc="+250 km / ~25 min">BYD Atto 3 EVO</option>
-            <option value="22,0" data-acmin="11" data-acmax="11" data-dc="+200 km / ~24 min">Kia EV9</option>
+            <option value="19,9" data-raw="17,5" data-acmin="7.4" data-acmax="11" data-dc="+180 km / ~28 min" selected>Peugeot e-208</option>
+            <option value="20,5" data-raw="18,0" data-acmin="11" data-acmax="11" data-dc="+210 km / ~27–32 min">Peugeot e-308</option>
+            <option value="23,3" data-raw="20,5" data-acmin="11" data-acmax="11" data-dc="+250 km / ~35 min">Peugeot e-3008</option>
+            <option value="18,2" data-raw="16,0" data-acmin="11" data-acmax="11" data-dc="+240 km / ~22 min">Tesla Model 3</option>
+            <option value="20,5" data-raw="18,0" data-acmin="11" data-acmax="11" data-dc="+230 km / ~24 min">Tesla Model Y</option>
+            <option value="22,2" data-raw="19,5" data-acmin="11" data-acmax="11" data-dc="+270 km / ~30 min">BYD Seal</option>
+            <option value="21,6" data-raw="19,0" data-acmin="11" data-acmax="11" data-dc="+250 km / ~25 min">BYD Atto 3 EVO</option>
+            <option value="25,0" data-raw="22,0" data-acmin="11" data-acmax="11" data-dc="+200 km / ~24 min">Kia EV9</option>
           </select>
         </label>
         <label>Consommation
-          <span class="cv-field"><input type="text" inputmode="decimal" id="cvConso" value="17,5" aria-label="Consommation au compteur en kWh aux 100 km"><span class="suf">kWh/100 km</span></span>
+          <span class="cv-field"><input type="text" inputmode="decimal" id="cvConso" value="19,9" aria-label="Consommation au compteur en kWh aux 100 km"><span class="suf">kWh/100 km</span></span>
         </label>
+        <div class="ac-group">Climatisation
+          <div class="season-toggle" role="group" aria-label="Climatisation pour le calcul de consommation">
+            <button type="button" class="season-btn on" id="chgAcOn" aria-pressed="true">Avec clim</button>
+            <button type="button" class="season-btn" id="chgAcOff" aria-pressed="false">Sans clim</button>
+          </div>
+        </div>
       </div>
       <div class="tbl"><table id="modesTbl">
         <caption class="sr-only">Comparaison des modes de recharge : puissance, vitesse, prix de l'énergie, coût aux 100 km et coût d'installation.</caption>
@@ -533,11 +541,12 @@
           <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
         </tbody>
       </table></div>
-      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte) + ~8 % de pertes de charge — valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
+      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte, clim active ≈ +14 % — cohérent avec le −12 % d'autonomie appliqué ailleurs) + ~8 % de pertes de charge — valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
 
       <div class="sim" style="margin-top:18px">
         <div class="sim-h">Coût de la recharge &amp; rentabilité d'une borne</div>
         <p class="sim-sub">Le simulateur ne compte que les <b>kilomètres professionnels</b> (trajets domicile-travail lun→ven, hors week-ends personnels), plus les déplacements ponctuels (réunions à Poitiers, ≈ 280 km A/R). Ajustez les valeurs et vos tarifs — le coût annuel par mode et le gain d'une borne pour l'entreprise se recalculent en direct.</p>
+        <p class="sim-note" id="cCarLabel" style="margin:-8px 0 14px"></p>
         <div class="sim-controls cost">
           <label><span class="lab">Trajet professionnel / semaine</span>
             <span class="sim-field">
@@ -976,11 +985,15 @@
         if(rech<=1)setV('g','Confortable','peu ou pas de recharges publiques');
         else if(rech<=2.5)setV('o','Tendu','recharges publiques fréquentes');
         else setV('r','Inadapté','recharges publiques très fréquentes');
-        // Long trajet : on planifie et on descend plus bas (~10 %) à la borne pour limiter les arrêts
-        // → fenêtre voyage 10→80 % = 70 %, appliquée à l'autonomie autoroute (~75 % du mixte à 130 km/h).
-        var winTrip=0.7;
+        // Long trajet : départ batterie pleine (100 %), on descend jusqu'à ~10 % avant le 1er arrêt
+        // → 1er tronçon = fenêtre 100→10 % = 90 %. Ensuite on ne recharge qu'à 80 % (rapide) puis
+        // on redescend à ~10 % → tronçons suivants = fenêtre 80→10 % = 70 %. Appliqué à l'autonomie
+        // autoroute (~75 % du mixte à 130 km/h).
+        var winTrip=0.7, winTripFirst=0.9;
         var utileHwy=auto*0.75*winTrip;
-        var stops=Math.max(0,Math.ceil(L/utileHwy)-1);
+        var firstLeg=auto*0.75*winTripFirst;
+        var remaining=Math.max(0,L-firstLeg);
+        var stops=remaining>0?Math.ceil(remaining/utileHwy):0;
         var isTesla=(car==='m3'||car==='my');
         var locThr=isTesla?4:3;                 // Tesla : réseau planifié et fluide → seuil de location plus tolérant
         var addMin=stops*(charge[car]||30);     // durée de charge cumulée selon la puissance réelle du modèle
@@ -1006,10 +1019,11 @@
         cNet=document.getElementById('cNet'),cNetInfo=document.getElementById('cNetInfo'),
         cProKm=document.getElementById('cProKm'),cProDetail=document.getElementById('cProDetail'),
         cHome=document.getElementById('cHome'),cPubOut=document.getElementById('cPubOut'),cDiff=document.getElementById('cDiff'),
-        cRoi=document.getElementById('cRoi'),cRoiSub=document.getElementById('cRoiSub');
+        cRoi=document.getElementById('cRoi'),cRoiSub=document.getElementById('cRoiSub'),
+        cCarLabel=document.getElementById('cCarLabel');
     var cvCar=document.getElementById('cvCar'),cvConso=document.getElementById('cvConso'),
         costCells=document.querySelectorAll('#modesTbl .cc'), rhCells=document.querySelectorAll('#modesTbl .rh'), dcCells=document.querySelectorAll('#modesTbl .dc');
-    function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:17.5; }   // kWh/100 km au compteur (pertes incluses)
+    function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:19.9; }   // kWh/100 km au compteur (pertes + clim incluses)
     function fmt1(x){ return (Math.round(x*10)/10).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
     function fillTable(){
       var c=conso100();
@@ -1047,13 +1061,38 @@
       cRoi.textContent = months<1 ? '< 1 mois' : '~'+Math.round(months)+' mois';
       cRoiSub.textContent='amortie, puis ~'+n0(diff)+' €/an · gain ~'+n0(diff*3-inst)+' € sur 3 ans';
     }
+    var chgAc=true; // clim active par défaut, cohérent avec le reste du document
+    function updateCarLabel(){
+      if(!cCarLabel) return;
+      var opt=cvCar.options[cvCar.selectedIndex];
+      cCarLabel.innerHTML='<b class="nh">Véhicule utilisé pour ce calcul</b> — '+opt.text+', '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+') — modifiable dans le sélecteur « Véhicule » ci-dessus.';
+    }
     [cSem,cExtra,cHC,cPub,cInst].forEach(function(el){ el.addEventListener('input',cUp); });
     cNet.addEventListener('change',cUp);
-    cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); });
-    cvCar.addEventListener('change',function(){ cvConso.value=cvCar.value; fillTable(); fillSpeeds(); cUp(); });
+    cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); updateCarLabel(); });
+    var chgAcOn=document.getElementById('chgAcOn'), chgAcOff=document.getElementById('chgAcOff');
+    function applyConso(){
+      var opt=cvCar.options[cvCar.selectedIndex];
+      cvConso.value = chgAc ? opt.value : opt.getAttribute('data-raw');
+      fillTable(); fillSpeeds(); cUp(); updateCarLabel();
+    }
+    cvCar.addEventListener('change',applyConso);
+    if(chgAcOn){
+      chgAcOn.addEventListener('click',function(){
+        chgAc=true; chgAcOn.classList.add('on'); chgAcOn.setAttribute('aria-pressed','true');
+        chgAcOff.classList.remove('on'); chgAcOff.setAttribute('aria-pressed','false');
+        applyConso();
+      });
+      chgAcOff.addEventListener('click',function(){
+        chgAc=false; chgAcOff.classList.add('on'); chgAcOff.setAttribute('aria-pressed','true');
+        chgAcOn.classList.remove('on'); chgAcOn.setAttribute('aria-pressed','false');
+        applyConso();
+      });
+    }
     fillTable();
     fillSpeeds();
     cUp();
+    updateCarLabel();
   })();
 
   // Fenêtres contextuelles (dialog) — ouverture/fermeture accessibles
