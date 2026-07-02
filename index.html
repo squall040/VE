@@ -280,7 +280,7 @@
   .info-trigger:hover{background:#d6ebef}
   .info-trigger:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px}
   .info-trigger::after{content:"›";font-size:1.15em;font-weight:800}
-  dialog.modal{max-width:680px;width:calc(100% - 36px);max-height:85vh;border:none;border-radius:16px;padding:0;box-shadow:0 24px 70px rgba(20,40,50,.35);color:var(--ink);background:var(--bg)}
+  dialog.modal{max-width:680px;width:calc(100% - 36px);max-height:85vh;border:none;border-radius:16px;padding:0;box-shadow:0 24px 70px rgba(20,40,50,.35);color:var(--ink);background:var(--bg);position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);margin:0}
   dialog.modal::backdrop{background:rgba(18,38,48,.55)}
   .modal-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);border-radius:16px 16px 0 0}
   .modal-head h3{margin:0;color:#1c93ab;font-size:1.12rem;font-weight:800}
@@ -321,7 +321,7 @@
     .info-trigger{display:none}
     details.more > summary{display:none}
     details.more{border-top:none;padding-top:0}
-    dialog.modal{display:block;position:static;max-width:none;width:auto;max-height:none;box-shadow:none;border:1px solid var(--line);margin:14px 0}
+    dialog.modal{display:block;position:static;max-width:none;width:auto;max-height:none;box-shadow:none;border:1px solid var(--line);margin:14px 0;transform:none}
     dialog.modal::backdrop{display:none}
     .modal-close{display:none}
     .modal-head{position:static}
@@ -555,7 +555,11 @@
       <div class="sim" style="margin-top:18px">
         <div class="sim-h">Coût de la recharge &amp; rentabilité d'une borne</div>
         <p class="sim-sub">Le simulateur ne compte que les <b>kilomètres professionnels</b> (trajets domicile-travail lun→ven, hors week-ends personnels), plus les déplacements ponctuels (réunions à Poitiers, ≈ 280 km A/R). Ajustez les valeurs et vos tarifs — le coût annuel par mode et le gain d'une borne pour l'entreprise se recalculent en direct.</p>
-        <p class="sim-note" id="cCarLabel" style="margin:-8px 0 14px"></p>
+        <p class="sim-note" style="margin:-8px 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <b class="nh">Véhicule utilisé pour ce calcul</b>
+          <select id="cCarSel" aria-label="Changer le véhicule pour ce calcul" style="padding:6px 28px 6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer"></select>
+          <span id="cCarInfo"></span>
+        </p>
         <div class="sim-controls cost">
           <label><span class="lab">Trajet professionnel / semaine</span>
             <span class="sim-field">
@@ -1035,7 +1039,7 @@
         cProKm=document.getElementById('cProKm'),cProDetail=document.getElementById('cProDetail'),
         cHome=document.getElementById('cHome'),cPubOut=document.getElementById('cPubOut'),cDiff=document.getElementById('cDiff'),
         cRoi=document.getElementById('cRoi'),cRoiSub=document.getElementById('cRoiSub'),
-        cCarLabel=document.getElementById('cCarLabel');
+        cCarSel=document.getElementById('cCarSel'),cCarInfo=document.getElementById('cCarInfo');
     var cvCar=document.getElementById('cvCar'),cvConso=document.getElementById('cvConso'),
         costCells=document.querySelectorAll('#modesTbl .cc'), rhCells=document.querySelectorAll('#modesTbl .rh'), dcCells=document.querySelectorAll('#modesTbl .dc');
     function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:19.9; }   // kWh/100 km au compteur (pertes + clim incluses)
@@ -1077,11 +1081,14 @@
       cRoiSub.textContent='amortie, puis ~'+n0(diff)+' €/an · gain ~'+n0(diff*3-inst)+' € sur 3 ans';
     }
     var chgAc=true; // clim active par défaut, cohérent avec le reste du document
+    if(cCarSel){ cCarSel.innerHTML=cvCar.innerHTML; cCarSel.value=cvCar.value; }
     function updateCarLabel(){
-      if(!cCarLabel) return;
+      if(!cCarInfo) return;
       var opt=cvCar.options[cvCar.selectedIndex];
-      cCarLabel.innerHTML='<b class="nh">Véhicule utilisé pour ce calcul</b> — '+opt.text+', '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+') — modifiable dans le sélecteur « Véhicule » ci-dessus.';
+      if(cCarSel) cCarSel.value=cvCar.value;
+      cCarInfo.textContent='— '+opt.text+', '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+')';
     }
+    if(cCarSel) cCarSel.addEventListener('change',function(){ cvCar.value=cCarSel.value; applyConso(); });
     [cSem,cExtra,cHC,cPub,cInst].forEach(function(el){ el.addEventListener('input',cUp); });
     cNet.addEventListener('change',cUp);
     cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); updateCarLabel(); });
