@@ -494,7 +494,7 @@
             <p class="sim-net-d" id="simNetD">Recharge à gérer soi-même, sans planification ni réservation (Superchargeurs souvent inclus). Aux grands départs, l'affluence allonge souvent les arrêts bien au-delà de la seule durée de charge — il faut attendre qu'une borne se libère.</p>
           </div>
         </div>
-        <p class="sim-note"><b class="nh">Quotidien</b> — km/semaine ÷ autonomie exploitable. Sans recharge à domicile, on recharge de ~20 % à ~80 % sur borne rapide (au-delà, la charge ralentit fortement), soit <b>60 %</b> de l'autonomie réelle « usage mixte » (EV-Database, <b>clim active incluse</b> ≈ −12 % sur la part doux/été — cf. section 3). Avec recharge à domicile, les pleins de nuit (quasi complets) couvrent l'usage quotidien.</p>
+        <p class="sim-note"><b class="nh">Quotidien</b> — km/semaine ÷ autonomie exploitable. Sans recharge à domicile, le <b>lundi matin</b> est supposé démarrer batterie pleine (rechargée le week-end, sans contrainte de temps) — 1er tronçon de la semaine sur une fenêtre <b>100→20&nbsp;% = 80&nbsp;%</b> — puis le reste de la semaine sur des recharges rapides <b>20→80&nbsp;% = 60&nbsp;%</b> (au-delà, la charge ralentit fortement), de l'autonomie réelle « usage mixte » (EV-Database, <b>clim active incluse</b> ≈ −12 % sur la part doux/été — cf. section 3). Avec recharge à domicile, les pleins de nuit (quasi complets) couvrent l'usage quotidien.</p>
         <p class="sim-note"><b class="nh">Longs trajets</b> — 1er tronçon parcouru batterie pleine au départ (fenêtre <b>100→10&nbsp;% = 90&nbsp;%</b>), puis tronçons suivants sur une fenêtre <b>80→10&nbsp;% = 70&nbsp;%</b> (recharge rapide jusqu'à 80 % seulement, on redescend bas avant l'arrêt suivant) — appliqué à l'autonomie autoroute exploitable (≈ 75 % du mixte à 130 km/h). <b>Durée d'un arrêt</b> = temps de charge rapide propre au modèle (cf. tableau comparatif : ≈ 22 min pour une Model 3, ≈ 28 min pour l'e-208…). Le réseau <b>Tesla</b> étant planifié et fluide, le seuil de « location conseillée » y est plus tolérant (4 arrêts) qu'avec les bornes publiques partagées (3 arrêts, files possibles).</p>
       </div>
 
@@ -704,10 +704,10 @@
         constants.</p>
 
       <div class="facts">
-        <div class="fact"><div class="v">≈ 100 h<span style="font-size:.9rem">/an</span></div><div class="l">passées à recharger sur bornes publiques, sur mon temps personnel<br><span style="font-size:.72rem">(vs ≈ 2–3 h/an avec le plein actuel)</span></div></div>
+        <div class="fact"><div class="v">≈ 88 h<span style="font-size:.9rem">/an</span></div><div class="l">passées à recharger sur bornes publiques, sur mon temps personnel<br><span style="font-size:.72rem">(vs ≈ 2–3 h/an avec le plein actuel)</span></div></div>
         <div class="fact"><div class="v">400–700 €</div><div class="l">location d'un thermique par semaine de vacances, à ma charge<br><span style="font-size:.72rem">(autonomie e-208 trop juste pour partir sereinement)</span></div></div>
         <div class="fact"><div class="v">dès 1 sem.</div><div class="l">de location, le gain fiscal de toute l'année est effacé<br><span style="font-size:.72rem">(au-delà : perte sèche)</span></div></div>
-        <div class="fact"><div class="v">≈ 4–5<span style="font-size:.9rem">/sem</span></div><div class="l">recharges publiques nécessaires en période de travail<br><span style="font-size:.72rem">(≈ 190 km utiles entre deux charges — fenêtre 20–80 %)</span></div></div>
+        <div class="fact"><div class="v">≈ 4<span style="font-size:.9rem">/sem</span></div><div class="l">recharges publiques nécessaires en période de travail<br><span style="font-size:.72rem">(≈ 196 km utiles entre deux charges — fenêtre 20–80 %)</span></div></div>
       </div>
 
       <div class="tbl" style="margin-top:18px"><table>
@@ -740,8 +740,8 @@
           <tr>
             <td class="m">Temps en semaine</td>
             <td class="d">plein en 3 min, 1×/sem</td>
-            <td class="d">≈ 4–5 recharges/sem, ≈ 30 min chacune</td>
-            <td class="d"><span class="verdict gE">Perte</span> — ≈ 100 h/an sur mon temps perso</td>
+            <td class="d">≈ 4 recharges/sem, ≈ 28 min chacune</td>
+            <td class="d"><span class="verdict gE">Perte</span> — ≈ 88 h/an sur mon temps perso</td>
           </tr>
           <tr>
             <td class="m">Week-end <small>trajets personnels</small></td>
@@ -976,10 +976,12 @@
         var home=simHome.value==='1';
         // Base de calcul : sans recharge à domicile, on recharge en moyenne de 20 % à 80 %
         // sur borne rapide → 80 − 20 = 60 % de l'autonomie réelle exploités entre deux recharges.
-        var winFast=0.6, winHome=0.9;
-        var kmWeek=km/47, utile=auto*winFast;
+        // Départ du lundi supposé batterie pleine (100 %, rechargée sur le week-end où le temps
+        // n'est pas contraint) → 1er tronçon de la semaine sur une fenêtre 100→20 % = 80 %.
+        var winFast=0.6, winFastFirst=0.8, winHome=0.9;
+        var kmWeek=km/47, utile=auto*winFast, firstLeg=auto*winFastFirst;
         var homeKm=5*auto*winHome; // 5 nuits de charge à domicile (quasi complète)
-        var rech=home?Math.max(0,(kmWeek-homeKm)/utile):kmWeek/utile;
+        var rech=home?Math.max(0,(kmWeek-homeKm)/utile):Math.max(0,kmWeek-(firstLeg-utile))/utile;
         simRech.textContent='≈ '+(rech<0.5?'0':rech.toFixed(1).replace('.',','));
         simH.textContent='≈ '+Math.round(rech*47*(charge[car]||30)/60)+' h';
         if(rech<=1)setV('g','Confortable','peu ou pas de recharges publiques');
