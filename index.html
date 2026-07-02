@@ -132,14 +132,20 @@
   .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin-top:8px;background:var(--paper)}
   table{border-collapse:collapse;width:100%;font-size:.82rem}
   th,td{padding:10px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:normal;vertical-align:top;overflow-wrap:anywhere}
+  /* table comparatif : trop de colonnes pour tenir en 100% sans écraser le texte lettre par
+     lettre — on lui laisse une largeur naturelle et on scrolle horizontalement (.tbl) plutôt
+     que de la forcer à rentrer dans le conteneur */
+  table.cmp{width:auto;min-width:100%}
+  table.cmp th{overflow-wrap:normal;white-space:normal}   /* les en-têtes cassent au mot, jamais en plein milieu */
+  table.cmp td:nth-child(2){min-width:120px}
   table.cmp td:nth-child(3),table.cmp th:nth-child(3),
   table.cmp td:nth-child(4),table.cmp th:nth-child(4),
   table.cmp td:nth-child(5),table.cmp td:nth-child(6){white-space:nowrap}
   /* colonne recharge : temps + distance sur une seule ligne, mention en dessous */
-  table.cmp td:nth-child(7),table.cmp td:last-child{white-space:nowrap}
+  table.cmp td:nth-child(7),table.cmp td:nth-child(8){white-space:nowrap}
   table.cmp td:nth-child(7) small{display:block;white-space:normal;font-weight:400}
-  table.cmp td:last-child small{font-weight:700;color:var(--teal-deep)}
-  table.cmp th:last-child{overflow-wrap:normal}   /* évite de couper « mois » (S orphelin) */
+  table.cmp td:nth-child(8) small{font-weight:700;color:var(--teal-deep)}
+  table.cmp th:nth-child(8){overflow-wrap:normal;white-space:normal}   /* évite de couper « mois » */
   th{background:var(--cream);color:var(--teal-deep);font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700}
   td.m{font-weight:700;white-space:normal;min-width:140px;color:var(--ink)}
   td.m small{display:block;font-weight:400;color:var(--muted);font-size:.72rem}
@@ -180,6 +186,9 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .verdict{font-weight:800}
   .verdict.neutral{color:var(--muted)}
+  .eco-tick{font-weight:800;margin-left:5px;font-size:.85em;cursor:help}
+  .eco-tick.ok{color:var(--good)}
+  .eco-tick.no{color:var(--bad)}
   /* ---------- simulateur de profil ---------- */
   .sim{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 1px 3px rgba(22,49,79,.05)}
   .sim-h{display:flex;align-items:center;gap:9px;font-size:1.02rem;font-weight:750;color:var(--brown)}
@@ -618,7 +627,10 @@
         gamme), pour une comparaison équitable — <strong>sauf la MG4</strong> (version 77&nbsp;kWh
         Extended Range, volontairement pas la version de base : la 64&nbsp;kWh d'entrée de gamme
         (452&nbsp;km WLTP) n'apporte que ≈&nbsp;+5&nbsp;% d'autonomie réelle vs l'e-208, jugé pas assez significatif pour
-        l'objectif recherché ici). Tous bénéficient des mêmes avantages fiscaux. Le <strong>WLTP</strong>
+        l'objectif recherché ici). <strong>Les avantages fiscaux ne sont pas les mêmes pour tous</strong> :
+        l'abattement AEN (70&nbsp;% au forfait) dépend de l'éco-score du modèle — repère
+        <strong>✓ / ✗</strong> à côté de chaque nom ci-dessous, détail dans la légende au-dessus du
+        tableau. Le <strong>WLTP</strong>
         est la valeur de laboratoire (référence constructeur, peu réaliste). Les deux colonnes d'autonomie réelle
         sont les estimations <strong>EV-Database</strong> : <strong>« Réel usage mixte »</strong> (Combiné-Doux —
         printemps/été/automne, hors grand froid déjà couvert par la colonne suivante ; bouton ci-dessous pour
@@ -629,6 +641,8 @@
         <span>Réel usage mixte :</span>
         <button type="button" class="season-btn on" id="cmpAcOn" aria-pressed="true">Avec clim</button>
         <button type="button" class="season-btn" id="cmpAcOff" aria-pressed="false">Sans clim</button>
+        <span style="margin-left:10px">· <span class="eco-tick ok">✓</span> éco-scoré (AEN réduit) &nbsp;<span class="eco-tick no">✗</span> non éco-scoré (AEN ≈×3,3)
+          <button type="button" class="info-trigger" data-modal="aenModal" aria-haspopup="dialog" style="margin-left:4px">Détail AEN</button></span>
       </div>
 
       <dialog id="rangeModal" class="modal" aria-labelledby="rangeModalTitle">
@@ -666,23 +680,30 @@
       </dialog>
 
       <div class="tbl"><table class="cmp" id="cmpVeh">
-        <caption class="sr-only">Comparatif des modèles : provenance, batterie, autonomie WLTP, autonomie réelle (usage mixte et grand froid), recharge rapide et loyer LLD.</caption>
+        <caption class="sr-only">Comparatif des modèles : provenance, batterie, autonomie WLTP, autonomie réelle (usage mixte et grand froid), recharge rapide, loyer LLD ; un repère ✓/✗ à côté du nom du modèle indique l'éligibilité à l'abattement fiscal AEN (éco-score).</caption>
         <thead><tr><th scope="col">Modèle</th><th scope="col">Provenance (assemblage)</th><th scope="col">Batterie</th><th scope="col">WLTP</th><th scope="col">Réel usage mixte</th><th scope="col">Réel grand froid</th><th scope="col">Recharge rapide 20→80 %</th><th scope="col">Loyer LLD/mois</th></tr></thead>
         <tbody>
-          <tr class="hl"><td class="m">Peugeot e-208 <small>modèle retenu · 156 ch</small></td><td class="d">Slovaquie / Espagne</td><td class="d">51 kWh</td><td class="d">433 km</td><td class="d" data-mixte-ac="343" data-mixte-raw="390">~343 km</td><td class="step gE">~280 km</td><td class="d">~28 min → +180 km <small>borne rapide, 100 kW</small></td><td class="d">510 €</td></tr>
-          <tr><td class="m">Peugeot e-308 <small>berline · batterie 58 kWh (2025)</small></td><td class="d">France (Mulhouse)</td><td class="d">58 kWh</td><td class="d">450 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~285 km</td><td class="d">~27–32 min → +210 km <small>borne rapide, 100 kW</small></td><td class="d">675 €</td></tr>
-          <tr><td class="m">Peugeot e-3008 <small>Standard Range · 213 ch · produit en France</small></td><td class="d">France (Sochaux)</td><td class="d">73 kWh</td><td class="d">529 km</td><td class="d" data-mixte-ac="378" data-mixte-raw="430">~378 km</td><td class="step gC">~320 km</td><td class="d">~35 min → +250 km <small>borne rapide, 160 kW</small></td><td class="d">585 €</td></tr>
-          <tr><td class="m">Tesla Model 3 <small>RWD / Propulsion</small></td><td class="d">Chine (Shanghai)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d" data-mixte-ac="466" data-mixte-raw="530">~466 km</td><td class="step gB">~370 km</td><td class="d">~22 min → +240 km <small>Supercharger, 175 kW</small></td><td class="d">593 €</td></tr>
-          <tr><td class="m">Tesla Model Y <small>RWD / Propulsion</small></td><td class="d">Allemagne (Berlin)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step gC">~315 km</td><td class="d">~24 min → +230 km <small>Supercharger, 175 kW</small></td><td class="d">545 €</td></tr>
-          <tr><td class="m">BYD Seal <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d" data-mixte-ac="488" data-mixte-raw="555">~488 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">BYD Atto 3 EVO <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d" data-mixte-ac="405" data-mixte-raw="460">~405 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">Renault Megane E-Tech <small>base · EV60 · 220 ch</small></td><td class="d">France (Douai)</td><td class="d">60 kWh</td><td class="d">470 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step">~320 km</td><td class="d">~30 min → +300 km <small>borne rapide, 130 kW</small></td><td class="d">605 € <a href="https://professionnels.renault.fr/vehicules-electriques/megane-e-tech-electrique-pro.html" target="_blank" rel="noopener" style="color:var(--teal-deep)"><small>base 90 000 km/36 mois</small></a></td></tr>
-          <tr><td class="m">Hyundai Ioniq 5 <small>Standard Range · RWD</small></td><td class="d">Corée du Sud</td><td class="d">63 kWh</td><td class="d">430 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step">~290 km</td><td class="d">~18 min → +230 km <small>borne rapide, 195 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">MG4 <small>Premium 77 kWh · ⚠️ pas la version de base <span style="white-space:nowrap">(64 kWh/452 km WLTP)</span></small></td><td class="d">Chine</td><td class="d">77 kWh</td><td class="d">545 km</td><td class="d" data-mixte-ac="440" data-mixte-raw="500">~440 km</td><td class="step">~365 km</td><td class="d">~35 min → +261 km <small>borne rapide, 144 kW</small></td><td class="d">sur devis</td></tr>
+          <tr class="hl"><td class="m">Peugeot e-208 <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span> <small>modèle retenu · 156 ch</small></td><td class="d">Slovaquie / Espagne</td><td class="d">51 kWh</td><td class="d">433 km</td><td class="d" data-mixte-ac="343" data-mixte-raw="390">~343 km</td><td class="step gE">~280 km</td><td class="d">~28 min → +180 km <small>borne rapide, 100 kW</small></td><td class="d">510 €</td></tr>
+          <tr><td class="m">Peugeot e-308 <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span> <small>berline · batterie 58 kWh (2025)</small></td><td class="d">France (Mulhouse)</td><td class="d">58 kWh</td><td class="d">450 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~285 km</td><td class="d">~27–32 min → +210 km <small>borne rapide, 100 kW</small></td><td class="d">675 €</td></tr>
+          <tr><td class="m">Peugeot e-3008 <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span> <small>Standard Range · 213 ch · produit en France</small></td><td class="d">France (Sochaux)</td><td class="d">73 kWh</td><td class="d">529 km</td><td class="d" data-mixte-ac="378" data-mixte-raw="430">~378 km</td><td class="step gC">~320 km</td><td class="d">~35 min → +250 km <small>borne rapide, 160 kW</small></td><td class="d">585 €</td></tr>
+          <tr><td class="m">Tesla Model 3 <span class="eco-tick no" title="Non éco-scoré (assemblage Shanghai) : perd l'abattement AEN, ≈×3,3 plus élevé">✗</span> <small>RWD / Propulsion</small></td><td class="d">Chine (Shanghai)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d" data-mixte-ac="466" data-mixte-raw="530">~466 km</td><td class="step gB">~370 km</td><td class="d">~22 min → +240 km <small>Supercharger, 175 kW</small></td><td class="d">593 €</td></tr>
+          <tr><td class="m">Tesla Model Y <span class="eco-tick ok" title="Éco-scoré (assemblage Berlin) : conserve l'abattement AEN 70 %">✓</span> <small>RWD / Propulsion</small></td><td class="d">Allemagne (Berlin)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step gC">~315 km</td><td class="d">~24 min → +230 km <small>Supercharger, 175 kW</small></td><td class="d">545 €</td></tr>
+          <tr><td class="m">BYD Seal <span class="eco-tick no" title="Non éco-scoré : perd l'abattement AEN, ≈×3,3 plus élevé">✗</span> <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d" data-mixte-ac="488" data-mixte-raw="555">~488 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">BYD Atto 3 EVO <span class="eco-tick no" title="Non éco-scoré : perd l'abattement AEN, ≈×3,3 plus élevé">✗</span> <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d" data-mixte-ac="405" data-mixte-raw="460">~405 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">Kia EV9 <span class="eco-tick no" title="Non éco-scoré : perd l'abattement AEN, ≈×3,3 plus élevé">✗</span> <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">Renault Megane E-Tech <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span> <small>base · EV60 · 220 ch</small></td><td class="d">France (Douai)</td><td class="d">60 kWh</td><td class="d">470 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step">~320 km</td><td class="d">~30 min → +300 km <small>borne rapide, 130 kW</small></td><td class="d">605 € <a href="https://professionnels.renault.fr/vehicules-electriques/megane-e-tech-electrique-pro.html" target="_blank" rel="noopener" style="color:var(--teal-deep)"><small>base 90 000&nbsp;km<br>sur 36 mois</small></a></td></tr>
+          <tr><td class="m">Hyundai Ioniq 5 <span class="eco-tick no" title="Non éco-scoré : perd l'abattement AEN, ≈×3,3 plus élevé">✗</span> <small>Standard Range · RWD</small></td><td class="d">Corée du Sud</td><td class="d">63 kWh</td><td class="d">430 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step">~290 km</td><td class="d">~18 min → +230 km <small>borne rapide, 195 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">MG4 <span class="eco-tick no" title="Non éco-scoré : perd l'abattement AEN, ≈×3,3 plus élevé">✗</span> <small>Premium 77 kWh · ⚠️ pas la version de base <span style="white-space:nowrap">(64 kWh/452 km WLTP)</span></small></td><td class="d">Chine</td><td class="d">77 kWh</td><td class="d">545 km</td><td class="d" data-mixte-ac="440" data-mixte-raw="500">~440 km</td><td class="step">~365 km</td><td class="d">~35 min → +261 km <small>borne rapide, 144 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Toyota Corolla <small>actuelle · hybride</small></td><td class="d">R-U / Turquie</td><td class="d">—</td><td class="d">—</td><td class="d">~560 km</td><td class="step gA">~530 km</td><td class="d">~3 min → plein <small>~560 km récupérés</small></td><td class="d">—</td></tr>
         </tbody>
       </table></div>
+      <p class="cap">Le repère <strong>✓ / ✗</strong> à côté de chaque modèle indique s'il conserve l'abattement
+        fiscal de 70&nbsp;% sur l'avantage en nature (liste ADEME, à jour juin 2026 — score
+        environnemental minimal, pénalise notamment la fabrication en Chine/Corée et le transport
+        maritime associé). Un modèle <strong>✗ non éligible</strong> voit son AEN imposable
+        <strong>≈&nbsp;3,3&nbsp;× plus élevé</strong>, à loyer LLD identique — ce ratio ne dépend
+        que des taux d'abattement réglementaires (70&nbsp;% vs 0&nbsp;%), pas du loyer lui-même,
+        donc valable même sans loyer LLD connu pour les modèles « sur devis » ci-dessus.</p>
       <div class="charge-note">
         <strong>Comprendre les temps de recharge.</strong> Il existe trois situations très différentes :
         <ul>
@@ -815,6 +836,12 @@
             </tbody>
           </table>
           <p>À coût de location égal, l'AEN est donc <strong>≈&nbsp;3,3× plus élevé</strong> pour un modèle non éligible. L'éligibilité se vérifie modèle par modèle sur la liste ADEME.</p>
+          <p style="margin-top:8px;font-size:.85rem"><b>Statut des modèles du comparatif</b> (vérifié juin 2026, <a href="https://score-environnemental-bonus.ademe.fr/" target="_blank" rel="noopener" style="color:var(--teal-deep)">outil officiel ADEME</a>) :</p>
+          <ul class="m-list">
+            <li><span class="verdict gA">Oui</span> — Peugeot e-208, e-308, e-3008 · Tesla Model Y (Berlin) · Renault Megane E-Tech (assemblage France/UE)</li>
+            <li><span class="verdict gE">Non</span> — Tesla Model 3 (Shanghai) · BYD Seal · BYD Atto 3 EVO · Kia EV9 · Hyundai Ioniq 5 · MG4 (assemblage Chine/Corée : score environnemental &lt; 60/80)</li>
+          </ul>
+          <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">La liste évolue régulièrement (ex. arrêté du 17&nbsp;juin&nbsp;2026) — c'est la liste en vigueur à la <b>facturation</b> qui compte, pas celle à la commande. À revérifier avant décision finale.</p>
 
           <h4>Au forfait ou au réel ?</h4>
           <p>L'employeur choisit la méthode (ré-évaluable chaque année). La différence pour une LLD :</p>
