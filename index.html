@@ -133,7 +133,8 @@
   table{border-collapse:collapse;width:100%;font-size:.82rem}
   th,td{padding:10px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:normal;vertical-align:top;overflow-wrap:anywhere}
   table.cmp td:nth-child(3),table.cmp th:nth-child(3),
-  table.cmp td:nth-child(4),table.cmp th:nth-child(4){white-space:nowrap}
+  table.cmp td:nth-child(4),table.cmp th:nth-child(4),
+  table.cmp td:nth-child(5),table.cmp td:nth-child(6){white-space:nowrap}
   /* colonne recharge : temps + distance sur une seule ligne, mention en dessous */
   table.cmp td:nth-child(7),table.cmp td:last-child{white-space:nowrap}
   table.cmp td:nth-child(7) small{display:block;white-space:normal;font-weight:400}
@@ -436,12 +437,16 @@
           <div class="bar"><div class="fill" data-ete="460" data-hiver="340" style="width:82%">≈ 460 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Model Y<small>base · 534 km WLTP</small></div>
           <div class="bar"><div class="fill" data-ete="440" data-hiver="315" style="width:79%">≈ 440 km</div></div></div>
+        <div class="scale-row"><div class="scale-name">Megane E-Tech<small>base · 470 km WLTP</small></div>
+          <div class="bar"><div class="fill" data-ete="440" data-hiver="320" style="width:79%">≈ 440 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-3008<small>base · 529 km WLTP</small></div>
           <div class="bar"><div class="fill" data-ete="430" data-hiver="320" style="width:77%">≈ 430 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Kia EV9<small>base · 443 km WLTP</small></div>
           <div class="bar"><div class="fill mid" data-ete="395" data-hiver="300" style="width:71%">≈ 395 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-308<small>base · 450 km WLTP</small></div>
           <div class="bar"><div class="fill mid" data-ete="395" data-hiver="285" style="width:71%">≈ 395 km</div></div></div>
+        <div class="scale-row"><div class="scale-name">Ioniq 5<small>base · 430 km WLTP</small></div>
+          <div class="bar"><div class="fill mid" data-ete="395" data-hiver="290" style="width:71%">≈ 395 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-208<small>modèle retenu · 433 km WLTP</small></div>
           <div class="bar"><div class="fill low" data-ete="390" data-hiver="280" style="width:70%">≈ 390 km</div></div></div>
       </div>
@@ -475,6 +480,8 @@
               <option value="seal">BYD Seal</option>
               <option value="atto">BYD Atto 3 EVO</option>
               <option value="ev9">Kia EV9</option>
+              <option value="megane">Renault Megane E-Tech</option>
+              <option value="ioniq5">Hyundai Ioniq 5</option>
               <option value="corolla">Toyota Corolla (actuelle)</option>
             </select>
           </label>
@@ -514,6 +521,8 @@
             <option value="22,2" data-raw="19,5" data-acmin="11" data-acmax="11" data-dc="+270 km / ~30 min">BYD Seal</option>
             <option value="21,6" data-raw="19,0" data-acmin="11" data-acmax="11" data-dc="+250 km / ~25 min">BYD Atto 3 EVO</option>
             <option value="25,0" data-raw="22,0" data-acmin="11" data-acmax="11" data-dc="+200 km / ~24 min">Kia EV9</option>
+            <option value="18,0" data-raw="15,8" data-acmin="11" data-acmax="11" data-dc="+300 km / ~30 min">Renault Megane E-Tech</option>
+            <option value="19,8" data-raw="17,4" data-acmin="11" data-acmax="11" data-dc="+230 km / ~18 min">Hyundai Ioniq 5</option>
           </select>
         </label>
         <label>Consommation
@@ -628,6 +637,8 @@
               <option value="seal">BYD Seal — 82,5 kWh</option>
               <option value="atto">BYD Atto 3 EVO — 74,8 kWh</option>
               <option value="ev9">Kia EV9 — 76,1 kWh</option>
+              <option value="megane">Renault Megane E-Tech — 60 kWh</option>
+              <option value="ioniq5">Hyundai Ioniq 5 — 63 kWh</option>
             </select>
           </label>
           <table class="m-table" id="rangeTbl">
@@ -654,6 +665,8 @@
           <tr><td class="m">BYD Seal <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d" data-mixte-ac="488" data-mixte-raw="555">~488 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">BYD Atto 3 EVO <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d" data-mixte-ac="405" data-mixte-raw="460">~405 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">Renault Megane E-Tech <small>base · EV60 · 220 ch</small></td><td class="d">France (Douai)</td><td class="d">60 kWh</td><td class="d">470 km</td><td class="d" data-mixte-ac="387" data-mixte-raw="440">~387 km</td><td class="step">~320 km</td><td class="d">~30 min → +300 km <small>borne rapide, 130 kW</small></td><td class="d">605 € <a href="https://professionnels.renault.fr/vehicules-electriques/megane-e-tech-electrique-pro.html" target="_blank" rel="noopener" style="color:var(--teal-deep)"><small>base 90 000 km/36 mois</small></a></td></tr>
+          <tr><td class="m">Hyundai Ioniq 5 <small>Standard Range · RWD</small></td><td class="d">Corée du Sud</td><td class="d">63 kWh</td><td class="d">430 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step">~290 km</td><td class="d">~18 min → +230 km <small>borne rapide, 195 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Toyota Corolla <small>actuelle · hybride</small></td><td class="d">R-U / Turquie</td><td class="d">—</td><td class="d">—</td><td class="d">~560 km</td><td class="step gA">~530 km</td><td class="d">~3 min → plein <small>~560 km récupérés</small></td><td class="d">—</td></tr>
         </tbody>
       </table></div>
@@ -670,8 +683,8 @@
         <p style="margin-top:10px;font-size:.8rem;color:var(--muted)">Temps et km indiqués : valeurs constructeur (20→80 %, borne à pleine puissance, batterie préconditionnée). En conditions réelles — froid, borne partagée, batterie non préchauffée — comptez sensiblement plus long.</p>
         <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">La provenance indiquée correspond au <b>lieu d'assemblage final</b>. Elle ne préjuge pas de l'origine de tous les composants : une voiture assemblée en France ou en Europe intègre des pièces (batterie, électronique) souvent fabriquées ailleurs. C'est un repère, pas une garantie d'origine intégrale.</p>
         <p style="margin-top:10px"><b>Versions retenues.</b> Le tableau compare la <b>version de base</b> de chaque modèle (batterie d'entrée de gamme effectivement vendue en France). Plusieurs modèles existent aussi en grande batterie, plus autonome (ex. e-3008 98 kWh, Kia EV9 99,8 kWh, Tesla Grande Autonomie).</p>
-        <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">Sources <b>croisées</b> (consultées en juin 2026) : configurateurs constructeurs (Peugeot, Tesla, BYD, Kia), EV-Database, Automobile-Propre, fiches-auto.fr, electrive. Capacités batterie = valeur annoncée par le constructeur ; la définition varie selon la marque (e-308 et EV9 = capacité brute ; e-3008 et Seal = nette/utile), et Tesla ne publie pas la sienne (≈ 60 kWh estimé). WLTP = valeur constructeur « jusqu'à » (meilleure configuration) ; les mesures standardisées peuvent être un peu plus basses — ex. e-208 : 433 km (Peugeot) vs 409 km (EV-Database). e-308 : 450 km = estimation Peugeot, homologation en cours. Les deux colonnes d'<b>autonomie réelle</b> reprennent les estimations <b>EV-Database</b> : « usage mixte » = Combiné-Doux (printemps/été/automne, hors grand froid déjà couvert par la colonne suivante), <b>climatisation active incluse</b> (≈ −12 % estimé par rapport à la valeur EV-Database brute — sans clim — ordre de grandeur AAA 2026/Recurrent, cf. section 3 et modale d'autonomie détaillée) ; et « grand froid » = Combiné-Froid (scénario −10 °C avec chauffage, worst-case).</p>
-        <p style="margin-top:8px;font-size:.78rem;color:var(--muted)"><b>Loyer LLD</b> : tarif public Peugeot — <a href="https://www.peugeot.fr/offres-pro/gamme-electrique.html" target="_blank" rel="noopener" style="color:var(--teal-deep)">offres professionnelles</a> (36 mois / 45 000 km, prime CEE 580 € incluse). Mon kilométrage réel étant ≈ 40 000 km/an, les loyers absolus seront plus élevés — mais l'écart <b>e-208 → e-3008 = +75 €/mois</b> (≈ +900 €/an) reste l'indicateur clé, à confirmer par devis flotte. Tesla, même base (45 000 km / 36 mois) : Model Y 545 €, Model 3 593 € — mais <b>hors entretien et assistance</b> (en option chez Tesla, inclus chez Peugeot), donc à majorer pour une comparaison stricte. BYD — <a href="https://www.byd.com/fr/offres-pro" target="_blank" rel="noopener" style="color:var(--teal-deep)">offres pro</a> (tarifs publics sur base 49 mois / 10 000 km, non comparable) ; Kia : sur devis.</p>
+        <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">Sources <b>croisées</b> (consultées en juin 2026) : configurateurs constructeurs (Peugeot, Tesla, BYD, Kia, Renault, Hyundai), EV-Database, Automobile-Propre, fiches-auto.fr, electrive. Capacités batterie = valeur annoncée par le constructeur ; la définition varie selon la marque (e-308, EV9 et Hyundai = capacité brute ; e-3008, Seal et Renault = nette/utile), et Tesla ne publie pas la sienne (≈ 60 kWh estimé). WLTP = valeur constructeur « jusqu'à » (meilleure configuration) ; les mesures standardisées peuvent être un peu plus basses — ex. e-208 : 433 km (Peugeot) vs 409 km (EV-Database). e-308 : 450 km = estimation Peugeot, homologation en cours. Les deux colonnes d'<b>autonomie réelle</b> reprennent les estimations <b>EV-Database</b> : « usage mixte » = Combiné-Doux (printemps/été/automne, hors grand froid déjà couvert par la colonne suivante), <b>climatisation active incluse</b> (≈ −12 % estimé par rapport à la valeur EV-Database brute — sans clim — ordre de grandeur AAA 2026/Recurrent, cf. section 3 et modale d'autonomie détaillée) ; et « grand froid » = Combiné-Froid (scénario −10 °C avec chauffage, worst-case).</p>
+        <p style="margin-top:8px;font-size:.78rem;color:var(--muted)"><b>Loyer LLD</b> : tarif public Peugeot — <a href="https://www.peugeot.fr/offres-pro/gamme-electrique.html" target="_blank" rel="noopener" style="color:var(--teal-deep)">offres professionnelles</a> (36 mois / 45 000 km, prime CEE 580 € incluse). Mon kilométrage réel étant ≈ 40 000 km/an, les loyers absolus seront plus élevés — mais l'écart <b>e-208 → e-3008 = +75 €/mois</b> (≈ +900 €/an) reste l'indicateur clé, à confirmer par devis flotte. Tesla, même base (45 000 km / 36 mois) : Model Y 545 €, Model 3 593 € — mais <b>hors entretien et assistance</b> (en option chez Tesla, inclus chez Peugeot), donc à majorer pour une comparaison stricte. Renault — <a href="https://professionnels.renault.fr/vehicules-electriques/megane-e-tech-electrique-pro.html" target="_blank" rel="noopener" style="color:var(--teal-deep)">offre pro</a> Megane E-Tech Techno 220 ch : 605 €, mais sur une base <b>90 000 km/36 mois</b> (≈ 30 000 km/an, non 45 000 km/36 mois comme les autres lignes) — entretien et assistance inclus, sans apport, prime CEE déjà déduite ; à noter que cette base est en réalité plus proche de mon kilométrage réel (≈ 40 000 km/an) que celle des autres lignes. BYD — <a href="https://www.byd.com/fr/offres-pro" target="_blank" rel="noopener" style="color:var(--teal-deep)">offres pro</a> (tarifs publics sur base 49 mois / 10 000 km, non comparable) ; Kia et Hyundai : sur devis.</p>
         </details>
       </div>
     </section>
@@ -947,9 +960,9 @@
           simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
       // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux (clim active, ≈ −12 %) / 25% Combiné-Froid (climat océanique : grand froid minoritaire dans l'année)
-      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'corolla':-1};
+      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'megane':370,'ioniq5':333,'corolla':-1};
       // Durée d'une recharge rapide 20→80 % en minutes (reprise du tableau comparatif : constructeurs / EV-Database)
-      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24};
+      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'megane':30,'ioniq5':18};
       function setV(c,t,s){simV.className='sim-card v-'+c;simV.querySelector('.v').textContent=t;simVSub.textContent=s;}
       function setVac(c,t,s){simVac.className='sim-card v-'+c;simVac.querySelector('.v').textContent=t;simVacSub.textContent=s;}
       function setNet(c,t,d){simNet.className='sim-net '+c;simNetT.textContent=t;simNetD.textContent=d;}
@@ -1124,7 +1137,9 @@
       'my':[360,270,315,555,355,440],
       'seal':[455,350,400,680,455,555],
       'atto':[405,285,340,595,365,460],
-      'ev9':[350,250,300,510,315,395]
+      'ev9':[350,250,300,510,315,395],
+      'megane':[370,270,320,565,350,440],
+      'ioniq5':[340,245,290,510,315,395]
     };
     var ids=['rCityCold','rHwyCold','rCombCold','rCityMild','rHwyMild','rCombMild'];
     function fillRange(){
