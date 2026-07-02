@@ -362,13 +362,13 @@
         (149&nbsp;km le lundi, 134 mardi et vendredi, 136 le mercredi, 124 le jeudi), soit <strong>677&nbsp;km
         sur la seule semaine de travail</strong> — hors réunion à Poitiers (≈&nbsp;280&nbsp;km A/R).<br>
         Kilométrage relevé :
-        <strong>174&nbsp;000&nbsp;km depuis novembre&nbsp;2021</strong>, soit <strong>≈&nbsp;38&nbsp;000&nbsp;km/an</strong>
+        <strong>172&nbsp;000&nbsp;km depuis novembre&nbsp;2021</strong>, soit <strong>≈&nbsp;38&nbsp;000&nbsp;km/an</strong>
         au global (pro&nbsp;+&nbsp;perso).</p>
       <div class="facts">
         <div class="fact"><div class="v">730 km</div><div class="l">moyenne globale/semaine<br><span style="font-size:.72rem">(pro + perso, 38 000 km/an)</span></div></div>
         <div class="fact"><div class="v">677 km</div><div class="l">trajets professionnels lun→ven<br><span style="font-size:.72rem">(149+134+136+124+134 km/j)</span></div></div>
         <div class="fact crux"><div class="v">0</div><div class="l">recharge possible au domicile</div></div>
-        <div class="fact"><div class="v">~315 km</div><div class="l">autonomie réelle e-208, usage mixte<br><span style="font-size:.72rem">(EV-Database ; ~260 km par grand froid)</span></div></div>
+        <div class="fact"><div class="v">~335 km</div><div class="l">autonomie réelle e-208, usage mixte<br><span style="font-size:.72rem">(EV-Database ; ~280 km par grand froid)</span></div></div>
       </div>
     </section>
 
@@ -407,7 +407,7 @@
       <p class="lead">Le critère déterminant n'est pas l'autonomie annoncée, mais
         <strong>l'autonomie réelle en usage mixte</strong> (ville + route, mon usage type — l'autoroute
         restant occasionnelle). Les 433 km WLTP de la e-208 sont une valeur de laboratoire ; en usage mixte
-        réel, on est plutôt autour de ≈ 315 km (EV-Database).</p>
+        réel, on est plutôt autour de ≈ 335 km (EV-Database).</p>
       <div class="scale">
         <div class="scale-row"><div class="scale-name">Corolla<small>actuelle · référence</small></div>
           <div class="bar"><div class="fill" style="width:100%">≈ 560 km · plein 3 min</div></div></div>
@@ -426,7 +426,7 @@
         <div class="scale-row"><div class="scale-name">e-308<small>base · 450 km WLTP</small></div>
           <div class="bar"><div class="fill mid" style="width:62%">≈ 345 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-208<small>modèle retenu · 433 km WLTP</small></div>
-          <div class="bar"><div class="fill low" style="width:56%">≈ 315 km</div></div></div>
+          <div class="bar"><div class="fill low" style="width:60%">≈ 335 km</div></div></div>
       </div>
       <p class="cap">Valeurs en <strong>usage mixte</strong> (ville + route), représentatif de mon usage
         habituel. <em>Pour information</em> : sur autoroute — plus rare dans mon cas — l'autonomie
@@ -449,14 +449,14 @@
           </label>
           <label>Modèle
             <select id="simCar" aria-label="Modèle">
-              <option value="208" selected>Peugeot e-208 — 315 km</option>
-              <option value="308">Peugeot e-308 — 345 km</option>
-              <option value="3008">Peugeot e-3008 — 380 km</option>
-              <option value="m3">Tesla Model 3 — 450 km</option>
-              <option value="my">Tesla Model Y — 380 km</option>
-              <option value="seal">BYD Seal — 480 km</option>
-              <option value="atto">BYD Atto 3 EVO — 405 km</option>
-              <option value="ev9">Kia EV9 — 350 km</option>
+              <option value="208" selected>Peugeot e-208 — 363 km</option>
+              <option value="308">Peugeot e-308 — 368 km</option>
+              <option value="3008">Peugeot e-3008 — 403 km</option>
+              <option value="m3">Tesla Model 3 — 490 km</option>
+              <option value="my">Tesla Model Y — 409 km</option>
+              <option value="seal">BYD Seal — 516 km</option>
+              <option value="atto">BYD Atto 3 EVO — 430 km</option>
+              <option value="ev9">Kia EV9 — 371 km</option>
               <option value="corolla">Toyota Corolla (actuelle) — 560 km</option>
             </select>
           </label>
@@ -488,14 +488,14 @@
       <div class="conso-bar">
         <label>Véhicule
           <select id="cvCar" aria-label="Véhicule pour le calcul de consommation">
-            <option value="17,5" selected>Peugeot e-208</option>
-            <option value="18,0">Peugeot e-308</option>
-            <option value="20,5">Peugeot e-3008</option>
-            <option value="16,0">Tesla Model 3</option>
-            <option value="18,0">Tesla Model Y</option>
-            <option value="19,5">BYD Seal</option>
-            <option value="19,0">BYD Atto 3 EVO</option>
-            <option value="22,0">Kia EV9</option>
+            <option value="17,5" data-acmin="7.4" data-acmax="11" data-dc="+180 km / ~28 min" selected>Peugeot e-208</option>
+            <option value="18,0" data-acmin="11" data-acmax="11" data-dc="+210 km / ~27–32 min">Peugeot e-308</option>
+            <option value="20,5" data-acmin="11" data-acmax="11" data-dc="+250 km / ~35 min">Peugeot e-3008</option>
+            <option value="16,0" data-acmin="11" data-acmax="11" data-dc="+240 km / ~22 min">Tesla Model 3</option>
+            <option value="18,0" data-acmin="11" data-acmax="11" data-dc="+230 km / ~24 min">Tesla Model Y</option>
+            <option value="19,5" data-acmin="11" data-acmax="11" data-dc="+270 km / ~30 min">BYD Seal</option>
+            <option value="19,0" data-acmin="11" data-acmax="11" data-dc="+250 km / ~25 min">BYD Atto 3 EVO</option>
+            <option value="22,0" data-acmin="11" data-acmax="11" data-dc="+200 km / ~24 min">Kia EV9</option>
           </select>
         </label>
         <label>Consommation
@@ -509,15 +509,15 @@
           <th scope="col">Prix énergie</th><th scope="col">Coût / 100 km</th><th scope="col">Installation</th>
         </tr></thead>
         <tbody>
-          <tr><td class="m">Prise classique <small>maison</small></td><td class="d">2,3 kW</td><td class="d">~13 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">incluse</td></tr>
-          <tr><td class="m">Prise renforcée <small>Green'Up</small></td><td class="d">3,7 kW</td><td class="d">~20 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">500–1 000 €</td></tr>
-          <tr><td class="m">Borne à domicile <small>wallbox</small></td><td class="d">7,4 kW</td><td class="d">~40 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">1 200–2 000 €</td></tr>
-          <tr><td class="m">Borne publique de ville <small>AC</small></td><td class="d">11–22 kW</td><td class="d">~40–60 km/h*</td><td class="d">0,30–0,45 €/kWh</td><td class="d aut-o cc" data-plo="0.30" data-phi="0.45">~6–8 €</td><td class="d">—</td></tr>
-          <tr><td class="m">Borne rapide <small>DC, autoroute</small></td><td class="d">50–150 kW</td><td class="d">+180 km / ~28 min</td><td class="d">0,45–0,69 €/kWh</td><td class="d aut-r cc" data-plo="0.45" data-phi="0.69">~8–12 €</td><td class="d">—</td></tr>
-          <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d">+240 km / ~22 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
+          <tr><td class="m">Prise classique <small>maison</small></td><td class="d">2,3 kW</td><td class="d rh" data-smin="2.3" data-smax="2.3">~13 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">incluse</td></tr>
+          <tr><td class="m">Prise renforcée <small>Green'Up</small></td><td class="d">3,7 kW</td><td class="d rh" data-smin="3.7" data-smax="3.7">~21 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">500–1 000 €</td></tr>
+          <tr><td class="m">Borne à domicile <small>wallbox</small></td><td class="d">7,4 kW</td><td class="d rh" data-smin="7.4" data-smax="7.4">~42 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">1 200–2 000 €</td></tr>
+          <tr><td class="m">Borne publique de ville <small>AC</small></td><td class="d">11–22 kW</td><td class="d rh" data-smin="11" data-smax="22">~42–63 km/h*</td><td class="d">0,30–0,45 €/kWh</td><td class="d aut-o cc" data-plo="0.30" data-phi="0.45">~6–8 €</td><td class="d">—</td></tr>
+          <tr><td class="m">Borne rapide <small>DC, autoroute</small></td><td class="d">50–150 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,45–0,69 €/kWh</td><td class="d aut-r cc" data-plo="0.45" data-phi="0.69">~8–12 €</td><td class="d">—</td></tr>
+          <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
         </tbody>
       </table></div>
-      <p class="cap">* Limité par le chargeur embarqué (e-208 : 7,4 kW de série, 11 kW en option). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte) + ~8 % de pertes de charge — valeurs indicatives, ajustables. Vitesses et temps de recharge indiqués : <strong>référence e-208</strong> ; seul le coût/100 km s'adapte au véhicule choisi.</p>
+      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte) + ~8 % de pertes de charge — valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : le bouton au-dessus du tableau bascule entre <strong>temps constructeur</strong> (20→80 %, borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus) et <strong>temps réel mesuré</strong> en test indépendant (Automobile-Propre « Supertest », EVKX), sur la version de base. Fenêtre 20→80 % dans les deux cas : les km ajoutés sont identiques, seul le temps change.</p>
 
       <div class="sim" style="margin-top:18px">
         <div class="sim-h">Coût de la recharge &amp; rentabilité d'une borne</div>
@@ -575,20 +575,54 @@
       <p class="lead">Tous les modèles sont indiqués en <strong>version de base</strong> (batterie d'entrée de
         gamme), pour une comparaison équitable. Tous bénéficient des mêmes avantages fiscaux. Le <strong>WLTP</strong>
         est la valeur de laboratoire (référence constructeur, peu réaliste). Les deux colonnes d'autonomie réelle
-        sont les estimations <strong>EV-Database</strong> : <strong>« Réel usage mixte »</strong> (conditions moyennes,
-        ville + route) et <strong>« Réel grand froid »</strong> (≈ −10 °C avec chauffage).</p>
+        sont les estimations <strong>EV-Database</strong> : <strong>« Réel usage mixte »</strong> (Combiné-Doux —
+        printemps/été/automne, hors grand froid déjà couvert par la colonne suivante) et <strong>« Réel grand froid »</strong>
+        (Combiné-Froid, ≈ −10 °C avec chauffage).
+        <button type="button" class="info-trigger" data-modal="rangeModal" aria-haspopup="dialog">Voir le détail ville/autoroute, froid/doux</button></p>
+
+      <dialog id="rangeModal" class="modal" aria-labelledby="rangeModalTitle">
+        <div class="modal-head">
+          <h3 id="rangeModalTitle">Autonomie réelle détaillée par véhicule</h3>
+          <button type="button" class="modal-close" data-close aria-label="Fermer la fenêtre">×</button>
+        </div>
+        <div class="modal-body">
+          <p>Le tableau comparatif n'affiche que 2 valeurs synthétiques (moyenne et pire cas). EV-Database publie en réalité <strong>6 estimations</strong> selon le trajet et la météo — sélectionnez un véhicule :</p>
+          <label style="display:block;margin:10px 0 14px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700">Véhicule
+            <select id="rangeCar" aria-label="Véhicule pour le détail d'autonomie" style="display:block;margin-top:7px;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.88rem;font-family:inherit;font-weight:600">
+              <option value="208" selected>Peugeot e-208 — 51 kWh</option>
+              <option value="308">Peugeot e-308 — 58 kWh</option>
+              <option value="3008">Peugeot e-3008 — 73 kWh</option>
+              <option value="m3">Tesla Model 3 — 60 kWh</option>
+              <option value="my">Tesla Model Y — 60 kWh</option>
+              <option value="seal">BYD Seal — 82,5 kWh</option>
+              <option value="atto">BYD Atto 3 EVO — 74,8 kWh</option>
+              <option value="ev9">Kia EV9 — 76,1 kWh</option>
+            </select>
+          </label>
+          <table class="m-table" id="rangeTbl">
+            <thead><tr><th scope="col"></th><th scope="col">Ville</th><th scope="col">Autoroute</th><th scope="col">Combiné</th></tr></thead>
+            <tbody>
+              <tr><td><b>Froid</b> <small>−10 °C, chauffage</small></td><td id="rCityCold"></td><td id="rHwyCold"></td><td id="rCombCold"></td></tr>
+              <tr><td><b>Doux</b> <small>23 °C, sans clim</small></td><td id="rCityMild"></td><td id="rHwyMild"></td><td id="rCombMild"></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Source : EV-Database, version de base de chaque modèle (identique au tableau comparatif). « Autoroute » suppose 110 km/h constant. Les valeurs déjà affichées dans le tableau reprennent directement le <b>Combiné-Froid</b> (« grand froid ») et le <b>Combiné-Doux</b> (« usage mixte », printemps/été/automne — le grand froid ayant sa propre colonne, pas de moyenne entre les deux).</p>
+          <p style="font-size:.78rem;color:var(--muted);margin-top:8px"><b>⚠️ Sans clim.</b> EV-Database précise que « Doux » suppose <b>23&nbsp;°C sans climatisation</b> (meilleur cas) — pas un scénario estival réaliste. Avec clim active par forte chaleur, comptez une perte supplémentaire d'environ <b>−5 à −18&nbsp;%</b> selon la température (<a href="https://newsroom.aaa.com/2026/05/aaa-study-reveals-temperature-impacts-on-ev-and-hybrid-performance-efficiency-and-costs/" target="_blank" rel="noopener" style="color:var(--teal-deep)">AAA 2026</a> : −17&nbsp;% à 35&nbsp;°C ; <a href="https://www.recurrentauto.com/research/what-a-c-does-to-your-range" target="_blank" rel="noopener" style="color:var(--teal-deep)">Recurrent</a> : −5&nbsp;% à 32&nbsp;°C, jusqu'à −17–18&nbsp;% à 37&nbsp;°C) — non individualisé par véhicule ici, données fiables par modèle insuffisantes.</p>
+        </div>
+      </dialog>
+
       <div class="tbl"><table class="cmp" id="cmpVeh">
         <caption class="sr-only">Comparatif des modèles : provenance, batterie, autonomie WLTP, autonomie réelle (usage mixte et grand froid), recharge rapide et loyer LLD.</caption>
         <thead><tr><th scope="col">Modèle</th><th scope="col">Provenance (assemblage)</th><th scope="col">Batterie</th><th scope="col">WLTP</th><th scope="col">Réel usage mixte</th><th scope="col">Réel grand froid</th><th scope="col">Recharge rapide 20→80 %</th><th scope="col">Loyer LLD/mois</th></tr></thead>
         <tbody>
-          <tr class="hl"><td class="m">Peugeot e-208 <small>modèle retenu · 156 ch</small></td><td class="d">Slovaquie / Espagne</td><td class="d">51 kWh</td><td class="d">433 km</td><td class="d">~315 km</td><td class="step gE">~260 km</td><td class="d">~28 min → +180 km <small>borne rapide, 100 kW</small></td><td class="d">510 €</td></tr>
-          <tr><td class="m">Peugeot e-308 <small>berline · batterie 58 kWh (2025)</small></td><td class="d">France (Mulhouse)</td><td class="d">58 kWh</td><td class="d">450 km</td><td class="d">~345 km</td><td class="step gC">~285 km</td><td class="d">~32 min → +210 km <small>borne rapide, 100 kW</small></td><td class="d">675 € <small>+165 €</small></td></tr>
-          <tr><td class="m">Peugeot e-3008 <small>Standard Range · 213 ch · produit en France</small></td><td class="d">France (Sochaux)</td><td class="d">73 kWh</td><td class="d">529 km</td><td class="d">~380 km</td><td class="step gC">~320 km</td><td class="d">~35 min → +250 km <small>borne rapide, 160 kW</small></td><td class="d">585 € <small>+75 €</small></td></tr>
-          <tr><td class="m">Tesla Model 3 <small>RWD / Propulsion</small></td><td class="d">Chine (Shanghai)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d">~450 km</td><td class="step gB">~370 km</td><td class="d">~22 min → +240 km <small>Supercharger, 175 kW</small></td><td class="d">593 € <small>+83 €</small></td></tr>
-          <tr><td class="m">Tesla Model Y <small>RWD / Propulsion</small></td><td class="d">Allemagne (Berlin)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d">~380 km</td><td class="step gC">~315 km</td><td class="d">~24 min → +230 km <small>Supercharger, 175 kW</small></td><td class="d">545 € <small>+35 €</small></td></tr>
-          <tr><td class="m">BYD Seal <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d">~480 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">BYD Atto 3 EVO <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d">~405 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
-          <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d">~350 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
+          <tr class="hl"><td class="m">Peugeot e-208 <small>modèle retenu · 156 ch</small></td><td class="d">Slovaquie / Espagne</td><td class="d">51 kWh</td><td class="d">433 km</td><td class="d">~390 km</td><td class="step gE">~280 km</td><td class="d">~28 min → +180 km <small>borne rapide, 100 kW</small></td><td class="d">510 €</td></tr>
+          <tr><td class="m">Peugeot e-308 <small>berline · batterie 58 kWh (2025)</small></td><td class="d">France (Mulhouse)</td><td class="d">58 kWh</td><td class="d">450 km</td><td class="d">~395 km</td><td class="step gC">~285 km</td><td class="d">~27–32 min → +210 km <small>borne rapide, 100 kW</small></td><td class="d">675 € <small>+165 €</small></td></tr>
+          <tr><td class="m">Peugeot e-3008 <small>Standard Range · 213 ch · produit en France</small></td><td class="d">France (Sochaux)</td><td class="d">73 kWh</td><td class="d">529 km</td><td class="d">~430 km</td><td class="step gC">~320 km</td><td class="d">~35 min → +250 km <small>borne rapide, 160 kW</small></td><td class="d">585 € <small>+75 €</small></td></tr>
+          <tr><td class="m">Tesla Model 3 <small>RWD / Propulsion</small></td><td class="d">Chine (Shanghai)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d">~530 km</td><td class="step gB">~370 km</td><td class="d">~22 min → +240 km <small>Supercharger, 175 kW</small></td><td class="d">593 € <small>+83 €</small></td></tr>
+          <tr><td class="m">Tesla Model Y <small>RWD / Propulsion</small></td><td class="d">Allemagne (Berlin)</td><td class="d">60 kWh</td><td class="d">534 km</td><td class="d">~440 km</td><td class="step gC">~315 km</td><td class="d">~24 min → +230 km <small>Supercharger, 175 kW</small></td><td class="d">545 € <small>+35 €</small></td></tr>
+          <tr><td class="m">BYD Seal <small>Design · LFP Blade (seule version vendue en France)</small></td><td class="d">Chine</td><td class="d">82,5 kWh</td><td class="d">570 km</td><td class="d">~555 km</td><td class="step gA">~400 km</td><td class="d">~30 min → +270 km <small>borne rapide, ~150 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">BYD Atto 3 EVO <small>RWD · SUV compact, 800 V</small></td><td class="d">Chine</td><td class="d">74,8 kWh</td><td class="d">510 km</td><td class="d">~460 km</td><td class="step gB">~340 km</td><td class="d">~25 min → +250 km <small>borne rapide, 220 kW</small></td><td class="d">sur devis</td></tr>
+          <tr><td class="m">Kia EV9 <small>Autonomie standard · 4×2 · 218 ch</small></td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d">~395 km</td><td class="step gC">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
           <tr><td class="m">Toyota Corolla <small>actuelle · hybride</small></td><td class="d">R-U / Turquie</td><td class="d">—</td><td class="d">—</td><td class="d">~560 km</td><td class="step gA">~530 km</td><td class="d">~3 min → plein <small>~560 km récupérés</small></td><td class="d">—</td></tr>
         </tbody>
       </table></div>
@@ -605,7 +639,7 @@
         <p style="margin-top:10px;font-size:.8rem;color:var(--muted)">Temps et km indiqués : valeurs constructeur (20→80 %, borne à pleine puissance, batterie préconditionnée). En conditions réelles — froid, borne partagée, batterie non préchauffée — comptez sensiblement plus long.</p>
         <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">La provenance indiquée correspond au <b>lieu d'assemblage final</b>. Elle ne préjuge pas de l'origine de tous les composants : une voiture assemblée en France ou en Europe intègre des pièces (batterie, électronique) souvent fabriquées ailleurs. C'est un repère, pas une garantie d'origine intégrale.</p>
         <p style="margin-top:10px"><b>Versions retenues.</b> Le tableau compare la <b>version de base</b> de chaque modèle (batterie d'entrée de gamme effectivement vendue en France). Plusieurs modèles existent aussi en grande batterie, plus autonome (ex. e-3008 98 kWh, Kia EV9 99,8 kWh, Tesla Grande Autonomie).</p>
-        <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">Sources <b>croisées</b> (consultées en juin 2026) : configurateurs constructeurs (Peugeot, Tesla, BYD, Kia), EV-Database, Automobile-Propre, fiches-auto.fr, electrive. Capacités batterie = valeur annoncée par le constructeur ; la définition varie selon la marque (e-308 et EV9 = capacité brute ; e-3008 et Seal = nette/utile), et Tesla ne publie pas la sienne (≈ 60 kWh estimé). WLTP = valeur constructeur « jusqu'à » (meilleure configuration) ; les mesures standardisées peuvent être un peu plus basses — ex. e-208 : 433 km (Peugeot) vs 409 km (EV-Database). e-308 : 450 km = estimation Peugeot, homologation en cours. Les deux colonnes d'<b>autonomie réelle</b> reprennent les estimations <b>EV-Database</b> : « usage mixte » = Real Range (conditions moyennes) et « grand froid » = scénario −10 °C avec chauffage (worst-case).</p>
+        <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">Sources <b>croisées</b> (consultées en juin 2026) : configurateurs constructeurs (Peugeot, Tesla, BYD, Kia), EV-Database, Automobile-Propre, fiches-auto.fr, electrive. Capacités batterie = valeur annoncée par le constructeur ; la définition varie selon la marque (e-308 et EV9 = capacité brute ; e-3008 et Seal = nette/utile), et Tesla ne publie pas la sienne (≈ 60 kWh estimé). WLTP = valeur constructeur « jusqu'à » (meilleure configuration) ; les mesures standardisées peuvent être un peu plus basses — ex. e-208 : 433 km (Peugeot) vs 409 km (EV-Database). e-308 : 450 km = estimation Peugeot, homologation en cours. Les deux colonnes d'<b>autonomie réelle</b> reprennent les estimations <b>EV-Database</b> : « usage mixte » = Combiné-Doux (printemps/été/automne, hors grand froid déjà couvert par la colonne suivante) et « grand froid » = Combiné-Froid (scénario −10 °C avec chauffage, worst-case).</p>
         <p style="margin-top:8px;font-size:.78rem;color:var(--muted)"><b>Loyer LLD</b> : tarif public Peugeot — <a href="https://www.peugeot.fr/offres-pro/gamme-electrique.html" target="_blank" rel="noopener" style="color:var(--teal-deep)">offres professionnelles</a> (36 mois / 45 000 km, prime CEE 580 € incluse). Mon kilométrage réel étant ≈ 40 000 km/an, les loyers absolus seront plus élevés — mais l'écart <b>e-208 → e-3008 = +75 €/mois</b> (≈ +900 €/an) reste l'indicateur clé, à confirmer par devis flotte. Tesla, même base (45 000 km / 36 mois) : Model Y 545 €, Model 3 593 € — mais <b>hors entretien et assistance</b> (en option chez Tesla, inclus chez Peugeot), donc à majorer pour une comparaison stricte. BYD — <a href="https://www.byd.com/fr/offres-pro" target="_blank" rel="noopener" style="color:var(--teal-deep)">offres pro</a> (tarifs publics sur base 49 mois / 10 000 km, non comparable) ; Kia : sur devis.</p>
         </details>
       </div>
@@ -624,8 +658,8 @@
       </div>
       <p class="lead" style="margin-top:18px">Le sujet n'est donc pas « électrique contre thermique », mais
         <strong>« petit véhicule contre usage intensif »</strong>.</p>
-      <p style="margin-top:14px">Pour mon usage, l'autonomie réelle de la <strong>e-208</strong> (≈&nbsp;315&nbsp;km en usage mixte,
-        ≈&nbsp;260&nbsp;km par grand froid) et sa puissance de charge sont les plus contraignantes du comparatif.
+      <p style="margin-top:14px">Pour mon usage, l'autonomie réelle de la <strong>e-208</strong> (≈&nbsp;335&nbsp;km en usage mixte,
+        ≈&nbsp;280&nbsp;km par grand froid) et sa puissance de charge sont les plus contraignantes du comparatif.
         Au-delà de ce constat, le comparatif (section&nbsp;4) présente l'ensemble des modèles sur les mêmes
         critères : <strong>je n'en privilégie aucun — le choix du modèle relève de l'entreprise.</strong></p>
     </section>
@@ -864,9 +898,10 @@
           simRech=document.getElementById('simRech'),simH=document.getElementById('simH'),simV=document.getElementById('simVerdict'),simVSub=document.getElementById('simVerdictSub'),
           simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
-      var autos={'208':315,'308':345,'3008':380,'m3':450,'my':380,'seal':480,'atto':405,'ev9':350,'corolla':-1};
+      // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux / 25% Combiné-Froid (climat océanique : grand froid minoritaire dans l'année)
+      var autos={'208':363,'308':368,'3008':403,'m3':490,'my':409,'seal':516,'atto':430,'ev9':371,'corolla':-1};
       // Durée d'une recharge rapide 20→80 % en minutes (reprise du tableau comparatif : constructeurs / EV-Database)
-      var charge={'208':28,'308':32,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24};
+      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24};
       function setV(c,t,s){simV.className='sim-card v-'+c;simV.querySelector('.v').textContent=t;simVSub.textContent=s;}
       function setVac(c,t,s){simVac.className='sim-card v-'+c;simVac.querySelector('.v').textContent=t;simVacSub.textContent=s;}
       function setNet(c,t,d){simNet.className='sim-net '+c;simNetT.textContent=t;simNetD.textContent=d;}
@@ -934,7 +969,7 @@
         cHome=document.getElementById('cHome'),cPubOut=document.getElementById('cPubOut'),cDiff=document.getElementById('cDiff'),
         cRoi=document.getElementById('cRoi'),cRoiSub=document.getElementById('cRoiSub');
     var cvCar=document.getElementById('cvCar'),cvConso=document.getElementById('cvConso'),
-        costCells=document.querySelectorAll('#modesTbl .cc');
+        costCells=document.querySelectorAll('#modesTbl .cc'), rhCells=document.querySelectorAll('#modesTbl .rh'), dcCells=document.querySelectorAll('#modesTbl .dc');
     function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:17.5; }   // kWh/100 km au compteur (pertes incluses)
     function fmt1(x){ return (Math.round(x*10)/10).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
     function fillTable(){
@@ -943,6 +978,18 @@
         var td=costCells[i], plo=+td.getAttribute('data-plo'), phi=+td.getAttribute('data-phi'), lo=c*plo, hi=c*phi;
         td.textContent = (plo===phi) ? '~'+fmt1(lo)+' €' : '~'+Math.round(lo)+'–'+Math.round(hi)+' €';
       }
+    }
+    function fillSpeeds(){
+      var c=conso100(), opt=cvCar.options[cvCar.selectedIndex];
+      var acmin=+opt.getAttribute('data-acmin'), acmax=+opt.getAttribute('data-acmax');
+      for(var i=0;i<rhCells.length;i++){
+        var td=rhCells[i], smin=+td.getAttribute('data-smin'), smax=+td.getAttribute('data-smax');
+        var emin=Math.min(smin,acmin), emax=Math.min(smax,acmax);
+        var kmin=Math.round(emin*100/c), kmax=Math.round(emax*100/c);
+        td.textContent = (kmin===kmax) ? '~'+kmin+' km/h' : '~'+kmin+'–'+kmax+' km/h*';
+      }
+      var dcText = opt.getAttribute('data-dc') || '—';
+      for(var j=0;j<dcCells.length;j++){ dcCells[j].textContent=dcText; }
     }
     function eur(n){return '≈ '+Math.round(n).toLocaleString('fr-FR')+' €';}
     function n0(n){return Math.round(n).toLocaleString('fr-FR');}
@@ -963,9 +1010,10 @@
     }
     [cSem,cExtra,cHC,cPub,cInst].forEach(function(el){ el.addEventListener('input',cUp); });
     cNet.addEventListener('change',cUp);
-    cvConso.addEventListener('input',function(){ fillTable(); cUp(); });
-    cvCar.addEventListener('change',function(){ cvConso.value=cvCar.value; fillTable(); cUp(); });
+    cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); });
+    cvCar.addEventListener('change',function(){ cvConso.value=cvCar.value; fillTable(); fillSpeeds(); cUp(); });
     fillTable();
+    fillSpeeds();
     cUp();
   })();
 
@@ -981,6 +1029,30 @@
       d.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click',function(){ d.close(); }); });
       d.addEventListener('click',function(e){ if(e.target===d) d.close(); }); // clic sur le fond
     });
+  })();
+
+  // Modale autonomie détaillée (6 valeurs EV-Database : ville/autoroute/combiné × froid/doux)
+  (function(){
+    var rangeCar=document.getElementById('rangeCar');
+    if(!rangeCar) return;
+    // [Ville-Froid, Autoroute-Froid, Combiné-Froid, Ville-Doux, Autoroute-Doux, Combiné-Doux] — km, EV-Database, version de base (cf. tableau comparatif)
+    var rangeData={
+      '208':[325,235,280,505,310,390],
+      '308':[330,245,285,505,315,395],
+      '3008':[375,270,320,555,345,430],
+      'm3':[410,325,370,660,435,530],
+      'my':[360,270,315,555,355,440],
+      'seal':[455,350,400,680,455,555],
+      'atto':[405,285,340,595,365,460],
+      'ev9':[350,250,300,510,315,395]
+    };
+    var ids=['rCityCold','rHwyCold','rCombCold','rCityMild','rHwyMild','rCombMild'];
+    function fillRange(){
+      var d=rangeData[rangeCar.value]||[];
+      ids.forEach(function(id,i){ document.getElementById(id).textContent = d[i]?d[i]+' km':'—'; });
+    }
+    rangeCar.addEventListener('change',fillRange);
+    fillRange();
   })();
 
   // Déplier les blocs <details class="more"> à l'impression, puis restaurer
