@@ -87,6 +87,9 @@
   .fact.crux .v{color:var(--bad)}
 
   /* ---------- échelle (signature) ---------- */
+  .season-toggle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px;font-size:.85rem;color:var(--muted)}
+  .season-btn{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer}
+  .season-btn.on{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
   .scale{margin-top:8px}
   .scale-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;padding:8px 0}
   .scale-name{font-weight:700;font-size:.9rem;color:var(--ink)}
@@ -368,7 +371,7 @@
         <div class="fact"><div class="v">730 km</div><div class="l">moyenne globale/semaine<br><span style="font-size:.72rem">(pro + perso, 38 000 km/an)</span></div></div>
         <div class="fact"><div class="v">677 km</div><div class="l">trajets professionnels lun→ven<br><span style="font-size:.72rem">(149+134+136+124+134 km/j)</span></div></div>
         <div class="fact crux"><div class="v">0</div><div class="l">recharge possible au domicile</div></div>
-        <div class="fact"><div class="v">~335 km</div><div class="l">autonomie réelle e-208, usage mixte<br><span style="font-size:.72rem">(EV-Database ; ~280 km par grand froid)</span></div></div>
+        <div class="fact"><div class="v">390 <span style="font-size:.85rem">été</span> · 280 <span style="font-size:.85rem">hiver</span></div><div class="l">autonomie réelle e-208 (km)<br><span style="font-size:.72rem">EV-Database — combiné doux 23 °C / combiné froid −10 °C</span></div></div>
       </div>
     </section>
 
@@ -405,32 +408,38 @@
     <section id="s3">
       <div class="head"><span class="num">3</span><h2>Le point de friction : autonomie et recharge</h2></div>
       <p class="lead">Le critère déterminant n'est pas l'autonomie annoncée, mais
-        <strong>l'autonomie réelle en usage mixte</strong> (ville + route, mon usage type — l'autoroute
-        restant occasionnelle). Les 433 km WLTP de la e-208 sont une valeur de laboratoire ; en usage mixte
-        réel, on est plutôt autour de ≈ 335 km (EV-Database).</p>
-      <div class="scale">
+        <strong>l'autonomie réelle</strong> (ville + route, mon usage type — l'autoroute
+        restant occasionnelle). Les 433 km WLTP de la e-208 sont une valeur de laboratoire ; en
+        <span id="s3SeasonLabel">été</span> réel, on est plutôt autour de ≈ <span id="s3E208">390</span> km (EV-Database).</p>
+      <div class="season-toggle" role="group" aria-label="Choix de la saison">
+        <span>Autonomie réelle :</span>
+        <button type="button" id="seasonEte" class="season-btn on" aria-pressed="true">Été (combiné doux)</button>
+        <button type="button" id="seasonHiver" class="season-btn" aria-pressed="false">Hiver (grand froid)</button>
+      </div>
+      <div class="scale" id="scaleChart">
         <div class="scale-row"><div class="scale-name">Corolla<small>actuelle · référence</small></div>
           <div class="bar"><div class="fill" style="width:100%">≈ 560 km · plein 3 min</div></div></div>
         <div class="scale-row"><div class="scale-name">BYD Seal<small>base · 570 km WLTP</small></div>
-          <div class="bar"><div class="fill" style="width:86%">≈ 480 km</div></div></div>
+          <div class="bar"><div class="fill" data-ete="555" data-hiver="400" style="width:99%">≈ 555 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Model 3<small>base · 534 km WLTP</small></div>
-          <div class="bar"><div class="fill" style="width:80%">≈ 450 km</div></div></div>
+          <div class="bar"><div class="fill" data-ete="530" data-hiver="370" style="width:95%">≈ 530 km</div></div></div>
         <div class="scale-row"><div class="scale-name">BYD Atto 3 EVO<small>base · 510 km WLTP</small></div>
-          <div class="bar"><div class="fill" style="width:72%">≈ 405 km</div></div></div>
-        <div class="scale-row"><div class="scale-name">e-3008<small>base · 529 km WLTP</small></div>
-          <div class="bar"><div class="fill" style="width:68%">≈ 380 km</div></div></div>
+          <div class="bar"><div class="fill" data-ete="460" data-hiver="340" style="width:82%">≈ 460 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Model Y<small>base · 534 km WLTP</small></div>
-          <div class="bar"><div class="fill" style="width:68%">≈ 380 km</div></div></div>
+          <div class="bar"><div class="fill" data-ete="440" data-hiver="315" style="width:79%">≈ 440 km</div></div></div>
+        <div class="scale-row"><div class="scale-name">e-3008<small>base · 529 km WLTP</small></div>
+          <div class="bar"><div class="fill" data-ete="430" data-hiver="320" style="width:77%">≈ 430 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Kia EV9<small>base · 443 km WLTP</small></div>
-          <div class="bar"><div class="fill mid" style="width:63%">≈ 350 km</div></div></div>
+          <div class="bar"><div class="fill mid" data-ete="395" data-hiver="300" style="width:71%">≈ 395 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-308<small>base · 450 km WLTP</small></div>
-          <div class="bar"><div class="fill mid" style="width:62%">≈ 345 km</div></div></div>
+          <div class="bar"><div class="fill mid" data-ete="395" data-hiver="285" style="width:71%">≈ 395 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-208<small>modèle retenu · 433 km WLTP</small></div>
-          <div class="bar"><div class="fill low" style="width:60%">≈ 335 km</div></div></div>
+          <div class="bar"><div class="fill low" data-ete="390" data-hiver="280" style="width:70%">≈ 390 km</div></div></div>
       </div>
-      <p class="cap">Valeurs en <strong>usage mixte</strong> (ville + route), représentatif de mon usage
-        habituel. <em>Pour information</em> : sur autoroute — plus rare dans mon cas — l'autonomie
-        baisse encore (≈ −25 à −30 %), et davantage par grand froid. Même en usage mixte, mes
+      <p class="cap">Valeurs <strong id="s3CapSeason">été (combiné doux, 23 °C sans clim)</strong> —
+        Corolla non recalculée par saison (thermique, peu sensible). <em>Pour information</em> : sur
+        autoroute — plus rare dans mon cas — l'autonomie baisse encore (≈ −25 à −30 %) par rapport au
+        combiné, quelle que soit la saison affichée. Même en été, mes
         ≈ 730 km/semaine sans recharge à domicile imposent des recharges publiques fréquentes
         avec la e-208.</p>
 
@@ -1053,6 +1062,29 @@
     }
     rangeCar.addEventListener('change',fillRange);
     fillRange();
+  })();
+
+  // Toggle été/hiver — barre d'autonomie section 3 (échelle comparative)
+  (function(){
+    var btnEte=document.getElementById('seasonEte'), btnHiver=document.getElementById('seasonHiver');
+    if(!btnEte) return;
+    var fills=document.querySelectorAll('#scaleChart .fill[data-ete]');
+    var e208El=document.getElementById('s3E208'), labelEl=document.getElementById('s3SeasonLabel'), capEl=document.getElementById('s3CapSeason');
+    function setSeason(season){
+      btnEte.classList.toggle('on',season==='ete'); btnEte.setAttribute('aria-pressed',season==='ete');
+      btnHiver.classList.toggle('on',season==='hiver'); btnHiver.setAttribute('aria-pressed',season==='hiver');
+      fills.forEach(function(f){
+        var v=+f.getAttribute(season==='hiver'?'data-hiver':'data-ete');
+        f.style.width=Math.round(v/560*100)+'%';
+        f.textContent='≈ '+v+' km';
+      });
+      var e208v = season==='hiver' ? 280 : 390;
+      if(e208El) e208El.textContent=e208v;
+      if(labelEl) labelEl.textContent = season==='hiver' ? 'hiver' : 'été';
+      if(capEl) capEl.textContent = season==='hiver' ? 'hiver (combiné froid, −10 °C avec chauffage)' : 'été (combiné doux, 23 °C sans clim)';
+    }
+    btnEte.addEventListener('click',function(){ setSeason('ete'); });
+    btnHiver.addEventListener('click',function(){ setSeason('hiver'); });
   })();
 
   // Déplier les blocs <details class="more"> à l'impression, puis restaurer
