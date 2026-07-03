@@ -90,11 +90,8 @@
   .season-toggle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px;font-size:.85rem;color:var(--muted)}
   .season-btn{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer}
   .season-btn.on{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
-  .ac-toggle{display:flex;align-items:center;gap:7px;margin:2px 0 10px;font-size:.85rem;color:var(--muted);cursor:pointer}
-  .ac-toggle input{accent-color:var(--teal-deep);cursor:pointer}
-  .ac-toggle.disabled{opacity:.45;cursor:not-allowed}
-  .hiver-sub{transition:opacity .15s}
-  .hiver-sub.disabled{opacity:.4}
+  .hiver-sub,.ete-sub{transition:opacity .15s}
+  .hiver-sub.disabled,.ete-sub.disabled{opacity:.4}
   .scale{margin-top:8px}
   .scale-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;padding:8px 0}
   .scale-name{font-weight:700;font-size:.9rem;color:var(--ink)}
@@ -429,19 +426,18 @@
         <strong>l'autonomie réelle</strong> (ville + route, mon usage type — l'autoroute
         restant occasionnelle). Les 433 km WLTP de la e-208 sont une valeur de laboratoire ; en
         <span id="s3SeasonLabel">été</span> réel, on est plutôt autour de ≈ <span id="s3E208">390</span> km (EV-Database).</p>
-      <div class="season-toggle" role="group" aria-label="Choix de la saison">
-        <span>Autonomie réelle :</span>
-        <button type="button" id="seasonEte" class="season-btn on" aria-pressed="true">Été (combiné doux)</button>
-        <button type="button" id="seasonHiver" class="season-btn" aria-pressed="false">Hiver</button>
-        <span class="hiver-sub disabled" id="hiverSubWrap" style="margin-left:10px">
-          <button type="button" id="s3HiverAtl" class="season-btn" aria-pressed="false" disabled>Atlantique</button>
-          <button type="button" id="s3HiverFroid" class="season-btn on" aria-pressed="true" disabled>Grand froid −10 °C</button>
+      <div class="season-toggle" role="group" aria-label="Climatisation pour « Réel usage mixte » et scénario météo pour « Réel hiver »">
+        <span>Réel usage mixte :</span>
+        <span class="ete-sub" id="eteSubWrap">
+          <button type="button" id="s3AcOn" class="season-btn on" aria-pressed="true">Avec clim</button>
+          <button type="button" id="s3AcOff" class="season-btn" aria-pressed="false">Sans clim</button>
+        </span>
+        <span style="margin-left:10px">Réel hiver :</span>
+        <span class="hiver-sub disabled" id="hiverSubWrap">
+          <button type="button" id="s3HiverAtl" class="season-btn" aria-pressed="false">Atlantique</button>
+          <button type="button" id="s3HiverFroid" class="season-btn on" aria-pressed="true">Grand froid −10 °C</button>
         </span>
       </div>
-      <label class="ac-toggle" id="acToggleWrap" for="acCheck">
-        <input type="checkbox" id="acCheck">
-        Climatisation active <small>(été seulement — ≈ −12&nbsp;% estimé, ordre de grandeur AAA 2026 / Recurrent, cf. modale d'autonomie détaillée)</small>
-      </label>
       <div class="scale" id="scaleChart">
         <div class="scale-row"><div class="scale-name">Corolla<small>actuelle · référence</small></div>
           <div class="bar"><div class="fill" style="width:100%">≈ 560 km · plein 3 min</div></div></div>
@@ -1255,29 +1251,29 @@
     fillRange();
   })();
 
-  // Toggle été/hiver + clim + Atlantique/grand froid — barre d'autonomie section 3 (échelle comparative)
+  // Toggle Avec/Sans clim + Atlantique/grand froid — barre d'autonomie section 3 (échelle comparative)
+  // Structure alignée sur le toggle du tableau comparatif (section 4) : 2 groupes indépendants,
+  // mais un seul scénario piloté par le dernier bouton cliqué (le graphique n'affiche qu'une valeur à la fois).
   (function(){
-    var btnEte=document.getElementById('seasonEte'), btnHiver=document.getElementById('seasonHiver');
-    if(!btnEte) return;
+    var btnAcOn=document.getElementById('s3AcOn'), btnAcOff=document.getElementById('s3AcOff');
+    if(!btnAcOn) return;
     var fills=document.querySelectorAll('#scaleChart .fill[data-ete]');
     var e208El=document.getElementById('s3E208'), labelEl=document.getElementById('s3SeasonLabel'), capEl=document.getElementById('s3CapSeason');
-    var acCheck=document.getElementById('acCheck'), acWrap=document.getElementById('acToggleWrap');
+    var eteWrap=document.getElementById('eteSubWrap');
     var btnHAtl=document.getElementById('s3HiverAtl'), btnHFroid=document.getElementById('s3HiverFroid'), hiverWrap=document.getElementById('hiverSubWrap');
     var AC_FACTOR=0.88; // ≈ −12 % estimé, clim active en été (AAA 2026 : −17 % à 35 °C ; Recurrent : −5 % à 32 °C, jusqu'à −18 % à 37 °C)
-    var season='ete', hiverMode='froid';
+    var season='ete', ac=true, hiverMode='froid'; // défaut avec clim, cohérent avec le tableau comparatif (section 4)
     function render(){
-      var ac = season==='ete' && acCheck && acCheck.checked;
       var atl = hiverMode==='atlantique';
-      btnEte.classList.toggle('on',season==='ete'); btnEte.setAttribute('aria-pressed',season==='ete');
-      btnHiver.classList.toggle('on',season==='hiver'); btnHiver.setAttribute('aria-pressed',season==='hiver');
-      if(acWrap) acWrap.classList.toggle('disabled',season==='hiver');
-      if(acCheck) acCheck.disabled = (season==='hiver');
-      if(hiverWrap) hiverWrap.classList.toggle('disabled',season==='ete');
-      if(btnHAtl) btnHAtl.disabled = (season==='ete');
-      if(btnHFroid) btnHFroid.disabled = (season==='ete');
+      btnAcOn.classList.toggle('on', season==='ete' && ac); btnAcOn.setAttribute('aria-pressed', season==='ete' && ac);
+      btnAcOff.classList.toggle('on', season==='ete' && !ac); btnAcOff.setAttribute('aria-pressed', season==='ete' && !ac);
+      if(eteWrap) eteWrap.classList.toggle('disabled', season!=='ete');
+      btnHAtl.classList.toggle('on', season==='hiver' && atl); btnHAtl.setAttribute('aria-pressed', season==='hiver' && atl);
+      btnHFroid.classList.toggle('on', season==='hiver' && !atl); btnHFroid.setAttribute('aria-pressed', season==='hiver' && !atl);
+      if(hiverWrap) hiverWrap.classList.toggle('disabled', season!=='hiver');
       fills.forEach(function(f){
         var v = season==='hiver' ? +f.getAttribute(atl?'data-hiver-atl':'data-hiver') : +f.getAttribute('data-ete');
-        if(ac) v=Math.round(v*AC_FACTOR);
+        if(season==='ete' && ac) v=Math.round(v*AC_FACTOR);
         f.style.width=Math.round(v/560*100)+'%';
         f.textContent='≈ '+v+' km';
       });
@@ -1288,11 +1284,10 @@
         ? (atl ? 'hiver Atlantique (estimation ≈ −20 %, voir note section 4)' : 'hiver (combiné froid, −10 °C avec chauffage)')
         : (ac ? 'été, clim active (combiné doux − 12 % estimé)' : 'été (combiné doux, 23 °C sans clim)');
     }
-    btnEte.addEventListener('click',function(){ season='ete'; render(); });
-    btnHiver.addEventListener('click',function(){ season='hiver'; render(); });
-    if(acCheck) acCheck.addEventListener('change',render);
-    if(btnHAtl) btnHAtl.addEventListener('click',function(){ hiverMode='atlantique'; btnHAtl.classList.add('on'); btnHAtl.setAttribute('aria-pressed','true'); btnHFroid.classList.remove('on'); btnHFroid.setAttribute('aria-pressed','false'); render(); });
-    if(btnHFroid) btnHFroid.addEventListener('click',function(){ hiverMode='froid'; btnHFroid.classList.add('on'); btnHFroid.setAttribute('aria-pressed','true'); btnHAtl.classList.remove('on'); btnHAtl.setAttribute('aria-pressed','false'); render(); });
+    btnAcOn.addEventListener('click',function(){ season='ete'; ac=true; render(); });
+    btnAcOff.addEventListener('click',function(){ season='ete'; ac=false; render(); });
+    btnHAtl.addEventListener('click',function(){ season='hiver'; hiverMode='atlantique'; render(); });
+    btnHFroid.addEventListener('click',function(){ season='hiver'; hiverMode='froid'; render(); });
     render();
   })();
 
