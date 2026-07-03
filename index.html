@@ -575,7 +575,20 @@
           <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
         </tbody>
       </table></div>
-      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database — <b>moyenne pondérée froid/doux</b>, énergie batterie→roues, <b>hors pertes de charge</b> selon EV-Database — clim active ≈ +14 % incluse (cohérent avec le −12 % d'autonomie appliqué ailleurs). Un forfait <b>+8 % de pertes de charge</b> (AC/DC, non incluses dans cette donnée) est activable via le bouton « Pertes de charge » ci-dessus — désactivé par défaut. Valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
+      <details class="more">
+        <summary>Détails et sources (prix, limites AC, méthodologie conso)</summary>
+        <p class="cap" style="margin-top:10px">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database — <b>moyenne pondérée froid/doux</b>, énergie batterie→roues, <b>hors pertes de charge</b> selon EV-Database — clim active ≈ +14 % incluse (cohérent avec le −12 % d'autonomie appliqué ailleurs). Un forfait <b>+8 % de pertes de charge</b> (AC/DC, non incluses dans cette donnée) est activable via le bouton « Pertes de charge » ci-dessus — désactivé par défaut. Valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
+      </details>
+
+      <div class="charge-note">
+        <strong>Comprendre les temps de recharge.</strong> Il existe trois situations très différentes :
+        <ul>
+          <li><b>Prise classique à la maison</b> (~2,3 kW) : une charge complète prend <b>12 à 16 h</b> — c'est la recharge de nuit. <em>C'est précisément ce dont je ne dispose pas à mon domicile.</em></li>
+          <li><b>Borne publique de ville</b> (11–22 kW) : <b>2 à 4 h</b> — adaptée à un arrêt long, pas à un trajet.</li>
+          <li><b>Borne rapide / Supercharger</b> (la colonne ci-dessus) : <b>17 à 30 min</b> pour passer de 20 à 80 %, selon la puissance que la voiture accepte. Plus la valeur en kW est élevée, plus l'arrêt est court.</li>
+        </ul>
+        Sans recharge à domicile, je dépends entièrement des bornes publiques — soit des arrêts rapides répétés (≈ 28 min pour la e-208), soit des charges lentes de plusieurs heures.
+      </div>
 
       <div class="sim" style="margin-top:18px">
         <div class="sim-h">Coût de la recharge &amp; rentabilité d'une borne</div>
@@ -708,13 +721,6 @@
         </tbody>
       </table></div>
       <div class="charge-note">
-        <strong>Comprendre les temps de recharge.</strong> Il existe trois situations très différentes :
-        <ul>
-          <li><b>Prise classique à la maison</b> (~2,3 kW) : une charge complète prend <b>12 à 16 h</b> — c'est la recharge de nuit. <em>C'est précisément ce dont je ne dispose pas à mon domicile.</em></li>
-          <li><b>Borne publique de ville</b> (11–22 kW) : <b>2 à 4 h</b> — adaptée à un arrêt long, pas à un trajet.</li>
-          <li><b>Borne rapide / Supercharger</b> (la colonne ci-dessus) : <b>17 à 30 min</b> pour passer de 20 à 80 %, selon la puissance que la voiture accepte. Plus la valeur en kW est élevée, plus l'arrêt est court.</li>
-        </ul>
-        Sans recharge à domicile, je dépends entièrement des bornes publiques — soit des arrêts rapides répétés (≈ 28 min pour la e-208), soit des charges lentes de plusieurs heures.
         <details class="more">
         <summary>Détails et sources (provenance, versions, méthodologie, loyers)</summary>
         <p style="margin-top:10px;font-size:.8rem;color:var(--muted)">Temps et km indiqués : valeurs constructeur (20→80 %, borne à pleine puissance, batterie préconditionnée). En conditions réelles — froid, borne partagée, batterie non préchauffée — comptez sensiblement plus long. <b>MG4</b> : version <b>77 kWh Extended Range, pas la version de base</b> (64 kWh, 452 km WLTP) — retenue spécifiquement pour un vrai gain d'autonomie vs l'e-208 (la 64 kWh n'apportait que +5 % de réel, jugé pas assez significatif). MG ne communique que sur une fenêtre 10→80 % (41 min officiels pour cette version) — le temps et les km 20→80 % affichés sont <b>extrapolés</b> (règle de trois sur la fenêtre de charge + conso réelle EV-Database), pas une mesure directe.</p>
