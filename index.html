@@ -308,14 +308,14 @@
   .m-table thead th{background:#f3f7f8;color:var(--teal-deep)}
   .m-src{color:var(--muted);font-size:.78rem;margin-top:12px}
   /* Sélecteur de véhicule / consommation (coût de recharge) */
-  .conso-bar{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;margin:12px 0 14px;padding:14px 16px;background:#e8f4f6;border-radius:10px}
-  .conso-bar > label,.conso-bar > .ac-group{display:flex;flex-direction:column;gap:7px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700}
-  .conso-bar .ac-group .season-toggle{margin:0;gap:8px}
-  .conso-bar .ac-group .season-btn{padding:0 14px;height:42px}
+  .conso-bar{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:10px 16px;align-items:flex-end;margin:12px 0 14px;padding:14px 16px;background:#e8f4f6;border-radius:10px;overflow-x:auto}
+  .conso-bar > label,.conso-bar > .ac-group{display:flex;flex-direction:column;gap:7px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700;flex:0 0 auto}
+  .conso-bar .ac-group .season-toggle{margin:0;gap:6px}
+  .conso-bar .ac-group .season-btn{padding:0 10px;height:42px;white-space:nowrap}
   .conso-bar select,.cv-field input{box-sizing:border-box;height:42px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.92rem;font-family:inherit;font-weight:600}
-  .conso-bar select{padding:0 34px 0 12px;min-width:210px;cursor:pointer}
+  .conso-bar select{padding:0 28px 0 10px;width:180px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
   .cv-field{position:relative;display:inline-block}
-  .cv-field input{width:172px;padding:0 88px 0 12px;font-weight:700;font-variant-numeric:tabular-nums}
+  .cv-field input{width:150px;padding:0 88px 0 12px;font-weight:700;font-variant-numeric:tabular-nums}
   .conso-bar select:focus,.cv-field input:focus{outline:2px solid var(--teal-deep);outline-offset:1px}
   .cv-field .suf{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600;font-size:.78em;text-transform:none;letter-spacing:0;pointer-events:none}
   /* Bloc déployable (notes de bas de tableau) */
@@ -520,8 +520,8 @@
       <p class="lead" style="margin-top:26px"><strong>Le coût de la recharge selon le mode.</strong>
         Au-delà du temps, le prix du kilomètre varie du simple au quadruple. Sans prise à mon domicile,
         je suis renvoyé vers les modes les plus chers — alors que la solution la moins chère serait aussi
-        la plus pratique. Base de calcul : la <strong>consommation au compteur</strong> (pertes de charge incluses)
-        du véhicule choisi ci-dessous — le coût/100 km et le simulateur annuel s'y adaptent.</p>
+        la plus pratique. Base de calcul : la <strong>consommation</strong>
+        du véhicule choisi ci-dessous (climatisation et pertes de charge de recharge ajustables) — le coût/100 km et le simulateur annuel s'y adaptent.</p>
       <div class="conso-bar">
         <label>Véhicule
           <select id="cvCar" aria-label="Véhicule pour le calcul de consommation">
@@ -539,12 +539,18 @@
           </select>
         </label>
         <label>Consommation
-          <span class="cv-field"><input type="text" inputmode="decimal" id="cvConso" value="17,3" aria-label="Consommation au compteur en kWh aux 100 km"><span class="suf">kWh/100 km</span></span>
+          <span class="cv-field"><input type="text" inputmode="decimal" id="cvConso" value="17,3" aria-label="Consommation en kWh aux 100 km"><span class="suf">kWh/100 km</span></span>
         </label>
         <div class="ac-group">Climatisation
           <div class="season-toggle" role="group" aria-label="Climatisation pour le calcul de consommation">
             <button type="button" class="season-btn on" id="chgAcOn" aria-pressed="true">Avec clim</button>
             <button type="button" class="season-btn" id="chgAcOff" aria-pressed="false">Sans clim</button>
+          </div>
+        </div>
+        <div class="ac-group">Pertes de charge
+          <div class="season-toggle" role="group" aria-label="Pertes de charge AC/DC pour le calcul de consommation">
+            <button type="button" class="season-btn on" id="chgLossOff" aria-pressed="true" title="Hors pertes de charge">Hors</button>
+            <button type="button" class="season-btn" id="chgLossOn" aria-pressed="false" title="Avec +8 % de pertes de charge">+8 %</button>
           </div>
         </div>
       </div>
@@ -563,7 +569,7 @@
           <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
         </tbody>
       </table></div>
-      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database (usage mixte, clim active ≈ +14 % — cohérent avec le −12 % d'autonomie appliqué ailleurs) + ~8 % de pertes de charge — valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
+      <p class="cap">* Limité par le chargeur AC embarqué du véhicule choisi (7,4 kW de série / 11 kW en option pour l'e-208 ; 11 kW pour les autres modèles listés — standard le plus répandu en 2026). Prix de l'énergie : tarif réglementé heures creuses ≈ 0,17 €/kWh ; bornes publiques 0,30–0,69 €/kWh selon le réseau (Ionity 0,69 € sans abonnement, TotalEnergies 0,59 €, Supercharger 0,40–0,55 €), +20–30 % sur autoroute. Installation : crédit d'impôt « borne » supprimé au 31/12/2025 ; restent la TVA à 5,5 % et la prime ADVENIR (copropriété). Sources croisées juin 2026 : Chargemap, Automobile-Propre, ENGIE, ISIOHM, Ionity, Tesla. <strong>Consommations</strong> : conso réelle EV-Database — <b>moyenne pondérée froid/doux</b>, énergie batterie→roues, <b>hors pertes de charge</b> selon EV-Database — clim active ≈ +14 % incluse (cohérent avec le −12 % d'autonomie appliqué ailleurs). Un forfait <b>+8 % de pertes de charge</b> (AC/DC, non incluses dans cette donnée) est activable via le bouton « Pertes de charge » ci-dessus — désactivé par défaut. Valeurs indicatives, ajustables. <strong>Récupéré/heure (AC)</strong> : s'adapte au véhicule choisi (puissance AC embarquée × consommation). <strong>Recharge rapide (DC)</strong> : temps constructeur 20→80 % (borne à pleine puissance, batterie préconditionnée — cohérent avec le tableau comparatif ci-dessus), sur la version de base.</p>
 
       <div class="sim" style="margin-top:18px">
         <div class="sim-h">Coût de la recharge &amp; rentabilité d'une borne</div>
@@ -1095,7 +1101,7 @@
         cCarSel=document.getElementById('cCarSel'),cCarInfo=document.getElementById('cCarInfo');
     var cvCar=document.getElementById('cvCar'),cvConso=document.getElementById('cvConso'),
         costCells=document.querySelectorAll('#modesTbl .cc'), rhCells=document.querySelectorAll('#modesTbl .rh'), dcCells=document.querySelectorAll('#modesTbl .dc');
-    function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:17.3; }   // kWh/100 km au compteur (pertes + clim incluses)
+    function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:17.3; }   // kWh/100 km (clim + pertes de charge selon toggles actifs)
     function fmt1(x){ return (Math.round(x*10)/10).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
     function fillTable(){
       var c=conso100();
@@ -1134,21 +1140,25 @@
       cRoiSub.textContent='amortie, puis ~'+n0(diff)+' €/an · gain ~'+n0(diff*3-inst)+' € sur 3 ans';
     }
     var chgAc=true; // clim active par défaut, cohérent avec le reste du document
+    var chgLoss=false; // pertes de charge AC/DC désactivées par défaut (non incluses dans la conso EV-Database "Vehicle")
     if(cCarSel){ cCarSel.innerHTML=cvCar.innerHTML; cCarSel.value=cvCar.value; }
     function updateCarLabel(){
       if(!cCarInfo) return;
       var opt=cvCar.options[cvCar.selectedIndex];
       if(cCarSel) cCarSel.value=cvCar.value;
-      cCarInfo.textContent='— '+opt.text+', '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+')';
+      cCarInfo.textContent='— '+opt.text+', '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+(chgLoss?', +8 % pertes charge':'')+')';
     }
     if(cCarSel) cCarSel.addEventListener('change',function(){ cvCar.value=cCarSel.value; applyConso(); });
     [cSem,cExtra,cHC,cPub,cInst].forEach(function(el){ el.addEventListener('input',cUp); });
     cNet.addEventListener('change',cUp);
     cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); updateCarLabel(); });
     var chgAcOn=document.getElementById('chgAcOn'), chgAcOff=document.getElementById('chgAcOff');
+    var chgLossOn=document.getElementById('chgLossOn'), chgLossOff=document.getElementById('chgLossOff');
     function applyConso(){
       var opt=cvCar.options[cvCar.selectedIndex];
-      cvConso.value = chgAc ? opt.value : opt.getAttribute('data-raw');
+      var base=parseFloat((chgAc?opt.value:opt.getAttribute('data-raw')).replace(',','.'));
+      if(chgLoss) base*=1.08;
+      cvConso.value=fmt1(base);
       fillTable(); fillSpeeds(); cUp(); updateCarLabel();
     }
     cvCar.addEventListener('change',applyConso);
@@ -1161,6 +1171,18 @@
       chgAcOff.addEventListener('click',function(){
         chgAc=false; chgAcOff.classList.add('on'); chgAcOff.setAttribute('aria-pressed','true');
         chgAcOn.classList.remove('on'); chgAcOn.setAttribute('aria-pressed','false');
+        applyConso();
+      });
+    }
+    if(chgLossOn){
+      chgLossOn.addEventListener('click',function(){
+        chgLoss=true; chgLossOn.classList.add('on'); chgLossOn.setAttribute('aria-pressed','true');
+        chgLossOff.classList.remove('on'); chgLossOff.setAttribute('aria-pressed','false');
+        applyConso();
+      });
+      chgLossOff.addEventListener('click',function(){
+        chgLoss=false; chgLossOff.classList.add('on'); chgLossOff.setAttribute('aria-pressed','true');
+        chgLossOn.classList.remove('on'); chgLossOn.setAttribute('aria-pressed','false');
         applyConso();
       });
     }
