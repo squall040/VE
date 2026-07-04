@@ -608,6 +608,7 @@
         <p class="sim-note" style="margin:-8px 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <b class="nh">Véhicule utilisé pour ce calcul</b>
           <select id="cCarSel" aria-label="Changer le véhicule pour ce calcul" style="padding:6px 28px 6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer"></select>
+          <select id="cBattSel" aria-label="Changer la version (batterie/motorisation) pour ce calcul" style="padding:6px 28px 6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer"></select>
           <span id="cCarInfo"></span>
         </p>
         <div class="sim-controls cost">
@@ -1210,7 +1211,7 @@
         cProKm=document.getElementById('cProKm'),cProDetail=document.getElementById('cProDetail'),
         cHome=document.getElementById('cHome'),cPubOut=document.getElementById('cPubOut'),cDiff=document.getElementById('cDiff'),
         cRoi=document.getElementById('cRoi'),cRoiSub=document.getElementById('cRoiSub'),
-        cCarSel=document.getElementById('cCarSel'),cCarInfo=document.getElementById('cCarInfo');
+        cCarSel=document.getElementById('cCarSel'),cBattSel=document.getElementById('cBattSel'),cCarInfo=document.getElementById('cCarInfo');
     var cvCar=document.getElementById('cvCar'),cvBatt=document.getElementById('cvBatt'),cvConso=document.getElementById('cvConso'),
         costCells=document.querySelectorAll('#modesTbl .cc'), rhCells=document.querySelectorAll('#modesTbl .rh'), dcCells=document.querySelectorAll('#modesTbl .dc');
     // Consommation réelle EV-Database "Vehicle Consumption" par variante (hors pertes de charge, sans clim), kWh/100km — mêmes variantes que le sélecteur du tableau comparatif (section 4)
@@ -1250,6 +1251,7 @@
     function populateBatt(){
       var list=cvBattData[cvCar.value]||[];
       cvBatt.innerHTML=list.map(function(v,i){ return '<option value="'+v.value+'"'+(i===0?' selected':'')+'>'+v.label+'</option>'; }).join('');
+      if(cBattSel){ cBattSel.innerHTML=cvBatt.innerHTML; cBattSel.value=cvBatt.value; }
     }
     function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:17.3; }   // kWh/100 km (clim + pertes de charge selon toggles actifs)
     function fmt1(x){ return (Math.round(x*10)/10).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
@@ -1296,9 +1298,11 @@
       if(!cCarInfo) return;
       var opt=cvCar.options[cvCar.selectedIndex], v=currentVariant();
       if(cCarSel) cCarSel.value=cvCar.value;
+      if(cBattSel) cBattSel.value=cvBatt.value;
       cCarInfo.textContent='— '+opt.text+' ('+(v?v.label:'')+'), '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+(chgLoss?', +8 % pertes charge':'')+')';
     }
     if(cCarSel) cCarSel.addEventListener('change',function(){ cvCar.value=cCarSel.value; onModelChange(); });
+    if(cBattSel) cBattSel.addEventListener('change',function(){ cvBatt.value=cBattSel.value; applyConso(); });
     [cSem,cExtra,cHC,cPub,cInst].forEach(function(el){ el.addEventListener('input',cUp); });
     cNet.addEventListener('change',cUp);
     cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); updateCarLabel(); });
