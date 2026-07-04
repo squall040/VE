@@ -300,6 +300,17 @@
   .modal-body h4{margin:18px 0 6px;color:var(--teal-deep);font-size:.95rem}
   .modal-body h4:first-child{margin-top:0}
   .modal-body p{margin:6px 0}
+  .cs-wrap{position:relative}
+  .cs-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;margin-top:7px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--teal-deep);font-size:.88rem;font-family:inherit;font-weight:700;cursor:pointer;text-align:left}
+  .cs-toggle:hover{border-color:var(--teal-deep)}
+  .cs-toggle .cs-arrow{color:var(--teal-deep);font-size:.7rem;flex-shrink:0;transition:transform .15s}
+  .cs-toggle[aria-expanded="true"] .cs-arrow{transform:rotate(180deg)}
+  .cs-panel{margin-top:6px;border:1px solid var(--line);border-radius:8px;max-height:260px;overflow:auto;background:var(--bg)}
+  .cs-panel[hidden]{display:none}
+  .cs-group-label{padding:8px 12px 5px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;font-weight:800;color:var(--teal-deep);background:var(--cream);position:sticky;top:0}
+  .cs-opt{padding:7px 16px;font-size:.85rem;cursor:pointer;border-top:1px solid var(--line);color:var(--ink)}
+  .cs-opt:hover{background:var(--cream)}
+  .cs-opt[aria-selected="true"]{background:var(--teal);color:#fff;font-weight:800}
   .m-list{margin:6px 0;padding-left:18px}
   .m-list li{margin:3px 0}
   .m-formula{background:#e8f4f6;border-left:3px solid var(--teal-deep);border-radius:0 8px 8px 0;padding:9px 12px;font-size:.88rem}
@@ -315,7 +326,7 @@
   .conso-bar select,.cv-field input{box-sizing:border-box;height:42px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.92rem;font-family:inherit;font-weight:600}
   .conso-bar select{padding:0 28px 0 10px;width:180px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
   .cv-field{position:relative;display:inline-block}
-  .cv-field input{width:150px;padding:0 88px 0 12px;font-weight:700;font-variant-numeric:tabular-nums}
+  .cv-field input{width:118px;padding:0 72px 0 10px;font-weight:700;font-variant-numeric:tabular-nums}
   .conso-bar select:focus,.cv-field input:focus{outline:2px solid var(--teal-deep);outline-offset:1px}
   .cv-field .suf{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600;font-size:.78em;text-transform:none;letter-spacing:0;pointer-events:none}
   /* Bloc déployable (notes de bas de tableau) */
@@ -529,18 +540,21 @@
       <div class="conso-bar">
         <label>Véhicule
           <select id="cvCar" aria-label="Véhicule pour le calcul de consommation">
-            <option value="17,3" data-raw="15,2" data-acmin="7.4" data-acmax="11" data-dc="+180 km / ~28 min" selected>Peugeot e-208</option>
-            <option value="18,3" data-raw="16,1" data-acmin="11" data-acmax="11" data-dc="+210 km / ~27–32 min">Peugeot e-308</option>
-            <option value="21,8" data-raw="19,2" data-acmin="11" data-acmax="11" data-dc="+250 km / ~35 min">Peugeot e-3008</option>
-            <option value="15,1" data-raw="13,3" data-acmin="11" data-acmax="11" data-dc="+240 km / ~22 min">Tesla Model 3</option>
-            <option value="18,0" data-raw="15,8" data-acmin="11" data-acmax="11" data-dc="+230 km / ~24 min">Tesla Model Y</option>
-            <option value="19,5" data-raw="17,2" data-acmin="11" data-acmax="11" data-dc="+270 km / ~30 min">BYD Seal</option>
-            <option value="21,0" data-raw="18,5" data-acmin="11" data-acmax="11" data-dc="+250 km / ~25 min">BYD Atto 3 EVO</option>
-            <option value="23,8" data-raw="20,9" data-acmin="11" data-acmax="11" data-dc="+200 km / ~24 min">Kia EV9</option>
-            <option value="18,0" data-raw="15,8" data-acmin="11" data-acmax="11" data-dc="+300 km / ~30 min">Renault Megane E-Tech</option>
-            <option value="19,8" data-raw="17,4" data-acmin="11" data-acmax="11" data-dc="+230 km / ~18 min">Hyundai Ioniq 5</option>
-            <option value="19,4" data-raw="17,1" data-acmin="11" data-acmax="11" data-dc="+261 km / ~35 min">MG4 (77 kWh, base = 64 kWh/452 km)</option>
+            <option value="208" data-acmin="7.4" data-acmax="11" selected>Peugeot e-208</option>
+            <option value="308" data-acmin="11" data-acmax="11">Peugeot e-308</option>
+            <option value="3008" data-acmin="11" data-acmax="11">Peugeot e-3008</option>
+            <option value="m3" data-acmin="11" data-acmax="11">Tesla Model 3</option>
+            <option value="my" data-acmin="11" data-acmax="11">Tesla Model Y</option>
+            <option value="seal" data-acmin="11" data-acmax="11">BYD Seal</option>
+            <option value="atto" data-acmin="11" data-acmax="11">BYD Atto 3 EVO</option>
+            <option value="ev9" data-acmin="11" data-acmax="11">Kia EV9</option>
+            <option value="megane" data-acmin="11" data-acmax="11">Renault Megane E-Tech</option>
+            <option value="ioniq5" data-acmin="11" data-acmax="11">Hyundai Ioniq 5</option>
+            <option value="mg4" data-acmin="11" data-acmax="11">MG4</option>
           </select>
+        </label>
+        <label>Batterie
+          <select id="cvBatt" aria-label="Version (batterie/motorisation) du véhicule choisi"></select>
         </label>
         <label>Consommation
           <span class="cv-field"><input type="text" inputmode="decimal" id="cvConso" value="17,3" aria-label="Consommation en kWh aux 100 km"><span class="suf">kWh/100 km</span></span>
@@ -671,21 +685,16 @@
         </div>
         <div class="modal-body">
           <p>Le tableau comparatif n'affiche que 2 valeurs synthétiques (moyenne et pire cas). EV-Database publie en réalité <strong>6 estimations</strong> selon le trajet et la météo — sélectionnez un véhicule :</p>
-          <label style="display:block;margin:10px 0 14px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700">Véhicule
-            <select id="rangeCar" aria-label="Véhicule pour le détail d'autonomie" style="display:block;margin-top:7px;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.88rem;font-family:inherit;font-weight:600">
-              <option value="208" selected>Peugeot e-208 — 51 kWh</option>
-              <option value="308">Peugeot e-308 — 58 kWh</option>
-              <option value="3008">Peugeot e-3008 — 73 kWh</option>
-              <option value="m3">Tesla Model 3 — 60 kWh</option>
-              <option value="my">Tesla Model Y — 60 kWh</option>
-              <option value="seal">BYD Seal — 82,5 kWh</option>
-              <option value="atto">BYD Atto 3 EVO — 74,8 kWh</option>
-              <option value="ev9">Kia EV9 — 76,1 kWh</option>
-              <option value="megane">Renault Megane E-Tech — 60 kWh</option>
-              <option value="ioniq5">Hyundai Ioniq 5 — 63 kWh</option>
-              <option value="mg4">MG4 — 77 kWh (base = 64 kWh/452 km)</option>
-            </select>
-          </label>
+          <div style="margin:10px 0 14px">
+            <span style="display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--teal-deep);font-weight:700">Véhicule</span>
+            <div class="cs-wrap" id="rangeCarWrap">
+              <button type="button" class="cs-toggle" id="rangeCarBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Véhicule pour le détail d'autonomie">
+                <span id="rangeCarLabel"></span>
+                <span class="cs-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div class="cs-panel" id="rangeCarPanel" role="listbox" aria-label="Liste des véhicules" hidden></div>
+            </div>
+          </div>
           <table class="m-table" id="rangeTbl">
             <thead><tr><th scope="col"></th><th scope="col">Ville</th><th scope="col">Autoroute</th><th scope="col">Combiné</th></tr></thead>
             <tbody>
@@ -1202,8 +1211,46 @@
         cHome=document.getElementById('cHome'),cPubOut=document.getElementById('cPubOut'),cDiff=document.getElementById('cDiff'),
         cRoi=document.getElementById('cRoi'),cRoiSub=document.getElementById('cRoiSub'),
         cCarSel=document.getElementById('cCarSel'),cCarInfo=document.getElementById('cCarInfo');
-    var cvCar=document.getElementById('cvCar'),cvConso=document.getElementById('cvConso'),
+    var cvCar=document.getElementById('cvCar'),cvBatt=document.getElementById('cvBatt'),cvConso=document.getElementById('cvConso'),
         costCells=document.querySelectorAll('#modesTbl .cc'), rhCells=document.querySelectorAll('#modesTbl .rh'), dcCells=document.querySelectorAll('#modesTbl .dc');
+    // Consommation réelle EV-Database "Vehicle Consumption" par variante (hors pertes de charge, sans clim), kWh/100km — mêmes variantes que le sélecteur du tableau comparatif (section 4)
+    var cvBattData={
+      '208':[ {value:'top', label:'51 kWh · 433 km (modèle retenu)', consRaw:15.2, dcKm:'+180 km', dcTime:'~28 min'},
+              {value:'entry', label:'46,3 kWh · 363 km (entrée de gamme)', consRaw:15.7, dcKm:'+155 km', dcTime:'~27 min'} ],
+      '308':[ {value:'base', label:'58 kWh · 450 km', consRaw:16.1, dcKm:'+210 km', dcTime:'~27–32 min'} ],
+      '3008':[ {value:'std', label:'73 kWh · 529 km (Standard Range)', consRaw:19.2, dcKm:'+250 km', dcTime:'~35 min'},
+               {value:'lr', label:'98 kWh · 701 km (Long Range)', consRaw:19.4, dcKm:'+260 km', dcTime:'~27 min'} ],
+      'm3':[ {value:'std', label:'60 kWh · 534 km (RWD/Propulsion)', consRaw:13.3, dcKm:'+240 km', dcTime:'~22 min'},
+             {value:'garwd', label:'79 kWh · 750 km (Grande Autonomie RWD)', consRaw:13.6, dcKm:'+330 km', dcTime:'~26 min'},
+             {value:'gaawd', label:'79 kWh · 660 km (Grande Autonomie AWD)', consRaw:14.2, dcKm:'+315 km', dcTime:'~26 min'},
+             {value:'perf', label:'79 kWh · 571 km (Performance)', consRaw:15.3, dcKm:'+290 km', dcTime:'~24 min'} ],
+      'my':[ {value:'std', label:'60 kWh · 534 km (RWD/Propulsion)', consRaw:15.8, dcKm:'+230 km', dcTime:'~24 min'},
+             {value:'garwd', label:'75 kWh · 609 km (Grande Autonomie RWD)', consRaw:16.0, dcKm:'+250 km', dcTime:'~23 min'},
+             {value:'gaawd', label:'79 kWh · 600 km (Grande Autonomie AWD)', consRaw:16.6, dcKm:'+250 km', dcTime:'~24 min'},
+             {value:'perf', label:'79 kWh · 580 km (Performance)', consRaw:17.2, dcKm:'+245 km', dcTime:'~24 min'} ],
+      'seal':[ {value:'design', label:'82,5 kWh · 570 km (Design)', consRaw:17.2, dcKm:'+270 km', dcTime:'~30 min'},
+               {value:'excellence', label:'82,5 kWh · 520 km (Excellence)', consRaw:18.5, dcKm:'+250 km', dcTime:'~30 min'} ],
+      'atto':[ {value:'design', label:'74,8 kWh · 510 km (Design)', consRaw:18.5, dcKm:'+250 km', dcTime:'~25 min'},
+               {value:'excellence', label:'74,8 kWh · 470 km (Excellence)', consRaw:19.2, dcKm:'+205 km', dcTime:'~21 min'} ],
+      'ev9':[ {value:'std', label:'76,1 kWh · 443 km (Autonomie standard)', consRaw:20.9, dcKm:'+200 km', dcTime:'~24 min'},
+              {value:'lr', label:'99,8 kWh · 579 km (Autonomie étendue)', consRaw:21.3, dcKm:'+315 km', dcTime:'~22 min'} ],
+      'megane':[ {value:'ev60', label:'60 kWh · 470 km (EV60)', consRaw:15.8, dcKm:'+300 km', dcTime:'~30 min'},
+                 {value:'ev40', label:'40 kWh · 300 km (EV40)', consRaw:15.4, dcKm:'+140 km', dcTime:'~25 min'} ],
+      'ioniq5':[ {value:'std', label:'63 kWh · 440 km (Standard Range)', consRaw:17.4, dcKm:'+230 km', dcTime:'~18 min'},
+                 {value:'lrrwd', label:'84 kWh · 570 km (Long Range RWD)', consRaw:17.8, dcKm:'+315 km', dcTime:'~18 min'},
+                 {value:'lrawd', label:'84 kWh · 495 km (Long Range AWD)', consRaw:18.0, dcKm:'+235 km', dcTime:'~18 min'} ],
+      'mg4':[ {value:'77', label:'77 kWh · 545 km (Extended Range)', consRaw:17.1, dcKm:'+261 km', dcTime:'~35 min'},
+              {value:'64', label:'64 kWh · 452 km (base)', consRaw:17.1, dcKm:'+216 km', dcTime:'~21 min'} ]
+    };
+    function currentVariant(){
+      var list=cvBattData[cvCar.value]||[];
+      for(var i=0;i<list.length;i++){ if(list[i].value===cvBatt.value) return list[i]; }
+      return list[0];
+    }
+    function populateBatt(){
+      var list=cvBattData[cvCar.value]||[];
+      cvBatt.innerHTML=list.map(function(v,i){ return '<option value="'+v.value+'"'+(i===0?' selected':'')+'>'+v.label+'</option>'; }).join('');
+    }
     function conso100(){ var v=parseFloat((cvConso.value||'').replace(',','.')); return v>0?v:17.3; }   // kWh/100 km (clim + pertes de charge selon toggles actifs)
     function fmt1(x){ return (Math.round(x*10)/10).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
     function fillTable(){
@@ -1214,7 +1261,7 @@
       }
     }
     function fillSpeeds(){
-      var c=conso100(), opt=cvCar.options[cvCar.selectedIndex];
+      var c=conso100(), opt=cvCar.options[cvCar.selectedIndex], v=currentVariant();
       var acmin=+opt.getAttribute('data-acmin'), acmax=+opt.getAttribute('data-acmax');
       for(var i=0;i<rhCells.length;i++){
         var td=rhCells[i], smin=+td.getAttribute('data-smin'), smax=+td.getAttribute('data-smax');
@@ -1222,7 +1269,7 @@
         var kmin=Math.round(emin*100/c), kmax=Math.round(emax*100/c);
         td.textContent = (kmin===kmax) ? '~'+kmin+' km/h' : '~'+kmin+'–'+kmax+' km/h*';
       }
-      var dcText = opt.getAttribute('data-dc') || '—';
+      var dcText = v ? (v.dcKm+' / '+v.dcTime) : '—';
       for(var j=0;j<dcCells.length;j++){ dcCells[j].textContent=dcText; }
     }
     function eur(n){return '≈ '+Math.round(n).toLocaleString('fr-FR')+' €';}
@@ -1247,24 +1294,28 @@
     if(cCarSel){ cCarSel.innerHTML=cvCar.innerHTML; cCarSel.value=cvCar.value; }
     function updateCarLabel(){
       if(!cCarInfo) return;
-      var opt=cvCar.options[cvCar.selectedIndex];
+      var opt=cvCar.options[cvCar.selectedIndex], v=currentVariant();
       if(cCarSel) cCarSel.value=cvCar.value;
-      cCarInfo.textContent='— '+opt.text+', '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+(chgLoss?', +8 % pertes charge':'')+')';
+      cCarInfo.textContent='— '+opt.text+' ('+(v?v.label:'')+'), '+cvConso.value+' kWh/100 km ('+(chgAc?'avec clim':'sans clim')+(chgLoss?', +8 % pertes charge':'')+')';
     }
-    if(cCarSel) cCarSel.addEventListener('change',function(){ cvCar.value=cCarSel.value; applyConso(); });
+    if(cCarSel) cCarSel.addEventListener('change',function(){ cvCar.value=cCarSel.value; onModelChange(); });
     [cSem,cExtra,cHC,cPub,cInst].forEach(function(el){ el.addEventListener('input',cUp); });
     cNet.addEventListener('change',cUp);
     cvConso.addEventListener('input',function(){ fillTable(); fillSpeeds(); cUp(); updateCarLabel(); });
     var chgAcOn=document.getElementById('chgAcOn'), chgAcOff=document.getElementById('chgAcOff');
     var chgLossOn=document.getElementById('chgLossOn'), chgLossOff=document.getElementById('chgLossOff');
     function applyConso(){
-      var opt=cvCar.options[cvCar.selectedIndex];
-      var base=parseFloat((chgAc?opt.value:opt.getAttribute('data-raw')).replace(',','.'));
+      var v=currentVariant();
+      var base=v.consRaw;
+      if(chgAc) base=base/0.88;
       if(chgLoss) base*=1.08;
       cvConso.value=fmt1(base);
       fillTable(); fillSpeeds(); cUp(); updateCarLabel();
     }
-    cvCar.addEventListener('change',applyConso);
+    function onModelChange(){ populateBatt(); applyConso(); }
+    cvCar.addEventListener('change',onModelChange);
+    cvBatt.addEventListener('change',applyConso);
+    populateBatt();
     if(chgAcOn){
       chgAcOn.addEventListener('click',function(){
         chgAc=true; chgAcOn.classList.add('on'); chgAcOn.setAttribute('aria-pressed','true');
@@ -1310,29 +1361,102 @@
   })();
 
   // Modale autonomie détaillée (6 valeurs EV-Database : ville/autoroute/combiné × froid/doux)
+  // Menu déroulant maison (au lieu d'un <select>/<optgroup> natif — Safari/macOS ignore toute
+  // couleur CSS sur le rendu natif des groupes, le nom du modèle ne pouvait pas ressortir en bleu).
   (function(){
-    var rangeCar=document.getElementById('rangeCar');
-    if(!rangeCar) return;
-    // [Ville-Froid, Autoroute-Froid, Combiné-Froid, Ville-Doux, Autoroute-Doux, Combiné-Doux] — km, EV-Database, version de base (cf. tableau comparatif)
-    var rangeData={
-      '208':[325,235,280,505,310,390],
-      '308':[330,245,285,505,315,395],
-      '3008':[375,270,320,555,345,430],
-      'm3':[410,325,370,660,435,530],
-      'my':[360,270,315,555,355,440],
-      'seal':[455,350,400,680,455,555],
-      'atto':[405,285,340,595,365,460],
-      'ev9':[350,250,300,510,315,395],
-      'megane':[370,270,320,565,350,440],
-      'ioniq5':[340,245,290,510,315,395],
-      'mg4':[425,310,365,640,400,500]
-    };
+    var btn=document.getElementById('rangeCarBtn'), labelEl=document.getElementById('rangeCarLabel'), panel=document.getElementById('rangeCarPanel');
+    if(!btn||!panel) return;
+    // Par groupe (modèle) : nom affiché en en-tête + variantes, chacune avec ses 6 valeurs
+    // [Ville-Froid, Autoroute-Froid, Combiné-Froid, Ville-Doux, Autoroute-Doux, Combiné-Doux] — km, EV-Database
+    var groups=[
+      {name:'Peugeot e-208', variants:[
+        {value:'208', label:'51 kWh · 433 km (modèle retenu)', data:[325,235,280,505,310,390]},
+        {value:'208-entry', label:'46,3 kWh · 363 km (entrée de gamme)', data:[285,205,245,440,270,340]}
+      ]},
+      {name:'Peugeot e-308', variants:[
+        {value:'308', label:'58 kWh · 450 km', data:[330,245,285,505,315,395]}
+      ]},
+      {name:'Peugeot e-3008', variants:[
+        {value:'3008', label:'73 kWh · 529 km (Standard Range)', data:[375,270,320,555,345,430]},
+        {value:'3008-lr', label:'98 kWh · 701 km (Long Range)', data:[495,360,425,725,455,570]}
+      ]},
+      {name:'Tesla Model 3', variants:[
+        {value:'m3', label:'60 kWh · 534 km (RWD/Propulsion)', data:[410,325,370,660,435,530]},
+        {value:'m3-garwd', label:'79 kWh · 750 km (Grande Autonomie RWD)', data:[535,420,474,850,560,684]},
+        {value:'m3-gaawd', label:'79 kWh · 660 km (Grande Autonomie AWD)', data:[510,400,458,805,535,652]},
+        {value:'m3-perf', label:'79 kWh · 571 km (Performance)', data:[485,370,430,750,490,600]}
+      ]},
+      {name:'Tesla Model Y', variants:[
+        {value:'my', label:'60 kWh · 534 km (RWD/Propulsion)', data:[360,270,315,555,355,440]},
+        {value:'my-garwd', label:'75 kWh · 609 km (Grande Autonomie RWD)', data:[450,335,395,690,440,545]},
+        {value:'my-gaawd', label:'79 kWh · 600 km (Grande Autonomie AWD)', data:[459,338,394,692,443,547]},
+        {value:'my-perf', label:'79 kWh · 580 km (Performance)', data:[445,330,385,670,430,530]}
+      ]},
+      {name:'BYD Seal', variants:[
+        {value:'seal', label:'82,5 kWh · 570 km (Design)', data:[455,350,400,680,455,555]},
+        {value:'seal-excellence', label:'82,5 kWh · 520 km (Excellence)', data:[425,325,375,630,425,510]}
+      ]},
+      {name:'BYD Atto 3 EVO', variants:[
+        {value:'atto', label:'74,8 kWh · 510 km (Design)', data:[405,285,340,595,365,460]},
+        {value:'atto-excellence', label:'74,8 kWh · 470 km (Excellence)', data:[390,275,330,570,350,440]}
+      ]},
+      {name:'Kia EV9', variants:[
+        {value:'ev9', label:'76,1 kWh · 443 km (Autonomie standard)', data:[350,250,300,510,315,395]},
+        {value:'ev9-lr', label:'99,8 kWh · 579 km (Autonomie étendue)', data:[455,325,385,655,410,510]}
+      ]},
+      {name:'Renault Megane E-Tech', variants:[
+        {value:'megane', label:'60 kWh · 470 km (EV60)', data:[370,270,320,565,350,440]},
+        {value:'megane-ev40', label:'40 kWh · 300 km (EV40)', data:[255,185,215,390,240,300]}
+      ]},
+      {name:'Hyundai Ioniq 5', variants:[
+        {value:'ioniq5', label:'63 kWh · 440 km (Standard Range)', data:[340,245,290,510,315,395]},
+        {value:'ioniq5-lrrwd', label:'84 kWh · 570 km (Long Range RWD)', data:[445,320,380,660,415,520]},
+        {value:'ioniq5-lrawd', label:'84 kWh · 495 km (Long Range AWD)', data:[435,315,375,645,410,505]}
+      ]},
+      {name:'MG4', variants:[
+        {value:'mg4', label:'77 kWh · 545 km (Extended Range)', data:[425,310,365,640,400,500]},
+        {value:'mg4-64', label:'64 kWh · 452 km (base)', data:[350,255,300,525,330,410]}
+      ]}
+    ];
     var ids=['rCityCold','rHwyCold','rCombCold','rCityMild','rHwyMild','rCombMild'];
+    var dataMap={}, current='208';
+    var html='';
+    groups.forEach(function(g){
+      html+='<div class="cs-group-label">'+g.name+'</div>';
+      g.variants.forEach(function(v){
+        dataMap[v.value]=v.data;
+        html+='<div class="cs-opt" role="option" tabindex="0" data-value="'+v.value+'" data-group="'+g.name+'" aria-selected="'+(v.value===current?'true':'false')+'">'+v.label+'</div>';
+      });
+    });
+    panel.innerHTML=html;
+
     function fillRange(){
-      var d=rangeData[rangeCar.value]||[];
+      var d=dataMap[current]||[];
       ids.forEach(function(id,i){ document.getElementById(id).textContent = d[i]?d[i]+' km':'—'; });
     }
-    rangeCar.addEventListener('change',fillRange);
+    function setLabel(opt){ labelEl.textContent=opt.dataset.group+' — '+opt.textContent; }
+    setLabel(panel.querySelector('.cs-opt[aria-selected="true"]'));
+
+    function openPanel(){ panel.hidden=false; btn.setAttribute('aria-expanded','true'); }
+    function closePanel(){ panel.hidden=true; btn.setAttribute('aria-expanded','false'); }
+    btn.addEventListener('click', function(e){ e.stopPropagation(); panel.hidden?openPanel():closePanel(); });
+    panel.addEventListener('click', function(e){
+      var opt=e.target.closest('.cs-opt');
+      if(!opt) return;
+      current=opt.dataset.value;
+      panel.querySelectorAll('.cs-opt').forEach(function(o){ o.setAttribute('aria-selected', o===opt?'true':'false'); });
+      setLabel(opt);
+      fillRange();
+      closePanel();
+    });
+    panel.addEventListener('keydown', function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.target.click(); }
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.hidden && !panel.contains(e.target) && e.target!==btn) closePanel();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !panel.hidden) closePanel(); });
+
     fillRange();
   })();
 
