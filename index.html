@@ -6,7 +6,7 @@
 <title>Véhicule de fonction — récapitulatif d'analyse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
      Charte inspirée d'Audilab : bleu marine + blanc + bois chaud.
@@ -16,29 +16,25 @@
   :root{
     /* Palette officielle Audilab (relevée sur audilab.fr) */
     --teal:#66c8d9;         /* teal signature Audilab (vif) */
-    --teal2:#2ea6bd;        /* teal moyen — transitions/dégradés */
     --teal-deep:#006387;    /* bleu nuit Audilab (--night-blue) — texte/accents */
     --gold:#edc547;         /* jaune doré Audilab (--yellow) */
     --gold-deep:#d9ad21;
-    --navy:#004d68;         /* bleu nuit profond — accent secondaire */
     --paper:#ffffff;
     --cream:#f4f0e6;        /* fond chaud doux */
     --bg:#ffffff;
-    --peach:#f1bb94;        /* accent chaud pêche Audilab */
-    --peach-bg:#fcebdf;
-    --brown:#5b5445;        /* brun chaud du logo / titres Audilab */
-    --ink:#2d2a24;          /* texte — brun-noir chaud */
+    --brown:#5b5445;        /* brun chaud du logo / titres Audilab — texte par défaut du site */
+    --ink:#2d2a24;          /* brun-noir chaud — réservé aux valeurs/contrôles mis en avant */
     --muted:#675f53;        /* taupe chaud (--brown clair) */
     --line:#e6e2d8;
     --good:#138a72; --good-bg:#e3f1ed;   /* teal-émeraude — reste dans la famille teal Audilab */
     --warn:#9e6e94; --warn-bg:#efe7ee;   /* mauve doux Audilab — « tendu » (moins accentué) */
     --bad:#c75d81; --bad-bg:#f8e2eb;     /* framboise Audilab (--pink) — « grave / inadapté » (accentué) */
     --font-body:"Cabin",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --font-head:"Barlow","Cabin",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --font-head:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; /* DINPro (titres officiels Audilab) est propriétaire et self-host sur audilab.fr, jamais chargée ici — sur leur site le repli sans-serif nu est un cas de secours rare (DINPro s'y charge presque toujours) ; ici c'est la seule police qui s'affiche pour tout le monde, donc on choisit la pile qui rend le mieux plutôt que de copier littéralement leur repli */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:20px}
-  body{background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6;
+  body{background:var(--bg);color:var(--brown);min-height:100vh;line-height:1.6;
     font-family:var(--font-body);-webkit-font-smoothing:antialiased}
   h1,h2,h3,.kicker,.logo,.head .num,.fact .v,.sim-card .v,.scale-name,
   .key .lab,.sim-net-t,.col h3,.toc a,.cta-box strong{font-family:var(--font-head)}
