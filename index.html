@@ -261,6 +261,11 @@
     .head{break-after:avoid}
     .tbl,.key,.fact,.prop,.col,.charge-note,.scale-row,.cta-box,table tr{break-inside:avoid}
     a{text-decoration:underline}
+    /* le tableau comparatif (8 colonnes, plusieurs en nowrap) scrolle à l'écran (.tbl overflow-x)
+       mais une page imprimée n'a pas de scroll : sans ce filet, les colonnes de droite seraient
+       coupées. On force le retour à la ligne et on réduit la police pour ce tableau uniquement. */
+    table.cmp{font-size:.68rem}
+    table.cmp td,table.cmp th{white-space:normal!important}
   }
   /* ---------- navigation & défilement (interactif) ---------- */
   #progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;z-index:200;will-change:transform}
@@ -366,7 +371,7 @@
 
   <header>
     <div class="hero">
-      <div class="kicker">Récapitulatif d'analyse · juin 2026</div>
+      <div class="kicker">Récapitulatif d'analyse · juillet 2026</div>
       <h1>Véhicule de fonction <span class="ar">—</span><br>Corolla hybride vers Peugeot e-208</h1>
       <p>Analyse d'adéquation entre le véhicule électrique retenu et un usage de gros rouleur
         sans recharge à domicile. Document factuel destiné à ouvrir une discussion constructive.</p>
@@ -479,6 +484,16 @@
         combiné, quelle que soit la saison affichée. Même en été, mes
         ≈ 730 km/semaine sans recharge à domicile imposent des recharges publiques fréquentes
         avec la e-208.</p>
+      <p class="lead" style="margin-top:10px">⚠️ <strong>Cas concret</strong> : mes réunions à
+        Poitiers (≈&nbsp;280&nbsp;km A/R, cf. section&nbsp;1) sont justement le cas où l'autoroute
+        est nécessaire. En hiver, l'autonomie autoroute réelle de la e-208 n'est que de
+        <strong>≈&nbsp;235&nbsp;km</strong> (EV-Database, grand froid) — <strong>inférieure à la
+        distance aller-retour</strong> : une recharge en cours de route devient obligatoire, pas
+        une option. Même en usage mixte (≈&nbsp;280&nbsp;km réels par grand froid), la marge est
+        nulle.</p>
+      <p class="cap">Ces autonomies sont des valeurs à la mise en service. Une dégradation batterie
+        d'environ 2&nbsp;%/an étant usuelle, comptez ≈&nbsp;6 à 8&nbsp;% de moins en fin de contrat
+        LLD (36 à 48 mois) — sur des marges déjà tendues.</p>
 
       <div class="sim">
         <div class="sim-h">Et pour votre profil ?</div>
@@ -514,8 +529,8 @@
           </label>
         </div>
         <div class="sim-out">
-          <div class="sim-card"><div class="v" id="simRech">≈ 4,5</div><div class="l">recharges publiques / semaine</div></div>
-          <div class="sim-card"><div class="v" id="simH">≈ 99 h</div><div class="l">par an passées à la borne</div></div>
+          <div class="sim-card"><div class="v" id="simRech">≈ 4,0</div><div class="l">recharges publiques / semaine</div></div>
+          <div class="sim-card"><div class="v" id="simH">≈ 88 h</div><div class="l">par an passées à la borne</div></div>
           <div class="sim-card v-r" id="simVerdict"><div class="t">Au quotidien</div><div class="v">Inadapté</div><div class="l" id="simVerdictSub">recharges publiques très fréquentes</div></div>
           <div class="sim-card v-r" id="simVac"><div class="t">Départ vacances</div><div class="v">Location conseillée</div><div class="l" id="simVacSub">sinon 4 arrêts (+1 h 50 de charge) · ~400–700 €/sem</div></div>
         </div>
@@ -576,12 +591,12 @@
           <th scope="col">Prix énergie</th><th scope="col">Coût / 100 km</th><th scope="col">Installation</th>
         </tr></thead>
         <tbody>
-          <tr><td class="m">Prise classique <small>maison</small></td><td class="d">2,3 kW</td><td class="d rh" data-smin="2.3" data-smax="2.3">~13 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">incluse</td></tr>
-          <tr><td class="m">Prise renforcée <small>Green'Up</small></td><td class="d">3,7 kW</td><td class="d rh" data-smin="3.7" data-smax="3.7">~21 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">500–1 000 €</td></tr>
-          <tr><td class="m">Borne à domicile <small>wallbox</small></td><td class="d">7,4 kW</td><td class="d rh" data-smin="7.4" data-smax="7.4">~42 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~3,0 €</td><td class="d">1 200–2 000 €</td></tr>
-          <tr><td class="m">Borne publique de ville <small>AC</small></td><td class="d">11–22 kW</td><td class="d rh" data-smin="11" data-smax="22">~42–63 km/h*</td><td class="d">0,30–0,45 €/kWh</td><td class="d aut-o cc" data-plo="0.30" data-phi="0.45">~6–8 €</td><td class="d">—</td></tr>
+          <tr><td class="m">Prise classique <small>maison</small></td><td class="d">2,3 kW</td><td class="d rh" data-smin="2.3" data-smax="2.3">~13 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~2,9 €</td><td class="d">incluse</td></tr>
+          <tr><td class="m">Prise renforcée <small>Green'Up</small></td><td class="d">3,7 kW</td><td class="d rh" data-smin="3.7" data-smax="3.7">~21 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~2,9 €</td><td class="d">500–1 000 €</td></tr>
+          <tr><td class="m">Borne à domicile <small>wallbox</small></td><td class="d">7,4 kW</td><td class="d rh" data-smin="7.4" data-smax="7.4">~43 km/h</td><td class="d">~0,17 €/kWh <small>heures creuses</small></td><td class="d aut-g cc" data-plo="0.17" data-phi="0.17">~2,9 €</td><td class="d">1 200–2 000 €</td></tr>
+          <tr><td class="m">Borne publique de ville <small>AC</small></td><td class="d">11–22 kW</td><td class="d rh" data-smin="11" data-smax="22">~43–64 km/h*</td><td class="d">0,30–0,45 €/kWh</td><td class="d aut-o cc" data-plo="0.30" data-phi="0.45">~5–8 €</td><td class="d">—</td></tr>
           <tr><td class="m">Borne rapide <small>DC, autoroute</small></td><td class="d">50–150 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,45–0,69 €/kWh</td><td class="d aut-r cc" data-plo="0.45" data-phi="0.69">~8–12 €</td><td class="d">—</td></tr>
-          <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–9 €</td><td class="d">—</td></tr>
+          <tr><td class="m">Superchargeur <small>Tesla</small></td><td class="d">175–250 kW</td><td class="d dc">+180 km / ~28 min</td><td class="d">0,40–0,55 €/kWh</td><td class="d aut-o cc" data-plo="0.40" data-phi="0.55">~7–10 €</td><td class="d">—</td></tr>
         </tbody>
       </table></div>
       <details class="more">
@@ -592,8 +607,8 @@
       <div class="charge-note">
         <strong>Comprendre les temps de recharge.</strong> Il existe trois situations très différentes :
         <ul>
-          <li><b>Prise classique à la maison</b> (~2,3 kW) : une charge complète prend <b>12 à 16 h</b> — c'est la recharge de nuit. <em>C'est précisément ce dont je ne dispose pas à mon domicile.</em></li>
-          <li><b>Borne publique de ville</b> (11–22 kW) : <b>2 à 4 h</b> — adaptée à un arrêt long, pas à un trajet.</li>
+          <li><b>Prise classique à la maison</b> (~2,3 kW, e-208) : une charge de <b>20 → 100 %</b> — la batterie n'étant jamais totalement vidée en usage réel — prend <b>≈ 18 h</b>, plus longue qu'une nuit. <em>C'est précisément ce dont je ne dispose pas à mon domicile.</em></li>
+          <li><b>Borne publique de ville</b> (11–22 kW) : bridée par le chargeur AC embarqué de l'e-208 (7,4 kW de série) à <b>≈ 5 à 6 h</b> (20→100 %) — adaptée à un arrêt long, pas à un trajet.</li>
           <li><b>Borne rapide / Supercharger</b> (la colonne ci-dessus) : <b>17 à 30 min</b> pour passer de 20 à 80 %, selon la puissance que la voiture accepte. Plus la valeur en kW est élevée, plus l'arrêt est court.</li>
         </ul>
         Sans recharge à domicile, je dépends entièrement des bornes publiques — soit des arrêts rapides répétés (≈ 28 min pour la e-208), soit des charges lentes de plusieurs heures.
@@ -644,12 +659,12 @@
           <input type="checkbox" id="cNet" checked>
           <span>Retirer les <b>5 semaines de congés</b> payés (52 → 47 semaines réellement travaillées) <span class="info" id="cNetInfo"></span></span>
         </label>
-        <p class="sim-total">Kilométrage <b>professionnel pur</b> retenu : <b id="cProKm">≈ 32 612 km/an</b> <span id="cProDetail" class="info"></span></p>
+        <p class="sim-total">Kilométrage <b>professionnel pur</b> retenu : <b id="cProKm">≈ 32 659 km/an</b> <span id="cProDetail" class="info"></span></p>
         <div class="sim-out">
-          <div class="sim-card v-g"><div class="t">À domicile</div><div class="v" id="cHome">≈ 970 €</div><div class="l">par an · heures creuses</div></div>
-          <div class="sim-card v-r"><div class="t">Sur borne publique</div><div class="v" id="cPubOut">≈ 3 140 €</div><div class="l">par an · recharge rapide</div></div>
-          <div class="sim-card"><div class="t">Surcoût</div><div class="v" id="cDiff">≈ 2 170 €</div><div class="l">par an, à la charge de l'entreprise</div></div>
-          <div class="sim-card v-g"><div class="t">Borne : gain entreprise</div><div class="v" id="cRoi">~8 mois</div><div class="l" id="cRoiSub">amortie, puis ~2 170 €/an économisés</div></div>
+          <div class="sim-card v-g"><div class="t">À domicile</div><div class="v" id="cHome">≈ 961 €</div><div class="l">par an · heures creuses</div></div>
+          <div class="sim-card v-r"><div class="t">Sur borne publique</div><div class="v" id="cPubOut">≈ 3 108 €</div><div class="l">par an · recharge rapide</div></div>
+          <div class="sim-card"><div class="t">Surcoût</div><div class="v" id="cDiff">≈ 2 147 €</div><div class="l">par an, à la charge de l'entreprise</div></div>
+          <div class="sim-card v-g"><div class="t">Borne : gain entreprise</div><div class="v" id="cRoi">~8 mois</div><div class="l" id="cRoiSub">amortie, puis ~2 147 €/an · gain ~4 941 € sur 3 ans</div></div>
         </div>
         <p class="sim-note"><b class="nh">Lecture entreprise</b> — financer une borne (à domicile si installable, sinon sur un site de l'entreprise) revient à investir <b>une fois</b> pour supprimer un <b>surcoût annuel</b> bien plus élevé. Passé le seuil de rentabilité, chaque année devient un <b>gain net</b> pour l'entreprise — sans compter le temps salarié récupéré. C'est l'enjeu chiffré de la piste B.</p>
       </div>
@@ -700,7 +715,7 @@
               <tr><td><b>Doux</b> <small>23 °C, <b style="color:var(--warn)">⚠️ sans clim</b></small></td><td id="rCityMild"></td><td id="rHwyMild"></td><td id="rCombMild"></td></tr>
             </tbody>
           </table>
-          <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Source : EV-Database, version de base de chaque modèle (identique au tableau comparatif). « Autoroute » suppose 110 km/h constant. Les valeurs de <b>ce tableau</b> sont les valeurs EV-Database brutes, <b>sans clim</b>. Le tableau comparatif applique au <b>Combiné-Doux</b> un abattement de ≈ −12&nbsp;% pour la climatisation active avant de l'afficher en « usage mixte » (cf. case à cocher section 3) — les deux tableaux ne montrent donc pas exactement le même chiffre pour l'été, par choix : celui-ci est la donnée brute, l'autre la donnée corrigée clim. Pour l'hiver, le tableau comparatif propose en plus une estimation <b>« Hiver Atlantique »</b> (Combiné-Doux brut −20&nbsp;% environ, non mesurée par EV-Database) à côté du <b>Combiné-Froid</b> officiel (« Grand froid », repris tel quel ici) — voir <em>Détails et sources</em> sous le tableau comparatif pour le détail.</p>
+          <p style="font-size:.78rem;color:var(--muted);margin-top:10px">Source : EV-Database, version de base de chaque modèle (identique au tableau comparatif). « Autoroute » suppose 110 km/h constant. Les valeurs de <b>ce tableau</b> sont les valeurs EV-Database brutes, <b>sans clim</b>. Le tableau comparatif applique au <b>Combiné-Doux</b> un abattement de ≈ −12&nbsp;% pour la climatisation active avant de l'afficher en « usage mixte » (cf. boutons Avec/Sans clim section 3) — les deux tableaux ne montrent donc pas exactement le même chiffre pour l'été, par choix : celui-ci est la donnée brute, l'autre la donnée corrigée clim. Pour l'hiver, le tableau comparatif propose en plus une estimation <b>« Hiver Atlantique »</b> (Combiné-Doux brut −20&nbsp;% environ, non mesurée par EV-Database) à côté du <b>Combiné-Froid</b> officiel (« Grand froid », repris tel quel ici) — voir <em>Détails et sources</em> sous le tableau comparatif pour le détail.</p>
           <p style="font-size:.78rem;color:var(--muted);margin-top:8px"><b>⚠️ Sans clim.</b> EV-Database précise que « Doux » suppose <b>23&nbsp;°C sans climatisation</b> (meilleur cas) — pas un scénario estival réaliste. Avec clim active par forte chaleur, comptez une perte supplémentaire d'environ <b>−5 à −18&nbsp;%</b> selon la température (<a href="https://newsroom.aaa.com/2026/05/aaa-study-reveals-temperature-impacts-on-ev-and-hybrid-performance-efficiency-and-costs/" target="_blank" rel="noopener" style="color:var(--teal-deep)">AAA 2026</a> : −17&nbsp;% à 35&nbsp;°C ; <a href="https://www.recurrentauto.com/research/what-a-c-does-to-your-range" target="_blank" rel="noopener" style="color:var(--teal-deep)">Recurrent</a> : −5&nbsp;% à 32&nbsp;°C, jusqu'à −17–18&nbsp;% à 37&nbsp;°C) — non individualisé par véhicule ici, données fiables par modèle insuffisantes.</p>
         </div>
       </dialog>
@@ -869,7 +884,7 @@
           <tr>
             <td class="m">Sérénité</td>
             <td class="d">totale</td>
-            <td class="d">planification permanente, ≈ 180–250 km l'hiver</td>
+            <td class="d">planification permanente, ≈ 280–312 km l'hiver</td>
             <td class="d"><span class="verdict gE">Perte</span> — charge mentale quotidienne</td>
           </tr>
         </tbody>
@@ -972,8 +987,11 @@
         <div class="prop"><span class="pn">B</span><div>
           <h4>Une solution de recharge dédiée</h4>
           <p>Une borne <b>installée et financée par l'entreprise</b> (et non à la charge du salarié), <b>au domicile</b>
-            plutôt que sur un site de l'entreprise : une borne sur le lieu de travail ne lèverait que la contrainte de
-            semaine, <b>pas celles des week-ends et des vacances</b>.</p></div></div>
+            — le véhicule stationne juste devant mon garage, sans prise extérieure ni installation sécurisée à ce
+            jour — plutôt que sur un site de l'entreprise : une borne sur le lieu de travail ne lèverait que la contrainte de
+            semaine, <b>pas celles des week-ends et des vacances</b>. Reste à définir comment l'électricité consommée
+            serait prise en charge (sous-compteur dédié, forfait URSSAF, badge de recharge) — modalités encadrées,
+            à choisir avec l'entreprise.</p></div></div>
         <div class="prop"><span class="pn">C</span><div>
           <h4>Les longues distances (vacances)</h4>
           <p>Quelle solution pour les <b>trajets longue distance et départs en vacances</b> que l'autonomie
@@ -988,7 +1006,7 @@
 
     <footer>
       <div>Document personnel d'analyse — éléments chiffrés à confirmer par devis loueur au kilométrage réel (≈ 40 000 km/an).</div>
-      <div>Autonomies : estimations de tests indépendants (climat océanique de La Rochelle, usage mixte). Fiscalité et loyers : ordres de grandeur juin 2026.</div>
+      <div>Autonomies : estimations de tests indépendants (climat océanique de La Rochelle, usage mixte). Fiscalité et loyers : ordres de grandeur juillet 2026 (sources consultées juin 2026, cf. détails ci-dessus).</div>
     </footer>
 
   </div>
