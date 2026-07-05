@@ -474,6 +474,8 @@
           <div class="bar"><div class="fill" data-ete="440" data-hiver="320" data-hiver-atl="352" style="width:79%">≈ 440 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-3008<small>base · 529 km WLTP</small></div>
           <div class="bar"><div class="fill" data-ete="430" data-hiver="320" data-hiver-atl="344" style="width:77%">≈ 430 km</div></div></div>
+        <div class="scale-row"><div class="scale-name">Kia EV4<small>base · 440 km WLTP</small></div>
+          <div class="bar"><div class="fill" data-ete="420" data-hiver="300" data-hiver-atl="336" style="width:75%">≈ 420 km</div></div></div>
         <div class="scale-row"><div class="scale-name">Kia EV9<small>base · 443 km WLTP</small></div>
           <div class="bar"><div class="fill mid" data-ete="395" data-hiver="300" data-hiver-atl="316" style="width:71%">≈ 395 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-308<small>base · 450 km WLTP</small></div>
@@ -529,6 +531,7 @@
               <option value="seal">BYD Seal</option>
               <option value="atto">BYD Atto 3 EVO</option>
               <option value="ev9">Kia EV9</option>
+              <option value="ev4">Kia EV4</option>
               <option value="megane">Renault Megane E-Tech</option>
               <option value="scenic">Renault Scenic E-Tech</option>
               <option value="ioniq5">Hyundai Ioniq 5</option>
@@ -573,6 +576,7 @@
             <option value="seal" data-acmin="11" data-acmax="11">BYD Seal</option>
             <option value="atto" data-acmin="11" data-acmax="11">BYD Atto 3 EVO</option>
             <option value="ev9" data-acmin="11" data-acmax="11">Kia EV9</option>
+            <option value="ev4" data-acmin="11" data-acmax="11">Kia EV4</option>
             <option value="megane" data-acmin="11" data-acmax="11">Renault Megane E-Tech</option>
             <option value="scenic" data-acmin="11" data-acmax="11">Renault Scenic E-Tech</option>
             <option value="ioniq5" data-acmin="11" data-acmax="11">Hyundai Ioniq 5</option>
@@ -798,6 +802,12 @@
               <option value="lr" data-small="Autonomie étendue · 4×2 · 204 ch" data-batt="99,8 kWh" data-wltp="579 km" data-mixte-ac="449" data-mixte-raw="510" data-hiver-atl="408" data-hiver-froid="385" data-dc-time="~22 min" data-dc-km="+315 km" data-dc-note="borne rapide, 209 kW">99,8 kWh · 579 km</option>
             </select>
           </td><td class="d">Corée du Sud</td><td class="d">76,1 kWh</td><td class="d">443 km</td><td class="d" data-mixte-ac="348" data-mixte-raw="395">~348 km</td><td class="step" data-hiver-atl="316" data-hiver-froid="300">~300 km</td><td class="d">~24 min → +200 km <small>borne rapide, 240 kW</small></td><td class="d">sur devis</td></tr>
+          <tr data-brand="Kia"><td class="m">Kia EV4 <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span> <small class="variant-note">Air Standard · 204 ch</small>
+            <select class="variant-sel" aria-label="Version du Kia EV4">
+              <option value="ev4" selected data-small="Air Standard · 204 ch" data-batt="58,3 kWh" data-wltp="440 km" data-mixte-ac="370" data-mixte-raw="420" data-hiver-atl="336" data-hiver-froid="300" data-dc-time="~26 min" data-dc-km="+216 km" data-dc-note="borne rapide, 100 kW (estimé)">58,3 kWh · 440 km</option>
+              <option value="ev4-lr" data-small="Air Long Range · 204 ch" data-batt="81,4 kWh" data-wltp="625 km" data-mixte-ac="515" data-mixte-raw="585" data-hiver-atl="468" data-hiver-froid="420" data-dc-time="~28 min" data-dc-km="+304 km" data-dc-note="borne rapide, 135 kW (estimé)">81,4 kWh · 625 km</option>
+            </select>
+          </td><td class="d">Slovaquie (Žilina)</td><td class="d">58,3 kWh</td><td class="d">440 km</td><td class="d" data-mixte-ac="370" data-mixte-raw="420">~370 km</td><td class="step" data-hiver-atl="336" data-hiver-froid="300">~300 km</td><td class="d">~26 min → +216 km <small>borne rapide, 100 kW (estimé)</small></td><td class="d">sur devis</td></tr>
           <tr data-brand="Renault"><td class="m"><span style="white-space:nowrap">Renault Megane E-Tech <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span></span> <small class="variant-note">base · EV60 · 220 ch</small>
             <select class="variant-sel" aria-label="Version de la Renault Megane E-Tech">
               <option value="ev60" selected data-small="base · EV60 · 220 ch" data-batt="60 kWh" data-wltp="470 km" data-mixte-ac="387" data-mixte-raw="440" data-hiver-atl="352" data-hiver-froid="320" data-dc-time="~30 min" data-dc-km="+300 km" data-dc-note="borne rapide, 130 kW">60 kWh · 470 km</option>
@@ -1225,9 +1235,9 @@
           simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
       // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux (clim active, ≈ −12 %) / 25% grand froid (climat océanique : grand froid minoritaire dans l'année)
-      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'megane':370,'scenic':329,'ioniq5':333,'elroq':334,'mg4':421,'corolla':-1};
+      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'ev4':353,'megane':370,'scenic':329,'ioniq5':333,'elroq':334,'mg4':421,'corolla':-1};
       // Durée d'une recharge rapide 20→80 % en minutes (reprise du tableau comparatif : constructeurs / EV-Database)
-      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'megane':30,'scenic':28,'ioniq5':18,'elroq':24,'mg4':35};
+      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'ev4':26,'megane':30,'scenic':28,'ioniq5':18,'elroq':24,'mg4':35};
       function setV(c,t,s){simV.className='sim-card v-'+c;simV.querySelector('.v').textContent=t;simVSub.textContent=s;}
       function setVac(c,t,s){simVac.className='sim-card v-'+c;simVac.querySelector('.v').textContent=t;simVacSub.textContent=s;}
       function setNet(c,t,d){simNet.className='sim-net '+c;simNetT.textContent=t;simNetD.textContent=d;}
@@ -1324,6 +1334,8 @@
                {value:'excellence', label:'74,8 kWh · 470 km (Excellence)', consRaw:19.2, dcKm:'+205 km', dcTime:'~21 min'} ],
       'ev9':[ {value:'std', label:'76,1 kWh · 443 km (Autonomie standard)', consRaw:20.9, dcKm:'+200 km', dcTime:'~24 min'},
               {value:'lr', label:'99,8 kWh · 579 km (Autonomie étendue)', consRaw:21.3, dcKm:'+315 km', dcTime:'~22 min'} ],
+      'ev4':[ {value:'ev4', label:'58,3 kWh · 440 km (Air Standard)', consRaw:15.3, dcKm:'+216 km', dcTime:'~26 min'},
+              {value:'ev4-lr', label:'81,4 kWh · 625 km (Air Long Range)', consRaw:15.4, dcKm:'+304 km', dcTime:'~28 min'} ],
       'megane':[ {value:'ev60', label:'60 kWh · 470 km (EV60)', consRaw:15.8, dcKm:'+300 km', dcTime:'~30 min'},
                  {value:'ev40', label:'40 kWh · 300 km (EV40)', consRaw:15.4, dcKm:'+140 km', dcTime:'~25 min'} ],
       'scenic':[ {value:'scenic', label:'60 kWh · 430 km (Comfort Range)', consRaw:17.6, dcKm:'+205 km', dcTime:'~28 min'},
@@ -1500,6 +1512,10 @@
       {name:'Kia EV9', variants:[
         {value:'ev9', label:'76,1 kWh · 443 km (Autonomie standard)', data:[350,250,300,510,315,395]},
         {value:'ev9-lr', label:'99,8 kWh · 579 km (Autonomie étendue)', data:[455,325,385,655,410,510]}
+      ]},
+      {name:'Kia EV4', variants:[
+        {value:'ev4', label:'58,3 kWh · 440 km (Air Standard)', data:[340,260,300,530,340,420]},
+        {value:'ev4-lr', label:'81,4 kWh · 625 km (Air Long Range)', data:[475,360,420,735,475,585]}
       ]},
       {name:'Renault Megane E-Tech', variants:[
         {value:'megane', label:'60 kWh · 470 km (EV60)', data:[370,270,320,565,350,440]},
