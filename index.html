@@ -488,6 +488,8 @@
           <div class="bar"><div class="fill low" data-ete="390" data-hiver="285" data-hiver-atl="312" style="width:70%">≈ 390 km</div></div></div>
         <div class="scale-row"><div class="scale-name">e-208<small>modèle retenu · 433 km WLTP</small></div>
           <div class="bar"><div class="fill low" data-ete="390" data-hiver="280" data-hiver-atl="312" style="width:70%">≈ 390 km</div></div></div>
+        <div class="scale-row"><div class="scale-name">VW ID.3 Neo<small>base · 417 km WLTP</small></div>
+          <div class="bar"><div class="fill low" data-ete="365" data-hiver="260" data-hiver-atl="292" style="width:65%">≈ 365 km</div></div></div>
       </div>
       <p class="cap">Valeurs <strong id="s3CapSeason">été (combiné doux, 23 °C sans clim)</strong> —
         Corolla non recalculée par saison (thermique, peu sensible). <em>Pour information</em> : sur
@@ -537,6 +539,7 @@
               <option value="ioniq5">Hyundai Ioniq 5</option>
               <option value="elroq">Skoda Elroq</option>
               <option value="mg4">MG4 (77 kWh, base = 64 kWh/452 km)</option>
+              <option value="id3">Volkswagen ID.3 Neo</option>
               <option value="corolla">Toyota Corolla (actuelle)</option>
             </select>
           </label>
@@ -582,6 +585,7 @@
             <option value="ioniq5" data-acmin="11" data-acmax="11">Hyundai Ioniq 5</option>
             <option value="elroq" data-acmin="11" data-acmax="11">Skoda Elroq</option>
             <option value="mg4" data-acmin="11" data-acmax="11">MG4</option>
+            <option value="id3" data-acmin="11" data-acmax="11">Volkswagen ID.3 Neo</option>
           </select>
         </label>
         <label>Batterie
@@ -749,6 +753,7 @@
         <button type="button" class="season-btn" data-brand-filter="Hyundai">Hyundai</button>
         <button type="button" class="season-btn" data-brand-filter="Skoda">Skoda</button>
         <button type="button" class="season-btn" data-brand-filter="MG">MG</button>
+        <button type="button" class="season-btn" data-brand-filter="Volkswagen">Volkswagen</button>
       </div>
 
       <div class="tbl"><table class="cmp" id="cmpVeh">
@@ -839,6 +844,12 @@
               <option value="64" data-small="Premium Long Range · 64 kWh (version de base)" data-batt="64 kWh" data-wltp="452 km" data-mixte-ac="361" data-mixte-raw="410" data-hiver-atl="328" data-hiver-froid="300" data-dc-time="~21 min" data-dc-km="+216 km" data-dc-note="borne rapide, 154 kW (estimé)">64 kWh · 452 km</option>
             </select>
           </td><td class="d">Chine</td><td class="d">77 kWh</td><td class="d">545 km</td><td class="d" data-mixte-ac="440" data-mixte-raw="500">~440 km</td><td class="step" data-hiver-atl="400" data-hiver-froid="365">~365 km</td><td class="d">~35 min → +261 km <small>borne rapide, 144 kW (estimé)</small></td><td class="d">sur devis</td></tr>
+          <tr data-brand="Volkswagen"><td class="m">Volkswagen ID.3 Neo <span class="eco-tick ok" title="Éco-scoré : conserve l'abattement AEN 70 %">✓</span> <small class="variant-note">50 kWh · 170 ch</small>
+            <select class="variant-sel" aria-label="Version de la Volkswagen ID.3 Neo">
+              <option value="id3" selected data-small="50 kWh · 170 ch" data-batt="50 kWh" data-wltp="417 km" data-mixte-ac="321" data-mixte-raw="365" data-hiver-atl="292" data-hiver-froid="260" data-dc-time="~22 min" data-dc-km="+189 km" data-dc-note="borne rapide, 105 kW (estimé)">50 kWh · 417 km</option>
+              <option value="id3-lr" data-small="Long Range · 79 kWh · 231 ch" data-batt="79 kWh" data-wltp="630 km" data-mixte-ac="497" data-mixte-raw="565" data-hiver-atl="452" data-hiver-froid="410" data-dc-time="~22 min" data-dc-km="+294 km" data-dc-note="borne rapide, 183 kW (estimé)">79 kWh · 630 km</option>
+            </select>
+          </td><td class="d">Allemagne (Zwickau)</td><td class="d">50 kWh</td><td class="d">417 km</td><td class="d" data-mixte-ac="321" data-mixte-raw="365">~321 km</td><td class="step" data-hiver-atl="292" data-hiver-froid="260">~260 km</td><td class="d">~22 min → +189 km <small>borne rapide, 105 kW (estimé)</small></td><td class="d">sur devis</td></tr>
           <tr class="pinned" data-brand="Toyota"><td class="m">Toyota Corolla <small>actuelle · hybride</small></td><td class="d">R-U / Turquie</td><td class="d">—</td><td class="d">—</td><td class="d">~560 km</td><td class="step gA">~530 km</td><td class="d">~3 min → plein <small>~560 km récupérés</small></td><td class="d">—</td></tr>
           <tr class="empty-row row-hidden" id="cmpEmptyRow"><td colspan="8">Aucun modèle pour cette sélection — choisissez au moins un constructeur ci-dessus.</td></tr>
         </tbody>
@@ -872,7 +883,8 @@
       <p class="lead" style="margin-top:18px">Le sujet n'est donc pas « électrique contre thermique », mais
         <strong>« petit véhicule contre usage intensif »</strong>.</p>
       <p style="margin-top:14px">Pour mon usage, l'autonomie réelle de la <strong>e-208</strong> (≈&nbsp;343&nbsp;km en été avec clim,
-        ≈&nbsp;280&nbsp;km par grand froid) et sa puissance de charge sont les plus contraignantes du comparatif.
+        ≈&nbsp;280&nbsp;km par grand froid) et sa puissance de charge sont parmi les plus contraignantes du comparatif
+        (seule la VW ID.3 Neo en version de base fait légèrement moins bien).
         Au-delà de ce constat, le comparatif (section&nbsp;4) présente l'ensemble des modèles sur les mêmes
         critères : <strong>je n'en privilégie aucun — le choix du modèle relève de l'entreprise.</strong></p>
     </section>
@@ -989,7 +1001,7 @@
           <p style="font-size:.78rem;color:var(--muted);margin-top:6px">Base ≈&nbsp;7&nbsp;000&nbsp;€/an de location, à ajuster au loyer réel du modèle retenu (cf. tableau comparatif) — l'AEN étant proportionnelle au loyer, ces montants le sont aussi.</p>
           <p style="margin-top:8px;font-size:.85rem"><b>Statut des modèles du comparatif</b> (vérifié juillet 2026, <a href="https://score-environnemental-bonus.ademe.fr/" target="_blank" rel="noopener" style="color:var(--teal-deep)">outil officiel ADEME</a>) :</p>
           <ul class="m-list">
-            <li><span class="verdict gA">Oui</span> — Peugeot e-208, e-308, e-3008 · Tesla Model Y (Berlin) · Renault Megane E-Tech &amp; Scenic E-Tech (Douai) · Skoda Elroq (Tchéquie) · Kia EV4 (Slovaquie) — assemblage UE</li>
+            <li><span class="verdict gA">Oui</span> — Peugeot e-208, e-308, e-3008 · Tesla Model Y (Berlin) · Renault Megane E-Tech &amp; Scenic E-Tech (Douai) · Skoda Elroq (Tchéquie) · Kia EV4 (Slovaquie) · VW ID.3 Neo (Zwickau) — assemblage UE</li>
             <li><span class="verdict gE">Non</span> — Tesla Model 3 (Shanghai) · BYD Seal · BYD Atto 3 EVO · Kia EV9 · Hyundai Ioniq 5 · MG4 (assemblage Chine/Corée : score environnemental &lt; 60/80)</li>
           </ul>
           <p style="margin-top:8px;font-size:.78rem;color:var(--muted)">La liste évolue régulièrement (ex. arrêté du 17&nbsp;juin&nbsp;2026) — c'est la liste en vigueur à la <b>facturation</b> qui compte, pas celle à la commande. À revérifier avant décision finale.</p>
@@ -1146,7 +1158,7 @@
       });
     });
   })();
-  /* sélecteur de variante (batterie/motorisation) par modèle — 13 des 14 lignes électriques */
+  /* sélecteur de variante (batterie/motorisation) par modèle — 14 des 15 lignes électriques */
   (function(){
     var sels=document.querySelectorAll('#cmpVeh .variant-sel');
     if(!sels.length) return;
@@ -1235,9 +1247,9 @@
           simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
       // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux (clim active, ≈ −12 %) / 25% grand froid (climat océanique : grand froid minoritaire dans l'année)
-      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'ev4':353,'megane':370,'scenic':329,'ioniq5':333,'elroq':334,'mg4':421,'corolla':-1};
+      var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'ev4':353,'megane':370,'scenic':329,'ioniq5':333,'elroq':334,'mg4':421,'id3':306,'corolla':-1};
       // Durée d'une recharge rapide 20→80 % en minutes (reprise du tableau comparatif : constructeurs / EV-Database)
-      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'ev4':26,'megane':30,'scenic':28,'ioniq5':18,'elroq':24,'mg4':35};
+      var charge={'208':28,'308':30,'3008':35,'m3':22,'my':24,'seal':30,'atto':25,'ev9':24,'ev4':26,'megane':30,'scenic':28,'ioniq5':18,'elroq':24,'mg4':35,'id3':22};
       function setV(c,t,s){simV.className='sim-card v-'+c;simV.querySelector('.v').textContent=t;simVSub.textContent=s;}
       function setVac(c,t,s){simVac.className='sim-card v-'+c;simVac.querySelector('.v').textContent=t;simVacSub.textContent=s;}
       function setNet(c,t,d){simNet.className='sim-net '+c;simNetT.textContent=t;simNetD.textContent=d;}
@@ -1346,7 +1358,9 @@
       'elroq':[ {value:'elroq', label:'58 kWh · 453 km (Elroq 60)', consRaw:16.8, dcKm:'+207 km', dcTime:'~24 min'},
                 {value:'elroq-85', label:'77 kWh · 576 km (Elroq 85)', consRaw:17.1, dcKm:'+270 km', dcTime:'~26 min'} ],
       'mg4':[ {value:'77', label:'77 kWh · 545 km (Extended Range)', consRaw:17.1, dcKm:'+261 km', dcTime:'~35 min'},
-              {value:'64', label:'64 kWh · 452 km (base)', consRaw:17.1, dcKm:'+216 km', dcTime:'~21 min'} ]
+              {value:'64', label:'64 kWh · 452 km (base)', consRaw:17.1, dcKm:'+216 km', dcTime:'~21 min'} ],
+      'id3':[ {value:'id3', label:'50 kWh · 417 km (170 ch)', consRaw:15.9, dcKm:'+189 km', dcTime:'~22 min'},
+              {value:'id3-lr', label:'79 kWh · 630 km (Long Range, 231 ch)', consRaw:16.1, dcKm:'+294 km', dcTime:'~22 min'} ]
     };
     function currentVariant(){
       var list=cvBattData[cvCar.value]||[];
@@ -1537,6 +1551,10 @@
       {name:'MG4', variants:[
         {value:'mg4', label:'77 kWh · 545 km (Extended Range)', data:[425,310,365,640,400,500]},
         {value:'mg4-64', label:'64 kWh · 452 km (base)', data:[350,255,300,525,330,410]}
+      ]},
+      {name:'Volkswagen ID.3 Neo', variants:[
+        {value:'id3', label:'50 kWh · 417 km (170 ch)', data:[300,225,260,460,290,365]},
+        {value:'id3-lr', label:'79 kWh · 630 km (Long Range, 231 ch)', data:[470,350,410,715,455,565]}
       ]}
     ];
     var ids=['rCityCold','rHwyCold','rCombCold','rCityMild','rHwyMild','rCombMild'];
