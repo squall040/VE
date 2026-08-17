@@ -199,15 +199,21 @@
      sans quoi la largeur intrinsèque des <select> ferait déborder ou passer la rangée à la ligne. */
   .sim-controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 12px;align-items:end}
   .sim-controls label{display:block;min-width:0;font-size:.68rem;text-transform:uppercase;letter-spacing:.03em;color:var(--teal-deep);font-weight:700;line-height:1.3}
-  .sim-controls output{float:right;color:var(--ink);font-variant-numeric:tabular-nums;font-weight:800}
-  .sim-controls input[type=range]{width:100%;margin-top:12px;accent-color:var(--teal-deep)}
+  /* Les 5 contrôles étant tous des <select> de même hauteur, l'alignement par le bas suffit :
+     le libellé se pose juste au-dessus du sien, et s'il passait sur 2 lignes il déborderait vers
+     le haut sans désaligner les contrôles. Pas de hauteur réservée, donc pas d'écart inutile. */
+  .sim-controls .lab{display:block;line-height:1.25}
+  /* Libellés centrés au-dessus de leur menu (simulateur de profil uniquement : le bloc « coût »
+     garde ses libellés alignés à gauche, ses intitulés étant plus longs et sur 2 lignes). */
+  .sim-controls:not(.cost) .lab{text-align:center}
+  /* Le bloc « coût » garde sa réserve de 2 lignes : ses libellés sont longs et il aligne par le haut. */
+  .sim-controls.cost .lab{min-height:2.4em}
   /* WebKit dimensionne un <select> sur son option la plus longue : largeur bornée + ellipsis
      (même correctif que #cvCar et .variant-sel) pour que la rangée tienne sur une seule ligne. */
-  .sim-controls select{width:100%;max-width:100%;min-width:0;margin-top:9px;padding:8px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.84rem;font-family:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sim-controls select{width:100%;max-width:100%;min-width:0;margin-top:5px;padding:8px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.84rem;font-family:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .sim-controls select:disabled{opacity:.55;cursor:not-allowed}
   /* Variante "coût" : 5 champs identiques sur une rangée, unité À L'INTÉRIEUR du champ */
   .sim-controls.cost{grid-template-columns:repeat(5,minmax(0,1fr));align-items:start;gap:14px 16px}
-  .sim-controls.cost .lab{display:block;min-height:2.4em;line-height:1.25}
   .sim-field{position:relative;display:block;margin-top:8px}
   .sim-field input{box-sizing:border-box;width:100%;padding:9px 50px 9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.95rem;font-weight:700;font-family:inherit;font-variant-numeric:tabular-nums}
   .sim-field input::-webkit-outer-spin-button,.sim-field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
@@ -228,6 +234,9 @@
   .sim-card .t{font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-bottom:6px}
   .sim-card .v{font-size:1.4rem;font-weight:800;color:var(--teal-deep);letter-spacing:-.02em;line-height:1.1}
   .sim-card .l{font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.35}
+  /* Cartes de mesure (sans titre .t, contrairement aux cartes de verdict) : contenu centré dans
+     la carte, qui prend sinon la hauteur des cartes de verdict et laisse un vide sous le chiffre. */
+  .sim-card.metric{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
   .sim-card.v-g{background:var(--good-bg);border-color:#b6dccf}
   .sim-card.v-o{background:var(--warn-bg);border-color:#d9c6d6}
   .sim-card.v-r{background:var(--bad-bg);border-color:#eebfd0}
@@ -519,16 +528,29 @@
         <div class="sim-h">Et pour votre profil ?</div>
         <p class="sim-sub">Faites varier le kilométrage, la recharge à domicile, le modèle et sa batterie — tout se recalcule en direct. Autonomie utilisée : moyenne pondérée sur l'année (<b>75&nbsp;% doux avec clim active / 25&nbsp;% grand froid</b>) — différente de la valeur « été » affichée plus haut, car ce simulateur doit couvrir les 52 semaines de l'année, hiver compris.</p>
         <div class="sim-controls">
-          <label>Kilométrage annuel <output id="simKmVal">40 000 km</output>
-            <input type="range" id="simKm" min="5000" max="60000" step="1000" value="40000" aria-label="Kilométrage annuel">
+          <label><span class="lab">Kilométrage annuel</span>
+            <select id="simKm" aria-label="Kilométrage annuel">
+              <option value="5000">5 000 km</option>
+              <option value="10000">10 000 km</option>
+              <option value="15000">15 000 km</option>
+              <option value="20000">20 000 km</option>
+              <option value="25000">25 000 km</option>
+              <option value="30000">30 000 km</option>
+              <option value="35000">35 000 km</option>
+              <option value="40000" selected>40 000 km</option>
+              <option value="45000">45 000 km</option>
+              <option value="50000">50 000 km</option>
+              <option value="55000">55 000 km</option>
+              <option value="60000">60 000 km</option>
+            </select>
           </label>
-          <label>Recharge à domicile
+          <label><span class="lab">Recharge à domicile</span>
             <select id="simHome" aria-label="Recharge à domicile">
               <option value="0" selected>Non</option>
               <option value="1">Oui</option>
             </select>
           </label>
-          <label>Modèle
+          <label><span class="lab">Modèle</span>
             <select id="simCar" aria-label="Modèle">
               <option value="208" selected>Peugeot e-208</option>
               <option value="308">Peugeot e-308</option>
@@ -548,16 +570,25 @@
               <option value="corolla">Toyota Corolla (actuelle)</option>
             </select>
           </label>
-          <label>Batterie
+          <label><span class="lab">Batterie</span>
             <select id="simBatt" aria-label="Batterie / motorisation"></select>
           </label>
-          <label>Trajet le plus long <output id="simTripVal">800 km</output>
-            <input type="range" id="simTrip" min="300" max="1000" step="50" value="800" aria-label="Trajet le plus long (vacances)">
+          <label><span class="lab">Trajet le plus long</span>
+            <select id="simTrip" aria-label="Trajet le plus long (vacances)">
+              <option value="300">300 km</option>
+              <option value="400">400 km</option>
+              <option value="500">500 km</option>
+              <option value="600">600 km</option>
+              <option value="700">700 km</option>
+              <option value="800" selected>800 km</option>
+              <option value="900">900 km</option>
+              <option value="1000">1 000 km</option>
+            </select>
           </label>
         </div>
         <div class="sim-out">
-          <div class="sim-card"><div class="v" id="simRech">≈ 4,0</div><div class="l">recharges publiques / semaine</div></div>
-          <div class="sim-card"><div class="v" id="simH">≈ 88 h</div><div class="l">par an passées à la borne</div></div>
+          <div class="sim-card metric"><div class="v" id="simRech">≈ 4,0</div><div class="l">recharges publiques / semaine</div></div>
+          <div class="sim-card metric"><div class="v" id="simH">≈ 88 h</div><div class="l">par an passées à la borne</div></div>
           <div class="sim-card v-r" id="simVerdict"><div class="t">Au quotidien</div><div class="v">Inadapté</div><div class="l" id="simVerdictSub">recharges publiques très fréquentes</div></div>
           <div class="sim-card v-r" id="simVac"><div class="t">Départ vacances</div><div class="v">Location conseillée</div><div class="l" id="simVacSub">sinon 4 arrêts (+1 h 50 de charge) · ~400–700 €/sem</div></div>
         </div>
@@ -1251,9 +1282,9 @@
     // Simulateur de profil
     var simKm=document.getElementById('simKm');
     if(simKm){
-      var simKmVal=document.getElementById('simKmVal'),simHome=document.getElementById('simHome'),simCar=document.getElementById('simCar'),
+      var simHome=document.getElementById('simHome'),simCar=document.getElementById('simCar'),
           simRech=document.getElementById('simRech'),simH=document.getElementById('simH'),simV=document.getElementById('simVerdict'),simVSub=document.getElementById('simVerdictSub'),
-          simTrip=document.getElementById('simTrip'),simTripVal=document.getElementById('simTripVal'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
+          simTrip=document.getElementById('simTrip'),simVac=document.getElementById('simVac'),simVacSub=document.getElementById('simVacSub'),
           simNet=document.getElementById('simNet'),simNetT=document.getElementById('simNetT'),simNetD=document.getElementById('simNetD');
       // Autonomie réelle "3 saisons" pondérée 75% Combiné-Doux (clim active, ≈ −12 %) / 25% grand froid (climat océanique : grand froid minoritaire dans l'année)
       var autos={'208':327,'308':332,'3008':364,'m3':442,'my':369,'seal':466,'atto':389,'ev9':336,'ev4':353,'megane':370,'scenic':329,'ioniq5':333,'elroq':334,'mg4':421,'id3':306,'corolla':-1};
@@ -1301,9 +1332,7 @@
       function fmtDur(min){min=Math.round(min/5)*5;var h=Math.floor(min/60),m=min%60;return h?(h+' h'+(m?' '+(m<10?'0'+m:m):'')):(m+' min');}
       function simUpdate(){
         var km=+simKm.value;
-        simKmVal.textContent=km.toLocaleString('fr-FR')+' km';
         var L=+simTrip.value;
-        simTripVal.textContent=L.toLocaleString('fr-FR')+' km';
         var car=simCar.value;
         if(car==='corolla')
           setNet('net-ice','Ravitaillement essence','Disponible partout, en quelques minutes. Aucune planification, aucune attente, même aux grands départs.');
@@ -1351,11 +1380,11 @@
         else if(stops>=locThr) setVac('r','Location conseillée','sinon '+stops+' arrêts (+'+fmtDur(addMin)+' de charge) · ~400–700 €/sem');
         else setVac('o',stops+' arrêts','≈ +'+fmtDur(addMin)+resQ);
       }
-      simKm.addEventListener('input',simUpdate);
+      simKm.addEventListener('change',simUpdate);
       simHome.addEventListener('change',simUpdate);
       simCar.addEventListener('change',function(){fillSimBatt();simUpdate();});
       simBatt.addEventListener('change',simUpdate);
-      simTrip.addEventListener('input',simUpdate);
+      simTrip.addEventListener('change',simUpdate);
       fillSimBatt();
       simUpdate();
     }
